@@ -1,6 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>代码随想录算法训练营Day6|哈希表 242、349、201、1</title>
+    <url>/2023/03/20/day6/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="哈希表理论基础"><a href="#哈希表理论基础" class="headerlink" title="哈希表理论基础"></a>哈希表理论基础</h2><p>408学数据结构的时候哈希表不是重点，只是一个会考但是不会考代码的选择题方面的考点，所以我只是有点印象了现在。重新学吧，况且是要真刀实枪上代码，come on。</p>
+<p>哈希表，根据关键码的值直接进行访问的数据结构，用来快速判断一个元素是否出现在集合里。</p>
+<p>哈希函数，well，有印象了，索引。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">index=hashFunction(name)</span><br><span class="line">hashFunction = hashCode(name)％tableSize</span><br></pre></td></tr></table></figure>
+
+<p>哈希碰撞，拉链法，线性探测法。</p>
+<p>拉链法，冲突元素存储在链表中。</p>
+<p>线性探测法，往下顺延找空位。</p>
+<p>哈希结构  数组、集合、映射</p>
+<p>代码随想录的表崩了，而且我也有点混乱，c++的std：：set/multiset/unordered_set?</p>
+<p>java还是看菜鸟吧</p>
+<p>总之，快速判断元素是否存在用哈希，牺牲空间换时间。</p>
+<h2 id="242-有效的字母异味词"><a href="#242-有效的字母异味词" class="headerlink" title="242 有效的字母异味词"></a>242 有效的字母异味词</h2><p><a href="https://leetcode.cn/problems/valid-anagram/">力扣题目链接</a></p>
+<p>暴力解法，明显两层for循环。</p>
+<p>现在学哈希，用哈希。不过看了代码随想录的思路，这个思路我曾经想过的，额外设一个数组，对相应的位置加减，看最后数值是否为0，没想到这个思路是哈希啊。</p>
+<p><del>而且的确chatAt( )这个函数我不知道，我小白。</del></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public boolean isAnagram(String s, String t) &#123;</span><br><span class="line">          int[] record = new int[26];</span><br><span class="line">          for(int i = 0;i &lt; s.length();i++)&#123;</span><br><span class="line">              record[s.charAt(i) - &#x27;a&#x27;]++;</span><br><span class="line">          &#125;</span><br><span class="line">          for(int i =0;i&lt; t.length();i++)&#123;</span><br><span class="line">              record[t.charAt(i) - &#x27;a&#x27;]--;</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">          for(int count: record)&#123;</span><br><span class="line">              if(count != 0)&#123;</span><br><span class="line">                  return false;</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">          return true;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="349-两个数组的交集"><a href="#349-两个数组的交集" class="headerlink" title="349 两个数组的交集"></a>349 两个数组的交集</h2><p><a href="https://leetcode.cn/problems/intersection-of-two-arrays/">力扣题目链接</a></p>
+<p>unordered_set  一种哈希数据结构</p>
+<p>（坦白地说我一开始想到的是双指针）</p>
+<p>multiset、set为红黑树基底，well，问题是，我用的是java，而且就算是c也不用c++啊</p>
+<p>不太会哈希啊，Java的哈希……要去专门找找教程了</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import java.util.HashSet;</span><br><span class="line">import java.util.Set;</span><br><span class="line"></span><br><span class="line">class Solution &#123;</span><br><span class="line">    public int[] intersection(int[] nums1, int[] nums2) &#123;</span><br><span class="line">           if(nums1==null || nums1.length == 0 ||nums2 == null ||nums2.length == 0)&#123;</span><br><span class="line">               return new int[0];</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">    Set&lt;Integer&gt; set1 = new HashSet&lt;&gt;();</span><br><span class="line">    Set&lt;Integer&gt; resSet = new HashSet&lt;&gt;();   </span><br><span class="line">    for (int i : nums1) &#123;</span><br><span class="line">            set1.add(i);</span><br><span class="line">        &#125;</span><br><span class="line">    for (int i : nums2) &#123;</span><br><span class="line">            if (set1.contains(i)) &#123;</span><br><span class="line">                resSet.add(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; </span><br><span class="line"></span><br><span class="line">        int[] arr = new int[resSet.size()];</span><br><span class="line">        int j = 0;</span><br><span class="line">        for(int i : resSet)&#123;</span><br><span class="line">            arr[j++] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        return arr;   </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="202-快乐数"><a href="#202-快乐数" class="headerlink" title="202 快乐数"></a>202 快乐数</h2><p><a href="https://leetcode.cn/problems/happy-number/">力扣题目链接</a></p>
+<p>的确不会。最让我棘手的是，不会位数操作，虽然之前就碰到过要每位如何如何，但是除10的操作我总是搞不好……不会，的确不会。</p>
+<p>把计算中所得的数加入哈希表，检测是否重复，受教了。</p>
+<p>哈希表的结构————</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public boolean isHappy(int n) &#123;</span><br><span class="line">         Set&lt;Integer&gt; record = new HashSet&lt;&gt;();</span><br><span class="line">        while (n != 1 &amp;&amp; !record.contains(n)) &#123;</span><br><span class="line">            record.add(n);</span><br><span class="line">            n = getNextNumber(n);</span><br><span class="line">        &#125;</span><br><span class="line">        return n == 1;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    private int getNextNumber(int n) &#123;</span><br><span class="line">        int res = 0;</span><br><span class="line">        while (n &gt; 0) &#123;</span><br><span class="line">            int temp = n % 10;</span><br><span class="line">            res += temp * temp;</span><br><span class="line">            n = n / 10;</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-两数之和"><a href="#1-两数之和" class="headerlink" title="1 两数之和"></a>1 两数之和</h2><p>暴力解很容易想出来，不过我自己想的是遍历，遍历找目标值减的差。好吧，也是两层for循环。</p>
+<p>不过最优解还是哈希（怨念</p>
+<p>map    key value 结构    key 数值    value 下标</p>
+<p>map 存放访问过的元素     {key：数据元素，value：数组元素对应的下标}</p>
+<p>哈希表查找的是另一个匹配的值 <del>什么啊，换成哈希表不就是和我一样吗</del></p>
+<p>所以，我真的要好好学哈希表。</p>
+<p>Java在哈希表方面是怎么表示的啊</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public int[] twoSum(int[] nums, int target) &#123;</span><br><span class="line">    int[] res = new int[2];</span><br><span class="line">    if(nums == null || nums.length == 0)&#123;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">    Map&lt;Integer, Integer&gt; map = new HashMap&lt;&gt;();</span><br><span class="line">    for(int i = 0; i &lt; nums.length; i++)&#123;</span><br><span class="line">        int temp = target - nums[i];   /</span><br><span class="line">        if(map.containsKey(temp))&#123;</span><br><span class="line">            res[1] = i;            //这一段是?</span><br><span class="line">            res[0] = map.get(temp);</span><br><span class="line">            break;</span><br><span class="line">        &#125;</span><br><span class="line">        map.put(nums[i], i);        &#125;</span><br><span class="line">    return res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+  </entry>
+  <entry>
     <title>代码随想录算法训练营Day4|继续链表24、19、160、142</title>
     <url>/2023/03/18/day4/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="24-两两交换链表的节点"><a href="#24-两两交换链表的节点" class="headerlink" title="24 两两交换链表的节点"></a>24 两两交换链表的节点</h2><p>交换链表为什么不是交换数值呢，不过交换指针的确正常，那么重点还是指针的指向变换顺序。依然使用虚拟头节点，不过没想到需要额外设置的指针更多了。</p>
