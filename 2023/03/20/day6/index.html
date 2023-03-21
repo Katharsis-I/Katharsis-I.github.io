@@ -83,7 +83,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">966</span>
+            <span class="post-count">1k</span>
         </span>
     </span>
 
@@ -119,7 +119,7 @@
 <p>代码随想录的表崩了，而且我也有点混乱，c++的std：：set/multiset/unordered_set?</p>
 <p>java还是看菜鸟吧</p>
 <p>总之，快速判断元素是否存在用哈希，牺牲空间换时间。</p>
-<h2 id="242-有效的字母异味词"><a href="#242-有效的字母异味词" class="headerlink" title="242 有效的字母异味词"></a>242 有效的字母异味词</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/valid-anagram/">力扣题目链接</a></p>
+<h2 id="242-有效的字母异位词"><a href="#242-有效的字母异位词" class="headerlink" title="242 有效的字母异位词"></a>242 有效的字母异位词</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/valid-anagram/">力扣题目链接</a></p>
 <p>暴力解法，明显两层for循环。</p>
 <p>现在学哈希，用哈希。不过看了代码随想录的思路，这个思路我曾经想过的，额外设一个数组，对相应的位置加减，看最后数值是否为0，没想到这个思路是哈希啊。</p>
 <p><del>而且的确chatAt( )这个函数我不知道，我小白。</del></p>
@@ -148,6 +148,10 @@
 <p>所以，我真的要好好学哈希表。</p>
 <p>Java在哈希表方面是怎么表示的啊</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public int[] twoSum(int[] nums, int target) &#123;</span><br><span class="line">    int[] res = new int[2];</span><br><span class="line">    if(nums == null || nums.length == 0)&#123;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">    Map&lt;Integer, Integer&gt; map = new HashMap&lt;&gt;();</span><br><span class="line">    for(int i = 0; i &lt; nums.length; i++)&#123;</span><br><span class="line">        int temp = target - nums[i];   /</span><br><span class="line">        if(map.containsKey(temp))&#123;</span><br><span class="line">            res[1] = i;            //这一段是?</span><br><span class="line">            res[0] = map.get(temp);</span><br><span class="line">            break;</span><br><span class="line">        &#125;</span><br><span class="line">        map.put(nums[i], i);        &#125;</span><br><span class="line">    return res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>综上所述，遭到了哈希表的毒打，代码随想录哈希表表示是C++，Java……</p>
+<p>更不用去想明天的了（悲）啊啊啊啊    不会写，不会写</p>
+<p>去找视频了（挥白旗</p>
  
       <!-- reward -->
       
@@ -222,6 +226,15 @@
 
    
   <nav class="article-nav">
+    
+      <a href="/2023/03/20/Day7/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            代码随想录算法训练营Day7|哈希表 454、383、15、18
+          
+        </div>
+      </a>
     
     
       <a href="/2023/03/18/day4/" class="article-nav-link">
