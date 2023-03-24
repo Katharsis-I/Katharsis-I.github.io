@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>代码随想录算法训练营Day10|栈</title>
+    <title>代码随想录算法训练营Day10|栈 232 225</title>
     <url>/2023/03/24/day10/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="栈-队列的理论基础"><a href="#栈-队列的理论基础" class="headerlink" title="栈 队列的理论基础"></a>栈 队列的理论基础</h2><p>栈，熟悉又友好的结构，408里面关于栈的不美好记忆大概是 运算符号的位置栈进栈出，左缀右缀，很好理解就是不好写。选择题很简单，算法题一般不考栈，我对栈的印象只停留在原理。 现在要实操（望天</p>
 <p>C++ stl库里有栈和队列两个数据结构  此处使用SGI STL</p>
