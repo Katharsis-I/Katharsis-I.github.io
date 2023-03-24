@@ -13,7 +13,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>代码随想录算法训练营Day9|（kmp） 回顾哈希、字符串 |  亦</title>
+      <title>代码随想录算法训练营Day10|栈 |  亦</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -56,7 +56,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-day9"
+  id="post-day10"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -67,7 +67,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  代码随想录算法训练营Day9|（kmp） 回顾哈希、字符串
+  代码随想录算法训练营Day10|栈
 </h1>
  
 
@@ -75,15 +75,15 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/03/23/day9/" class="article-date">
-  <time datetime="2023-03-23T13:42:03.000Z" itemprop="datePublished">2023-03-23</time>
+      <a href="/2023/03/24/day10/" class="article-date">
+  <time datetime="2023-03-24T15:26:06.000Z" itemprop="datePublished">2023-03-24</time>
 </a>   
 <div class="word_count">
     <span class="post-time">
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">291</span>
+            <span class="post-count">621</span>
         </span>
     </span>
 
@@ -92,7 +92,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">1 min</span>
+            <span class="post-count">2 min</span>
         </span>
     </span>
 </div>
@@ -107,14 +107,34 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="28-实现strStr"><a href="#28-实现strStr" class="headerlink" title="28 实现strStr( )"></a>28 实现strStr( )</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string/">力扣题目链接</a></p>
-<p>这个函数讲的是 KMP算法，408数据结构很着重讲了，虽然不考大题，主要是选择题，例如next数组，nextval数组，下标</p>
-<p>所以我kmp还是懂个百分之六七十，真让我写还是算了（手动扇子脸</p>
-<p>一刷先跳了，前几天进度不乐观，回顾前几天。</p>
-<h2 id="459-重复的子字符串"><a href="#459-重复的子字符串" class="headerlink" title="459 重复的子字符串"></a>459 重复的子字符串</h2><p>子串重复多次构成的确可以用kmp，但是如何kmp呢？</p>
-<p>思路有点蒙，next数组我知道，但是如何判定重复出现的子字符串？先跳了，有空看看视频。</p>
-<h2 id="总结字符串、数组"><a href="#总结字符串、数组" class="headerlink" title="总结字符串、数组"></a>总结字符串、数组</h2><p>主要讲的是前几天的代码题思路总结，思路还好，但是函数我不认识一点也不好。可能也有c++ primer 我看不下去的原因…… 虽然格式大差不差与c，但就是莫名各种不适应，所以函数不认识直接就跪了。</p>
-<p>字符串的基本操作指令，性质我也忘了；数组常常提，但是很少考虑操作的事，还是跪，复习，看前几天的代码题了。</p>
+  <h2 id="栈-队列的理论基础"><a href="#栈-队列的理论基础" class="headerlink" title="栈 队列的理论基础"></a>栈 队列的理论基础</h2><p>栈，熟悉又友好的结构，408里面关于栈的不美好记忆大概是 运算符号的位置栈进栈出，左缀右缀，很好理解就是不好写。选择题很简单，算法题一般不考栈，我对栈的印象只停留在原理。 现在要实操（望天</p>
+<p>C++ stl库里有栈和队列两个数据结构  此处使用SGI STL</p>
+<p>栈的内部结构主要就是数组以及链表                  vector deque list</p>
+<p>deque 双向队列 底层</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">std::stack&lt;int, std::vector&lt;int&gt; &gt; third;  </span><br><span class="line">std::queue&lt;int, std::list&lt;int&gt;&gt; third; </span><br></pre></td></tr></table></figure>
+
+<p>以上为C++实例</p>
+<h2 id="232-用栈实现队列"><a href="#232-用栈实现队列" class="headerlink" title="232 用栈实现队列"></a>232 用栈实现队列</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/implement-queue-using-stacks/">力扣题目链接</a></p>
+<p>队列</p>
+<p>push放入尾部 </p>
+<p> pop首部移除</p>
+<p> peek返回首部</p>
+<p> empty 判断</p>
+<p>和之前的设计链表一样都是要抽象函数，进行基础编写。</p>
+<p>栈只有一个端口一进一出，队列双端都在，需要两个栈。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">class MyQueue &#123;</span><br><span class="line">    Stack&lt;Integer&gt; stackIn;</span><br><span class="line">    Stack&lt;Integer&gt; stackOut;</span><br><span class="line"></span><br><span class="line">    public MyQueue() &#123;</span><br><span class="line"></span><br><span class="line">        stackIn = new Stack&lt;&gt;();            //初始</span><br><span class="line">        stackOut = new Stack&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public void push(int x) &#123;         //放入</span><br><span class="line"></span><br><span class="line">         stackIn.push(x);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public int pop() &#123;             //移除</span><br><span class="line"></span><br><span class="line">        placetackIn();</span><br><span class="line">        return stackOut.pop();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public int peek() &#123;           //返回</span><br><span class="line"></span><br><span class="line">         placetackIn();</span><br><span class="line">         return stackOut.peek();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public boolean empty() &#123;     //都空</span><br><span class="line"></span><br><span class="line">         return stackIn.isEmpty() &amp;&amp; stackOut.isEmpty();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void placetackIn()&#123;      //转移</span><br><span class="line">        if(!stackOut.isEmpty())</span><br><span class="line">             return;</span><br><span class="line">        while(!stackIn.isEmpty())&#123;      //这里是while</span><br><span class="line">            stackOut.push(stackIn.pop());</span><br><span class="line">        &#125;     </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Your MyQueue object will be instantiated and called as such:</span><br><span class="line"> * MyQueue obj = new MyQueue();</span><br><span class="line"> * obj.push(x);</span><br><span class="line"> * int param_2 = obj.pop();</span><br><span class="line"> * int param_3 = obj.peek();</span><br><span class="line"> * boolean param_4 = obj.empty();</span><br><span class="line"> */</span><br></pre></td></tr></table></figure>
+
+<h2 id="225-用队列实现栈"><a href="#225-用队列实现栈" class="headerlink" title="225 用队列实现栈"></a>225 用队列实现栈</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/implement-stack-using-queues/">力扣题目链接</a></p>
+<p>两个互相实现啊，但是队列的顺序怎么实现栈，队列顺序是固定的又不能翻转</p>
+<p>没想到另一个是用来备份的，队列出就全出没有取巧</p>
+<p>queue or deque</p>
+<p>甚至还可以优化成一个</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">class MyStack &#123;</span><br><span class="line"></span><br><span class="line">      Queue&lt;Integer&gt; queue1; </span><br><span class="line">      Queue&lt;Integer&gt; queue2; </span><br><span class="line"></span><br><span class="line">    public MyStack() &#123;</span><br><span class="line"></span><br><span class="line">      queue1= new LinkedList&lt;&gt;();</span><br><span class="line">      queue2 = new LinkedList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public void push(int x) &#123;</span><br><span class="line"></span><br><span class="line">      queue2.offer(x);</span><br><span class="line">      while(!queue1.isEmpty())&#123;</span><br><span class="line">          queue2.offer(queue1.poll());</span><br><span class="line">      &#125;   </span><br><span class="line">      Queue&lt;Integer&gt;  queueTemp;</span><br><span class="line">      queueTemp = queue1;</span><br><span class="line">      queue1 = queue2;</span><br><span class="line">      queue2 = queueTemp;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public int pop() &#123;</span><br><span class="line"></span><br><span class="line">       return queue1.poll();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public int top() &#123;</span><br><span class="line"></span><br><span class="line">       return queue1.peek();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public boolean empty() &#123;</span><br><span class="line">    </span><br><span class="line">       return queue1.isEmpty();   </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Your MyStack object will be instantiated and called as such:</span><br><span class="line"> * MyStack obj = new MyStack();</span><br><span class="line"> * obj.push(x);</span><br><span class="line"> * int param_2 = obj.pop();</span><br><span class="line"> * int param_3 = obj.top();</span><br><span class="line"> * boolean param_4 = obj.empty();</span><br><span class="line"> */</span><br></pre></td></tr></table></figure>
+
+<p>一个的话，原地排列</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public void push(int x) &#123;</span><br><span class="line">        queue.offer(x);</span><br><span class="line">        int size = queue.size();</span><br><span class="line">        while (size-- &gt; 1)   //这个判断式</span><br><span class="line">            queue.offer(queue.poll());</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>deque没见过结构，虽然知道是队列，替换一下命令就ok了</p>
  
       <!-- reward -->
       
@@ -179,7 +199,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/03/23/day9/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/03/24/day10/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -190,19 +210,10 @@
    
   <nav class="article-nav">
     
-      <a href="/2023/03/24/day10/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            代码随想录算法训练营Day10|栈
-          
-        </div>
-      </a>
     
-    
-      <a href="/2023/03/22/day8/" class="article-nav-link">
+      <a href="/2023/03/23/day9/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">代码随想录算法训练营Day8|字符串 344、541、05、151 58.2</div>
+        <div class="article-nav-title">代码随想录算法训练营Day9|（kmp） 回顾哈希、字符串</div>
       </a>
     
   </nav>
