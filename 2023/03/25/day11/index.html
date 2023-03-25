@@ -13,7 +13,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>Hello World |  亦</title>
+      <title>代码随想录算法训练营Day11|栈与队列 20 1047 150 |  亦</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -56,7 +56,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-hello-world"
+  id="post-day11"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -67,7 +67,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  Hello World
+  代码随想录算法训练营Day11|栈与队列 20 1047 150
 </h1>
  
 
@@ -75,15 +75,15 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/03/13/hello-world/" class="article-date">
-  <time datetime="2023-03-12T16:16:33.986Z" itemprop="datePublished">2023-03-13</time>
+      <a href="/2023/03/25/day11/" class="article-date">
+  <time datetime="2023-03-25T15:55:19.000Z" itemprop="datePublished">2023-03-25</time>
 </a>   
 <div class="word_count">
     <span class="post-time">
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">75</span>
+            <span class="post-count">657</span>
         </span>
     </span>
 
@@ -92,7 +92,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">1 min</span>
+            <span class="post-count">3 min</span>
         </span>
     </span>
 </div>
@@ -107,19 +107,30 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+  <h2 id="20-有效的括号"><a href="#20-有效的括号" class="headerlink" title="20 有效的括号"></a>20 有效的括号</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/valid-parentheses/">力扣题目链接</a></p>
+<p>昨天提到括号，今天这不是就来了吗，虽然不是代数式，但是相差不远。思路我还是知道的，栈的栈进栈出，符合条件进，遇到右括号出。</p>
+<p>没从代数式的思路跳出来，检测到左括号进右括号没反应过来，直接和右括号对应啊，粗暴直接。</p>
+<p>deque.pop()?</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public boolean isValid(String s) &#123;</span><br><span class="line">        Deque&lt;Character&gt; deque = new LinkedList&lt;&gt;();</span><br><span class="line">        char ch;</span><br><span class="line">        for(int i = 0; i &lt; s.length();i++)&#123;</span><br><span class="line">            ch = s.charAt(i);</span><br><span class="line">            if(ch == &#x27;(&#x27;)&#123;</span><br><span class="line">                deque.push(&#x27;)&#x27;);</span><br><span class="line">            &#125;else if(ch == &#x27;&#123;&#x27;)&#123;</span><br><span class="line">                deque.push(&#x27;&#125;&#x27;);</span><br><span class="line">            &#125;else if(ch == &#x27;[&#x27;)&#123;</span><br><span class="line">                deque.push(&#x27;]&#x27;);</span><br><span class="line">            &#125;else if(deque.isEmpty()||deque.peek() != ch)&#123; //判断匹配</span><br><span class="line">                return false;</span><br><span class="line">            &#125;else&#123;  </span><br><span class="line">                deque.pop();   //匹配就弹出啊</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return deque.isEmpty();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<h2 id="1047-删除字符串中的所有相邻重复项"><a href="#1047-删除字符串中的所有相邻重复项" class="headerlink" title="1047 删除字符串中的所有相邻重复项"></a>1047 删除字符串中的所有相邻重复项</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-all-adjacent-duplicates-in-string/">力扣题目链接</a></p>
+<p>遍历，判断栈里与下一个是否相同，继续遍历还是开删，不过忘了反转。没有讲的简练。</p>
+<p><strong>栈，字符串为栈，双指针</strong>，学海无涯。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public String removeDuplicates(String s) &#123;</span><br><span class="line">         ArrayDeque&lt;Character&gt; deque = new ArrayDeque&lt;&gt;();</span><br><span class="line">         char ch;</span><br><span class="line">         for(int i = 0;i&lt;s.length();i++)&#123;</span><br><span class="line">             ch = s.charAt(i);</span><br><span class="line">             if(deque.isEmpty() || deque.peek() != ch)&#123;</span><br><span class="line">                 deque.push(ch);</span><br><span class="line">             &#125;else&#123;</span><br><span class="line">                 deque.pop();</span><br><span class="line">             &#125;</span><br><span class="line">         &#125;</span><br><span class="line">         String str = &quot;&quot;;</span><br><span class="line">         while(!deque.isEmpty())&#123;        //用这种方式解决反转的啊</span><br><span class="line">             str = deque.pop() + str;</span><br><span class="line">         &#125;</span><br><span class="line">         return str;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>字符串为栈</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">int top = -1;</span><br><span class="line">for (int i = 0; i &lt; s.length(); i++) &#123;</span><br><span class="line">   char c = s.charAt(i);</span><br><span class="line">   </span><br><span class="line">if (top &gt;= 0 &amp;&amp; res.charAt(top) == c) &#123;</span><br><span class="line">         res.deleteCharAt(top);</span><br><span class="line">         top--;</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">         res.append(c);</span><br><span class="line">         top++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>双指针</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">while(fast &lt; s.length())&#123;</span><br><span class="line">       ch[slow] = ch[fast];</span><br><span class="line">       if(slow &gt; 0 &amp;&amp; ch[slow] == ch[slow - 1])&#123;</span><br><span class="line">                slow--;</span><br><span class="line">          &#125;else&#123;</span><br><span class="line">                slow++;              //略有点忘了</span><br><span class="line">          &#125;</span><br><span class="line">            fast++;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<h2 id="150-逆波兰表达式求值"><a href="#150-逆波兰表达式求值" class="headerlink" title="150 逆波兰表达式求值"></a>150 逆波兰表达式求值</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/evaluate-reverse-polish-notation/">力扣题目链接</a></p>
+<p>逆波兰表达式就是后缀表达式啊，那没事了，我完全理解了。</p>
+<p>数字你只管进，计算由进来的第一个运算符来想.jpg</p>
+<p>进数字，遇到运算符弹出去，计算完再填进来，如此这般，完事。</p>
+<p><del>虽然我没写过我有罪</del></p>
+<p>看的是官方解答，switch好久没看见了，差点就忘了这么一个循环语句的存在。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int evalRPN(String[] tokens) &#123;</span><br><span class="line">        int n = tokens.length;</span><br><span class="line">        int[] stack = new int[(n + 1) / 2];    //长度</span><br><span class="line">        int index = -1;               //-1?</span><br><span class="line">        for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">            String token = tokens[i];</span><br><span class="line">            switch (token) &#123;</span><br><span class="line">                case &quot;+&quot;:</span><br><span class="line">                    index--;</span><br><span class="line">                    stack[index] += stack[index + 1];</span><br><span class="line">                    break;</span><br><span class="line">                case &quot;-&quot;:</span><br><span class="line">                    index--;</span><br><span class="line">                    stack[index] -= stack[index + 1];</span><br><span class="line">                    break;</span><br><span class="line">                case &quot;*&quot;:</span><br><span class="line">                    index--;</span><br><span class="line">                    stack[index] *= stack[index + 1];</span><br><span class="line">                    break;</span><br><span class="line">                case &quot;/&quot;:</span><br><span class="line">                    index--;</span><br><span class="line">                    stack[index] /= stack[index + 1];</span><br><span class="line">                    break;</span><br><span class="line">                default:</span><br><span class="line">                    index++;</span><br><span class="line">                    stack[index] = Integer.parseInt(token);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return stack[index];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
  
       <!-- reward -->
       
@@ -184,7 +195,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/03/13/hello-world/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/03/25/day11/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -195,15 +206,11 @@
    
   <nav class="article-nav">
     
-      <a href="/2023/03/15/day1/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            代码随想录算法训练营Day1|数组、二分、移除
-          
-        </div>
-      </a>
     
+      <a href="/2023/03/24/day10/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">代码随想录算法训练营Day10|栈 232 225</div>
+      </a>
     
   </nav>
 
