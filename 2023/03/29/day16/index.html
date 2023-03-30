@@ -13,7 +13,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>代码随想录算法训练营Day13|栈与队列 239 347 |  亦</title>
+      <title>代码随想录算法训练营Day16|二叉树 104 111 222 |  亦</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -56,7 +56,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-day13"
+  id="post-day16"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -67,7 +67,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  代码随想录算法训练营Day13|栈与队列 239 347
+  代码随想录算法训练营Day16|二叉树 104 111 222
 </h1>
  
 
@@ -75,15 +75,15 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/03/27/day13/" class="article-date">
-  <time datetime="2023-03-26T20:16:59.000Z" itemprop="datePublished">2023-03-27</time>
+      <a href="/2023/03/29/day16/" class="article-date">
+  <time datetime="2023-03-28T19:53:39.000Z" itemprop="datePublished">2023-03-29</time>
 </a>   
 <div class="word_count">
     <span class="post-time">
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">482</span>
+            <span class="post-count">656</span>
         </span>
     </span>
 
@@ -92,7 +92,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">2 min</span>
+            <span class="post-count">3 min</span>
         </span>
     </span>
 </div>
@@ -107,16 +107,120 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="239-滑动窗口最大值"><a href="#239-滑动窗口最大值" class="headerlink" title="239  滑动窗口最大值"></a>239  滑动窗口最大值</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/sliding-window-maximum/">力扣题目链接</a></p>
-<p>用队列，暴力解遍历。但显然最优解不是这个。队列有返回最大值的函数是挺理想的，问题是需要自己构建函数。如何构建？</p>
-<p>单调队列，维护最大值始终在队列里怎么搞，难不成前后端都要比较吗？</p>
-<p>进去的需要比较，思路模糊还是不会。看了代码随想录，我还是比较倾向于第二种。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int[] maxSlidingWindow(int[] nums, int k) &#123;</span><br><span class="line">        ArrayDeque&lt;Integer&gt; deque = new ArrayDeque&lt;&gt;();</span><br><span class="line">        int n = nums.length;</span><br><span class="line">        int[] res = new int[n - k + 1];</span><br><span class="line">        int idx = 0;</span><br><span class="line">        for(int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">            while(!deque.isEmpty() &amp;&amp; deque.peek() &lt; i - k + 1)&#123;</span><br><span class="line">                deque.poll();</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            while(!deque.isEmpty() &amp;&amp; nums[deque.peekLast()] &lt; nums[i]) &#123;</span><br><span class="line">                deque.pollLast();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            deque.offer(i);</span><br><span class="line">            if(i &gt;= k - 1)&#123;</span><br><span class="line">                res[idx++] = nums[deque.peek()];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  <h2 id="104-二叉树的最大深度"><a href="#104-二叉树的最大深度" class="headerlink" title="104 二叉树的最大深度"></a>104 二叉树的最大深度</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-depth-of-binary-tree/">力扣题目链接</a></p>
+<p>一眼深度遍历，高度是本节点而不是根节点</p>
+<p>前序 深  后序 高    换个思路   后序求根节点高</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int maxDepth(TreeNode root) &#123;</span><br><span class="line">      if(root == null)&#123;</span><br><span class="line">          return 0;</span><br><span class="line">      &#125;</span><br><span class="line">      int  leftd = maxDepth(root.left);</span><br><span class="line">      int  rightd = maxDepth(root.right);</span><br><span class="line">      return Math.max(leftd,rightd)+1;       </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="347-前K个高频元素"><a href="#347-前K个高频元素" class="headerlink" title="347 前K个高频元素"></a>347 前K个高频元素</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/top-k-frequent-elements/">力扣题目链接</a></p>
-<p>然而我一眼看的时候觉得用哈希不错，细看不对，数组而不是字母，哈希表查找起来量级不太行还要不断更新。没想到是堆，这个数据结构有讲，不过比较简略，真正的实施并没有，寄，不会。而且用队列实现堆，呃，二叉树我没见过用队列的示例（跪   </p>
-<p>好吧，原来还是用了哈希  map</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">public int[] topKFrequent(int[] nums, int k) &#123;</span><br><span class="line">        Map&lt;Integer,Integer&gt; map = new HashMap&lt;&gt;();</span><br><span class="line">        for(int num:nums)&#123;</span><br><span class="line">            map.put(num,map.getOrDefault(num,0)+1);</span><br><span class="line">        &#125;</span><br><span class="line">                            //从队头到队尾从小到大 priorityqueue</span><br><span class="line">        PriorityQueue&lt;int[]&gt; pq = new PriorityQueue&lt;&gt;((pair1,pair2)-&gt;pair1[1]-pair2[1]);</span><br><span class="line">        for(Map.Entry&lt;Integer,Integer&gt; entry:map.entrySet())&#123;</span><br><span class="line">            if(pq.size()&lt;k)&#123;</span><br><span class="line">                pq.add(new int[]&#123;entry.getKey(),entry.getValue()&#125;);</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                if(entry.getValue()&gt;pq.peek()[1])&#123;</span><br><span class="line">                    pq.poll();       //弹出最少</span><br><span class="line">                    pq.add(new int[]&#123;entry.getKey(),entry.getValue()&#125;);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        int[] ans = new int[k];</span><br><span class="line">        for(int i=k-1;i&gt;=0;i--)&#123;</span><br><span class="line">            ans[i] = pq.poll()[0];</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">void ans(TreeNode tr,int tmp)&#123;</span><br><span class="line">        if(tr==null) return;</span><br><span class="line">        tmp++;</span><br><span class="line">        maxnum = maxnum&lt;tmp?tmp:maxnum; // 二元</span><br><span class="line">        ans(tr.left,tmp);</span><br><span class="line">        ans(tr.right,tmp);</span><br><span class="line">        tmp--;</span><br></pre></td></tr></table></figure>
+
+<p>除此之外迭代   查 加</p>
+<pre><code>public int maxDepth(TreeNode root) &#123;
+        if(root == null) &#123;
+            return 0;
+        &#125;
+        Deque&lt;TreeNode&gt; deque = new LinkedList&lt;&gt;();
+        deque.offer(root);
+        int depth = 0;
+        while (!deque.isEmpty()) &#123;
+            int size = deque.size();
+            depth++;
+            for (int i = 0; i &lt; size; i++) &#123;
+                TreeNode node = deque.poll();
+                if (node.left != null) &#123;
+                    deque.offer(node.left);
+                &#125;
+                if (node.right != null) &#123;
+                    deque.offer(node.right);
+                &#125;
+            &#125;
+        &#125;
+        return depth;
+    &#125;         
+</code></pre>
+<p>n叉树</p>
+<pre><code>class Solution &#123;
+    public int maxDepth(Node root) &#123;
+        if(root == null)
+              return 0;
+        int deep = 0;
+       Queue&lt;Node&gt; que = new LinkedList&lt;&gt;();
+        que.offer(root);
+        while(!que.isEmpty())&#123;
+              deep ++;
+              while(que.size())&#123;
+                Node node = que.poll();
+                for(int i = 0;i&lt; node.children.size();i++)&#123;
+                  if(que.children.get(i)!= null)
+                        que.offer(node.children.get(i));
+                        len--;
+                &#125;
+              &#125;
+              return deep;
+        &#125;
+
+    &#125;      
+</code></pre>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><h2 id="111-二叉树的最小深度"><a href="#111-二叉树的最小深度" class="headerlink" title="111 二叉树的最小深度"></a>111 二叉树的最小深度</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-depth-of-binary-tree/">力扣题目链接</a></p>
+<p>层次一次，最小，注意根节点左右缺其1不算  ？ 找到就返回还需要比较（层次应该不用吧     左右比较原来如此</p>
+<pre><code>public int minDepth(TreeNode root) &#123;
+        if (root == null) &#123;
+            return 0;
+        &#125;
+        int leftd = minDepth(root.left);
+        int rightd = minDepth(root.right);
+        if (root.left == null) &#123;
+            return rightd + 1;
+        &#125;
+        if (root.right == null) &#123;
+            return leftd + 1;
+        &#125;
+        // 左右结点都不为null
+        return Math.min(leftDepth, rightDepth) + 1;
+    &#125;
+
+public int minDepth(TreeNode root) &#123;
+        if (root == null) &#123;
+            return 0;
+        &#125;
+        Deque&lt;TreeNode&gt; deque = new LinkedList&lt;&gt;();
+        deque.offer(root);
+        int depth = 0;
+        while (!deque.isEmpty()) &#123;
+            int size = deque.size();
+            depth++;
+            for (int i = 0; i &lt; size; i++) &#123;
+                TreeNode poll = deque.poll();
+                if (poll.left == null &amp;&amp; poll.right == null) &#123;
+                    return depth;
+                &#125;
+                if (poll.left != null) &#123;
+                    deque.offer(poll.left);
+                &#125;
+                if (poll.right != null) &#123;
+                    deque.offer(poll.right);
+                &#125;
+            &#125;
+        &#125;
+        return depth;
+    &#125;    
+</code></pre>
+<h2 id="222-完全二叉树的节点个数"><a href="#222-完全二叉树的节点个数" class="headerlink" title="222 完全二叉树的节点个数"></a>222 完全二叉树的节点个数</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/count-complete-tree-nodes/">力扣题目链接</a></p>
+<p>层次？还是直接用数学公式</p>
+<p>数学，记录for循坏的i   不对不对不对，那样要switch好几种方案？</p>
+<p>不，很难算，等等，要另开for 好吧 继续层次</p>
+<pre><code> class Solution &#123;
+    public int countNodes(TreeNode root) &#123;
+        if(root == null) &#123;
+            return 0;
+        &#125;
+        return countNodes(root.left) + countNodes(root.right) + 1;
+    &#125;
+&#125;      
+</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int countNodes(TreeNode root) &#123;</span><br><span class="line">        if (root == null) </span><br><span class="line">            return 0;</span><br><span class="line">        Queue&lt;TreeNode&gt; queue = new LinkedList&lt;&gt;();</span><br><span class="line">        queue.offer(root);</span><br><span class="line">        int result = 0;</span><br><span class="line">        while (!queue.isEmpty()) &#123;</span><br><span class="line">            int size = queue.size();</span><br><span class="line">            while (size  &gt; 0) &#123;</span><br><span class="line">                size--;</span><br><span class="line">                TreeNode cur = queue.poll();   //下一个</span><br><span class="line">                result++;</span><br><span class="line">                if (cur.left != null) queue.offer(cur.left);</span><br><span class="line">                if (cur.right != null) queue.offer(cur.right);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>满二叉树就简单多了 重点左子树   or递归</p>
  
       <!-- reward -->
       
@@ -181,7 +285,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/03/27/day13/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/03/29/day16/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -192,19 +296,19 @@
    
   <nav class="article-nav">
     
-      <a href="/2023/03/28/day14/" class="article-nav-link">
+      <a href="/2023/03/30/day15/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            代码随想录算法训练营Day14|二叉树理论基础 遍历
+            代码随想录算法训练营Day15|层序 226 101
           
         </div>
       </a>
     
     
-      <a href="/2023/03/25/day11/" class="article-nav-link">
+      <a href="/2023/03/28/day14/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">代码随想录算法训练营Day11|栈与队列 20 1047 150</div>
+        <div class="article-nav-title">代码随想录算法训练营Day14|二叉树理论基础 遍历</div>
       </a>
     
   </nav>
