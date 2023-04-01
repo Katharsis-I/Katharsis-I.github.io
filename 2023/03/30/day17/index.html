@@ -13,7 +13,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>代码随想录算法训练营Day|110 257 404 |  亦</title>
+      <title>代码随想录算法训练营Day17|110 257 404 |  亦</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -67,7 +67,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  代码随想录算法训练营Day|110 257 404
+  代码随想录算法训练营Day17|110 257 404
 </h1>
  
 
@@ -169,7 +169,7 @@
             traversal(root.right,paths,res);
             paths.remove(paths.size()-1);
         &#125;
-        
+
     &#125;
 </code></pre>
 <p>迭代</p>
@@ -202,7 +202,7 @@
 <h2 id="404-左叶子之和"><a href="#404-左叶子之和" class="headerlink" title="404 左叶子之和"></a>404 左叶子之和</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/sum-of-left-leaves/">力扣题目链接</a></p>
 <p>叶子在父节点左边</p>
 <p>node-&gt;left != NULL &amp;&amp; node-&gt;left-&gt;left == NULL &amp;&amp; node-&gt;left-&gt;right == NULL</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int sumOfLeftLeaves(TreeNode root) &#123;</span><br><span class="line">        if (root == null) return 0;</span><br><span class="line">        int leftValue = sumOfLeftLeaves(root.left);    </span><br><span class="line">        int rightValue = sumOfLeftLeaves(root.right);  </span><br><span class="line">                                                       </span><br><span class="line">        int real = 0;</span><br><span class="line">        if (root.left != null &amp;&amp; root.left.left == null &amp;&amp; root.left.right == null) &#123; </span><br><span class="line">            real = root.left.val;</span><br><span class="line">        &#125;</span><br><span class="line">        int sum = real + leftValue + rightValue;  </span><br><span class="line">        return sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int sumOfLeftLeaves(TreeNode root) &#123;</span><br><span class="line">        if (root == null) return 0;</span><br><span class="line">        int leftValue = sumOfLeftLeaves(root.left);    </span><br><span class="line">        int rightValue = sumOfLeftLeaves(root.right);  </span><br><span class="line"></span><br><span class="line">        int real = 0;</span><br><span class="line">        if (root.left != null &amp;&amp; root.left.left == null &amp;&amp; root.left.right == null) &#123; </span><br><span class="line">            real = root.left.val;</span><br><span class="line">        &#125;</span><br><span class="line">        int sum = real + leftValue + rightValue;  </span><br><span class="line">        return sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>递归说简单但是逻辑是必须要捋顺的</p>
 <p>层序迭代，比较直观</p>
@@ -286,7 +286,7 @@
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            day18
+            代码随想录算法训练营Day18|513 112 106
           
         </div>
       </a>

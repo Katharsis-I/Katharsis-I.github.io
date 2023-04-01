@@ -13,7 +13,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>day18 |  亦</title>
+      <title>代码随想录算法训练营Day18|513 112 106 |  亦</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -67,7 +67,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  day18
+  代码随想录算法训练营Day18|513 112 106
 </h1>
  
 
@@ -83,7 +83,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">0</span>
+            <span class="post-count">982</span>
         </span>
     </span>
 
@@ -92,20 +92,78 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">1 min</span>
+            <span class="post-count">5 min</span>
         </span>
     </span>
 </div>
  
     </div>
       
+    <div class="tocbot"></div>
+
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-   
+  <h2 id="223-找树左下角的值"><a href="#223-找树左下角的值" class="headerlink" title="223 找树左下角的值"></a>223 找树左下角的值</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-bottom-left-tree-value/">力扣题目链接</a></p>
+<p>层序，递归毕竟确定的不一定是最后一层。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int findBottomLeftValue(TreeNode root) &#123;</span><br><span class="line">        Queue&lt;TreeNode&gt; queue = new LinkedList&lt;&gt;();</span><br><span class="line">        queue.offer(root);</span><br><span class="line">        int res = 0;</span><br><span class="line">        while(!queue.isEmpty())&#123;</span><br><span class="line">            int size = queue.size();</span><br><span class="line">            for(int i = 0; i &lt; size; i++)&#123;</span><br><span class="line">                TreeNode poll = queue.poll();</span><br><span class="line">                if(i == 0)&#123;</span><br><span class="line">                    res = poll.val;</span><br><span class="line">                &#125;</span><br><span class="line">                if(poll.left != null)&#123;</span><br><span class="line">                    queue.offer(poll.left);</span><br><span class="line">                &#125;</span><br><span class="line">                if(poll.right != null)&#123;</span><br><span class="line">                    queue.offer(poll.right);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="112-路经总和"><a href="#112-路经总和" class="headerlink" title="112 路经总和"></a>112 路经总和</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/path-sum/">力扣题目链接</a></p>
+<p>不好说迭代好还是递归好，返回值单设变量？还是其他 不知道怎么设置判断条件</p>
+<p>递归的代码有一点看不懂，不太行</p>
+<p>迭代一路相加，递归一路相减</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">class solution &#123;</span><br><span class="line">   public boolean haspathsum(treenode root, int targetsum) &#123;</span><br><span class="line">        if (root == null) &#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        targetsum -= root.val;</span><br><span class="line">        if (root.left == null &amp;&amp; root.right == null) &#123;</span><br><span class="line">            return targetsum == 0;</span><br><span class="line">        &#125;</span><br><span class="line">        if (root.left != null) &#123;</span><br><span class="line">            boolean left = haspathsum(root.left, targetsum);</span><br><span class="line">            if (left) &#123;     </span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        if (root.right != null) &#123;</span><br><span class="line">            boolean right = haspathsum(root.right, targetsum);</span><br><span class="line">            if (right) &#123;     </span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">public boolean haspathsum(treenode root, int targetsum) &#123;</span><br><span class="line">        if(root == null) return false;</span><br><span class="line">        stack&lt;treenode&gt; stack1 = new stack&lt;&gt;();</span><br><span class="line">        stack&lt;integer&gt; stack2 = new stack&lt;&gt;();</span><br><span class="line">        stack1.push(root);</span><br><span class="line">        stack2.push(root.val);</span><br><span class="line">        while(!stack1.isempty()) &#123;</span><br><span class="line">            int size = stack1.size();</span><br><span class="line">            for(int i = 0; i &lt; size; i++) &#123;</span><br><span class="line">                treenode node = stack1.pop();</span><br><span class="line">                int sum = stack2.pop();</span><br><span class="line"></span><br><span class="line">                if(node.left == null &amp;&amp; node.right == null &amp;&amp; sum == targetsum) &#123;</span><br><span class="line">                    return true;</span><br><span class="line">                &#125;</span><br><span class="line">                </span><br><span class="line">                if(node.right != null)&#123;</span><br><span class="line">                    stack1.push(node.right);</span><br><span class="line">                    stack2.push(sum + node.right.val);</span><br><span class="line">                &#125;</span><br><span class="line">                </span><br><span class="line">                if(node.left != null) &#123;</span><br><span class="line">                    stack1.push(node.left);</span><br><span class="line">                    stack2.push(sum + node.left.val);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>求路径总和 113</p>
+<p>迭代反而不太行，怎么回溯路径，全记录路径太占空间了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">class solution &#123;</span><br><span class="line">    public List&lt;List&lt;Integer&gt;&gt; pathsum(TreeNode root, int targetsum) &#123;</span><br><span class="line">        List&lt;List&lt;Integer&gt;&gt; res = new ArrayList&lt;&gt;();</span><br><span class="line">        if (root == null) </span><br><span class="line">            return res；</span><br><span class="line">        List&lt;Integer&gt; path = new LinkedList&lt;&gt;();</span><br><span class="line">        preorderdfs(root, targetsum, res, path);</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void preorderdfs(TreeNode root, int targetsum, List&lt;List&lt;Integer&gt;&gt; res, List&lt;Integer&gt; path) &#123;</span><br><span class="line">        path.add(root.val);</span><br><span class="line">        if (root.left == null &amp;&amp; root.right == null) &#123;</span><br><span class="line">            if (targetsum - root.val == 0) &#123;</span><br><span class="line">                res.add(new ArrayList&lt;&gt;(path));</span><br><span class="line">            &#125;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if (root.left != null) &#123;</span><br><span class="line">            preorderdfs(root.left, targetsum - root.val, res, path);</span><br><span class="line">            path.remove(path.size() - 1);  //返回上一层，递归 香槟塔</span><br><span class="line">        &#125;</span><br><span class="line">        if (root.right != null) &#123;</span><br><span class="line">            preorderdfs(root.right, targetsum - root.val, res, path);</span><br><span class="line">            path.remove(path.size() - 1);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="106-从中序与后序遍历序列构造二叉树"><a href="#106-从中序与后序遍历序列构造二叉树" class="headerlink" title="106 从中序与后序遍历序列构造二叉树"></a>106 从中序与后序遍历序列构造二叉树</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/construct-binary-tree-from-inorder-and-postorder-traversal/">力扣题目链接</a></p>
+<p>用中序遍历和后序遍历确定二叉树是可以做到的，不过如何用程序实现，是个问题，这个我确实没什么思路，我不会，看视频。</p>
+<p>如果不为空，那么取后序数组最后一个元素作为节点元素 找到后序数组最后一个元素在中序数组的位置，作为切割点 切割中序数组 切割后序数组 递归处理左区间和右区间</p>
+<p>中后</p>
+<pre><code>class Solution &#123;
+    Map&lt;Integer, Integer&gt; map;  // 查找
+    public TreeNode buildTree(int[] inorder, int[] postorder) &#123;
+        map = new HashMap&lt;&gt;();
+        for (int i = 0; i &lt; inorder.length; i++) &#123; // map保存
+            map.put(inorder[i], i);
+        &#125;
+
+        return findNode(inorder,  0, inorder.length, postorder,0, postorder.length);  // 前闭后开
+    &#125;
+
+    public TreeNode findNode(int[] inorder, int inBegin, int inEnd, int[] postorder, int postBegin, int postEnd) &#123;
+        //前闭后开
+        if (inBegin &gt;= inEnd || postBegin &gt;= postEnd) &#123;  // 不满足左闭右开 空
+            return null;
+        &#125;
+        int rootIndex = map.get(postorder[postEnd - 1]);  // 后序最后一个在中序位置
+        TreeNode root = new TreeNode(inorder[rootIndex]);  
+        int lenOfLeft = rootIndex - inBegin;  // 确定后序个数
+        root.left = findNode(inorder, inBegin, rootIndex,
+                            postorder, postBegin, postBegin + lenOfLeft);
+        root.right = findNode(inorder, rootIndex + 1, inEnd,
+                            postorder, postBegin + lenOfLeft, postEnd - 1);
+
+        return root;
+    &#125;
+&#125; 
+</code></pre>
+<p>前中</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">lass Solution &#123;</span><br><span class="line">    Map&lt;Integer, Integer&gt; map;</span><br><span class="line">    public TreeNode buildTree(int[] preorder, int[] inorder) &#123;</span><br><span class="line">        map = new HashMap&lt;&gt;();</span><br><span class="line">        for (int i = 0; i &lt; inorder.length; i++) &#123; </span><br><span class="line">            map.put(inorder[i], i);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return findNode(preorder, 0, preorder.length, inorder,  0, inorder.length);  // 前闭后开</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public TreeNode findNode(int[] preorder, int preBegin, int preEnd, int[] inorder, int inBegin, int inEnd) &#123;</span><br><span class="line">       </span><br><span class="line">        if (preBegin &gt;= preEnd || inBegin &gt;= inEnd) &#123;  </span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">        int rootIndex = map.get(preorder[preBegin]); </span><br><span class="line">        TreeNode root = new TreeNode(inorder[rootIndex]); </span><br><span class="line">        int lenOfLeft = rootIndex - inBegin;  </span><br><span class="line">        root.left = findNode(preorder, preBegin + 1, preBegin + lenOfLeft + 1,</span><br><span class="line">                            inorder, inBegin, rootIndex);</span><br><span class="line">        root.right = findNode(preorder, preBegin + lenOfLeft + 1, preEnd,</span><br><span class="line">                            inorder, rootIndex + 1, inEnd);</span><br><span class="line"></span><br><span class="line">        return root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ 
       <!-- reward -->
       
     </div>
@@ -183,7 +241,7 @@
     
       <a href="/2023/03/30/day17/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">代码随想录算法训练营Day|110 257 404</div>
+        <div class="article-nav-title">代码随想录算法训练营Day17|110 257 404</div>
       </a>
     
   </nav>
