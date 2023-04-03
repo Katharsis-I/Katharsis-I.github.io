@@ -152,6 +152,90 @@
     
     
     <article
+  id="post-day21"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/04/04/day21/"
+    >代码随想录算法训练营Day21|530 501 236</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/04/04/day21/" class="article-date">
+  <time datetime="2023-04-03T20:08:28.000Z" itemprop="datePublished">2023-04-04</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="530-二叉搜索树的最小绝对差"><a href="#530-二叉搜索树的最小绝对差" class="headerlink" title="530 二叉搜索树的最小绝对差"></a>530 二叉搜索树的最小绝对差</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-absolute-difference-in-bst/">力扣题目链接</a></p>
+<p>任意两节点的差的绝对值的最小值，二叉树啊，可以直接遍历到数组中然后排序然后双指针吗 <del>快排？还是，双指针应该什么思路</del></p>
+<p>加上指针不是太会，看了讲解才豁然开朗</p>
+<p>每次最后用一下min</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    TreeNode pre;</span><br><span class="line">    int result = Integer.MAX_VALUE;</span><br><span class="line"></span><br><span class="line">    public int getMinimumDifference(TreeNode root) &#123;</span><br><span class="line">       if(root==null)</span><br><span class="line">         return 0;</span><br><span class="line">       traversal(root);</span><br><span class="line">       return result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void traversal(TreeNode root)&#123;</span><br><span class="line">        if(root==null)</span><br><span class="line">           return;</span><br><span class="line"></span><br><span class="line">        traversal(root.left);</span><br><span class="line"></span><br><span class="line">        if(pre!=null)&#123;</span><br><span class="line">            result = Math.min(result,root.val-pre.val);</span><br><span class="line">        &#125;</span><br><span class="line">        pre = root;          // 定位指针</span><br><span class="line">        traversal(root.right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<pre><code> class Solution &#123;
+    TreeNode pre;
+    Stack&lt;TreeNode&gt; stack;
+    public int getMinimumDifference(TreeNode root) &#123;
+        if (root == null)       
+            return 0;
+        stack = new Stack&lt;&gt;();
+        TreeNode cur = root;
+        int result = Integer.MAX_VALUE;
+ 
+        while (cur != null || !stack.isEmpty()) &#123;
+            if (cur != null) &#123;
+                stack.push(cur); 
+                cur = cur.left; 
+            &#125;else &#123;
+                cur = stack.pop(); 
+                if (pre != null) &#123; 
+                    result = Math.min(result, cur.val - pre.val);
+                &#125;
+ 
+                pre = cur;
+                cur = cur.right; 
+            &#125;
+        &#125;
+        return result;
+    &#125;
+&#125;    
+</code></pre>
+<h2 id="501-二叉搜索树中的众数"><a href="#501-二叉搜索树中的众数" class="headerlink" title="501 二叉搜索树中的众数"></a>501 二叉搜索树中的众数</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-mode-in-binary-search-tree/">力扣题目链接</a></p>
+<p>频率最高，刚开始以为哈希表重现，     毕竟已经是搜索了，不一定就是哈希</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/" rel="tag"> </a></li></ul>
+
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
   id="post-day20"
   class="article article-type-post"
   itemscope
@@ -263,19 +347,50 @@ class Solution &#123;
  class Solution &#123;
     public TreeNode searchBST(TreeNode root, int val) &#123;
         while (root != null)&#123;
- 
+
             if (val &lt; root.val)
                root = root.left;
             else if (val &gt; root.val) 
                root = root.right;
- 
+
             else    
                 return root;
            &#125;
- 
+
         return null;
     &#125;
 &#125;  
+</code></pre>
+<h2 id="98-验证二叉搜索树"><a href="#98-验证二叉搜索树" class="headerlink" title="98 验证二叉搜索树"></a>98 验证二叉搜索树</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/validate-binary-search-tree/">力扣题目链接</a></p>
+<p>递归！  中陷阱了，附庸的附庸不一定是我的附庸，中间节点的左右界</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    TreeNode max;</span><br><span class="line">    public boolean isValidBST(TreeNode root) &#123;</span><br><span class="line">        if (root == null) &#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        boolean left = isValidBST(root.left);</span><br><span class="line">        if (!left) &#123;     //空？</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if (max != null &amp;&amp; root.val &lt;= max.val) &#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        max = root;</span><br><span class="line"></span><br><span class="line">        boolean right = isValidBST(root.right);</span><br><span class="line">        return right;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<pre><code>class Solution &#123;
+    public boolean isValidBST(TreeNode root) &#123;
+        if (root == null) &#123;
+            return true;
+        &#125;
+        Stack&lt;TreeNode&gt; stack = new Stack&lt;&gt;();
+        TreeNode pre = null;
+
+        while (root != null || !stack.isEmpty()) &#123;  //||
+、
+            while (root != null) &#123;
+                stack.push(root);
+                root = root.left;
+            &#125;
+            TreeNode pop = stack.pop();
+            if (pre != null &amp;&amp; pop.val &lt;= pre.val) &#123;
+                return false;
+            &#125;
+
+            pre = pop;
+            root = pop.right;
+        &#125;
+        return true;
+    &#125;
+&#125;
+   
 </code></pre>
  
       <!-- reward -->
@@ -1090,60 +1205,6 @@ public int minDepth(TreeNode root) &#123;
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public void push(int x) &#123;</span><br><span class="line">        queue.offer(x);</span><br><span class="line">        int size = queue.size();</span><br><span class="line">        while (size-- &gt; 1)   //这个判断式</span><br><span class="line">            queue.offer(queue.poll());</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
 <p>deque没见过结构，虽然知道是队列，替换一下命令就ok了</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-day9"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/03/23/day9/"
-    >代码随想录算法训练营Day9|（kmp） 回顾哈希、字符串</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/03/23/day9/" class="article-date">
-  <time datetime="2023-03-23T13:42:03.000Z" itemprop="datePublished">2023-03-23</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="28-实现strStr"><a href="#28-实现strStr" class="headerlink" title="28 实现strStr( )"></a>28 实现strStr( )</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string/">力扣题目链接</a></p>
-<p>这个函数讲的是 KMP算法，408数据结构很着重讲了，虽然不考大题，主要是选择题，例如next数组，nextval数组，下标</p>
-<p>所以我kmp还是懂个百分之六七十，真让我写还是算了（手动扇子脸</p>
-<p>一刷先跳了，前几天进度不乐观，回顾前几天。</p>
-<h2 id="459-重复的子字符串"><a href="#459-重复的子字符串" class="headerlink" title="459 重复的子字符串"></a>459 重复的子字符串</h2><p>子串重复多次构成的确可以用kmp，但是如何kmp呢？</p>
-<p>思路有点蒙，next数组我知道，但是如何判定重复出现的子字符串？先跳了，有空看看视频。</p>
-<h2 id="总结字符串、数组"><a href="#总结字符串、数组" class="headerlink" title="总结字符串、数组"></a>总结字符串、数组</h2><p>主要讲的是前几天的代码题思路总结，思路还好，但是函数我不认识一点也不好。可能也有c++ primer 我看不下去的原因…… 虽然格式大差不差与c，但就是莫名各种不适应，所以函数不认识直接就跪了。</p>
-<p>字符串的基本操作指令，性质我也忘了；数组常常提，但是很少考虑操作的事，还是跪，复习，看前几天的代码题了。</p>
  
       <!-- reward -->
       

@@ -83,7 +83,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">603</span>
+            <span class="post-count">772</span>
         </span>
     </span>
 
@@ -191,19 +191,50 @@ class Solution &#123;
  class Solution &#123;
     public TreeNode searchBST(TreeNode root, int val) &#123;
         while (root != null)&#123;
- 
+
             if (val &lt; root.val)
                root = root.left;
             else if (val &gt; root.val) 
                root = root.right;
- 
+
             else    
                 return root;
            &#125;
- 
+
         return null;
     &#125;
 &#125;  
+</code></pre>
+<h2 id="98-验证二叉搜索树"><a href="#98-验证二叉搜索树" class="headerlink" title="98 验证二叉搜索树"></a>98 验证二叉搜索树</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/validate-binary-search-tree/">力扣题目链接</a></p>
+<p>递归！  中陷阱了，附庸的附庸不一定是我的附庸，中间节点的左右界</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    TreeNode max;</span><br><span class="line">    public boolean isValidBST(TreeNode root) &#123;</span><br><span class="line">        if (root == null) &#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        boolean left = isValidBST(root.left);</span><br><span class="line">        if (!left) &#123;     //空？</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if (max != null &amp;&amp; root.val &lt;= max.val) &#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        max = root;</span><br><span class="line"></span><br><span class="line">        boolean right = isValidBST(root.right);</span><br><span class="line">        return right;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<pre><code>class Solution &#123;
+    public boolean isValidBST(TreeNode root) &#123;
+        if (root == null) &#123;
+            return true;
+        &#125;
+        Stack&lt;TreeNode&gt; stack = new Stack&lt;&gt;();
+        TreeNode pre = null;
+
+        while (root != null || !stack.isEmpty()) &#123;  //||
+、
+            while (root != null) &#123;
+                stack.push(root);
+                root = root.left;
+            &#125;
+            TreeNode pop = stack.pop();
+            if (pre != null &amp;&amp; pop.val &lt;= pre.val) &#123;
+                return false;
+            &#125;
+
+            pre = pop;
+            root = pop.right;
+        &#125;
+        return true;
+    &#125;
+&#125;
+   
 </code></pre>
  
       <!-- reward -->
@@ -279,6 +310,15 @@ class Solution &#123;
 
    
   <nav class="article-nav">
+    
+      <a href="/2023/04/04/day21/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            代码随想录算法训练营Day21|530 501 236
+          
+        </div>
+      </a>
     
     
       <a href="/2023/03/31/day18/" class="article-nav-link">
