@@ -194,7 +194,7 @@
         stack = new Stack&lt;&gt;();
         TreeNode cur = root;
         int result = Integer.MAX_VALUE;
- 
+
         while (cur != null || !stack.isEmpty()) &#123;
             if (cur != null) &#123;
                 stack.push(cur); 
@@ -204,7 +204,7 @@
                 if (pre != null) &#123; 
                     result = Math.min(result, cur.val - pre.val);
                 &#125;
- 
+
                 pre = cur;
                 cur = cur.right; 
             &#125;
@@ -215,6 +215,133 @@
 </code></pre>
 <h2 id="501-二叉搜索树中的众数"><a href="#501-二叉搜索树中的众数" class="headerlink" title="501 二叉搜索树中的众数"></a>501 二叉搜索树中的众数</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-mode-in-binary-search-tree/">力扣题目链接</a></p>
 <p>频率最高，刚开始以为哈希表重现，     毕竟已经是搜索了，不一定就是哈希</p>
+<p>但是如果频率相同何如？</p>
+<p>哈希</p>
+<pre><code>class Solution &#123;
+    public int[] findMode(TreeNode root) &#123;
+
+        Map&lt;Integer, Integer&gt; map = new HashMap&lt;&gt;();
+        List&lt;Integer&gt; list = new ArrayList&lt;&gt;();
+  
+        if (root == null) 
+        return list.stream().mapToInt(Integer::intValue).toArray();
+
+        searchBST(root, map);
+ //这段……
+        List&lt;Map.Entry&lt;Integer, Integer&gt;&gt; mapList = map.entrySet().stream()
+                .sorted((c1, c2) -&gt; c2.getValue().compareTo(c1.getValue()))
+                .collect(Collectors.toList());
+
+        list.add(mapList.get(0).getKey());
+
+        for (int i = 1; i &lt; mapList.size(); i++) &#123;
+          if (mapList.get(i).getValue() == mapList.get(i - 1).getValue()) &#123;
+
+                list.add(mapList.get(i).getKey());
+
+            &#125; else &#123;
+                break;
+            &#125;
+        &#125;
+        return list.stream().mapToInt(Integer::intValue).toArray();
+    &#125;
+
+    void searchBST(TreeNode curr, Map&lt;Integer, Integer&gt; map) &#123;
+        if (curr == null) 
+            return;
+        map.put(curr.val, map.getOrDefault(curr.val, 0) + 1);
+        searchBST(curr.left, map);
+        searchBST(curr.right, map);
+    &#125;
+
+&#125;  
+
+class Solution &#123;
+    ArrayList&lt;Integer&gt; resList;
+    int maxCount;
+    int count;
+    TreeNode pre;
+
+    public int[] findMode(TreeNode root) &#123;
+        resList = new ArrayList&lt;&gt;();
+        maxCount = 0;
+        count = 0;
+        pre = null;
+        findMode1(root);
+
+        int[] res = new int[resList.size()];
+        for (int i = 0; i &lt; resList.size(); i++) &#123;
+            res[i] = resList.get(i);
+        &#125;
+        return res;
+    &#125;
+
+    public void findMode1(TreeNode root) &#123;
+        if (root == null) &#123;
+            return;
+        &#125;
+        findMode1(root.left);
+
+        int rootValue = root.val;
+
+        if (pre == null || rootValue != pre.val) &#123;
+            count = 1;
+        &#125; else &#123;
+            count++;
+        &#125;
+
+        if (count &gt; maxCount) &#123;
+
+            resList.clear();
+            resList.add(rootValue);
+            maxCount = count;
+
+        &#125; else if (count == maxCount) &#123;
+
+            resList.add(rootValue);
+
+        &#125;
+        pre = root;
+
+        findMode1(root.right);
+    &#125;
+&#125;    
+
+
+
+if (pre == null || cur.val != pre.val) &#123;    //pre确认是否重复
+                    count = 1;
+                &#125;else &#123;
+                    count++;
+                &#125;
+</code></pre>
+<h2 id="236-二叉树的最近公共祖先"><a href="#236-二叉树的最近公共祖先" class="headerlink" title="236 二叉树的最近公共祖先"></a>236 二叉树的最近公共祖先</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/">力扣题目链接</a></p>
+<p>正如同，可惜二叉树不能够由下而上</p>
+<p>原来是回溯，受教，遍历后的回溯的确很适合。遍历确定子树，回溯确定共同节点</p>
+<p>但是怎么回溯确定共同点呢</p>
+<p>这里回溯返回值很重要，正因为需要回溯的节点判断，那么返回值要能确定节点，所以函数类型就是 节点 </p>
+<p>自身亦是祖先</p>
+<pre><code>class Solution &#123;
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) &#123;
+        if (root == null || root == p || root == q) &#123; 
+            return root;
+        &#125;
+
+        TreeNode left = lowestCommonAncestor(root.left, p, q);
+        TreeNode right = lowestCommonAncestor(root.right, p, q);
+
+        if(left == null &amp;&amp; right == null) &#123; 
+            return null;
+        &#125;else if(left == null &amp;&amp; right != null) &#123; 
+            return right;
+        &#125;else if(left != null &amp;&amp; right == null) &#123; 
+            return left;
+        &#125;else &#123; 
+            return root;        //重点是这行（个人认为，思路问题
+        &#125;
+    &#125;
+&#125;  
+</code></pre>
  
       <!-- reward -->
       
@@ -390,7 +517,6 @@ class Solution &#123;
         return true;
     &#125;
 &#125;
-   
 </code></pre>
  
       <!-- reward -->
