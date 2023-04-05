@@ -152,6 +152,152 @@
     
     
     <article
+  id="post-day11"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/03/25/day11/"
+    >代码随想录算法训练营Day11|栈与队列 20 1047 150</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/03/25/day11/" class="article-date">
+  <time datetime="2023-03-25T15:55:19.000Z" itemprop="datePublished">2023-03-25</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="20-有效的括号"><a href="#20-有效的括号" class="headerlink" title="20 有效的括号"></a>20 有效的括号</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/valid-parentheses/">力扣题目链接</a></p>
+<p>昨天提到括号，今天这不是就来了吗，虽然不是代数式，但是相差不远。思路我还是知道的，栈的栈进栈出，符合条件进，遇到右括号出。</p>
+<p>没从代数式的思路跳出来，检测到左括号进右括号没反应过来，直接和右括号对应啊，粗暴直接。</p>
+<p>deque.pop()?</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public boolean isValid(String s) &#123;</span><br><span class="line">        Deque&lt;Character&gt; deque = new LinkedList&lt;&gt;();</span><br><span class="line">        char ch;</span><br><span class="line">        for(int i = 0; i &lt; s.length();i++)&#123;</span><br><span class="line">            ch = s.charAt(i);</span><br><span class="line">            if(ch == &#x27;(&#x27;)&#123;</span><br><span class="line">                deque.push(&#x27;)&#x27;);</span><br><span class="line">            &#125;else if(ch == &#x27;&#123;&#x27;)&#123;</span><br><span class="line">                deque.push(&#x27;&#125;&#x27;);</span><br><span class="line">            &#125;else if(ch == &#x27;[&#x27;)&#123;</span><br><span class="line">                deque.push(&#x27;]&#x27;);</span><br><span class="line">            &#125;else if(deque.isEmpty()||deque.peek() != ch)&#123; //判断匹配</span><br><span class="line">                return false;</span><br><span class="line">            &#125;else&#123;  </span><br><span class="line">                deque.pop();   //匹配就弹出啊</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return deque.isEmpty();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="1047-删除字符串中的所有相邻重复项"><a href="#1047-删除字符串中的所有相邻重复项" class="headerlink" title="1047 删除字符串中的所有相邻重复项"></a>1047 删除字符串中的所有相邻重复项</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-all-adjacent-duplicates-in-string/">力扣题目链接</a></p>
+<p>遍历，判断栈里与下一个是否相同，继续遍历还是开删，不过忘了反转。没有讲的简练。</p>
+<p><strong>栈，字符串为栈，双指针</strong>，学海无涯。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public String removeDuplicates(String s) &#123;</span><br><span class="line">         ArrayDeque&lt;Character&gt; deque = new ArrayDeque&lt;&gt;();</span><br><span class="line">         char ch;</span><br><span class="line">         for(int i = 0;i&lt;s.length();i++)&#123;</span><br><span class="line">             ch = s.charAt(i);</span><br><span class="line">             if(deque.isEmpty() || deque.peek() != ch)&#123;</span><br><span class="line">                 deque.push(ch);</span><br><span class="line">             &#125;else&#123;</span><br><span class="line">                 deque.pop();</span><br><span class="line">             &#125;</span><br><span class="line">         &#125;</span><br><span class="line">         String str = &quot;&quot;;</span><br><span class="line">         while(!deque.isEmpty())&#123;        //用这种方式解决反转的啊</span><br><span class="line">             str = deque.pop() + str;</span><br><span class="line">         &#125;</span><br><span class="line">         return str;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>字符串为栈</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">int top = -1;</span><br><span class="line">for (int i = 0; i &lt; s.length(); i++) &#123;</span><br><span class="line">   char c = s.charAt(i);</span><br><span class="line">   </span><br><span class="line">if (top &gt;= 0 &amp;&amp; res.charAt(top) == c) &#123;</span><br><span class="line">         res.deleteCharAt(top);</span><br><span class="line">         top--;</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">         res.append(c);</span><br><span class="line">         top++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<p>双指针</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">while(fast &lt; s.length())&#123;</span><br><span class="line">       ch[slow] = ch[fast];</span><br><span class="line">       if(slow &gt; 0 &amp;&amp; ch[slow] == ch[slow - 1])&#123;</span><br><span class="line">                slow--;</span><br><span class="line">          &#125;else&#123;</span><br><span class="line">                slow++;              //略有点忘了</span><br><span class="line">          &#125;</span><br><span class="line">            fast++;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="150-逆波兰表达式求值"><a href="#150-逆波兰表达式求值" class="headerlink" title="150 逆波兰表达式求值"></a>150 逆波兰表达式求值</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/evaluate-reverse-polish-notation/">力扣题目链接</a></p>
+<p>逆波兰表达式就是后缀表达式啊，那没事了，我完全理解了。</p>
+<p>数字你只管进，计算由进来的第一个运算符来想.jpg</p>
+<p>进数字，遇到运算符弹出去，计算完再填进来，如此这般，完事。</p>
+<p><del>虽然我没写过我有罪</del></p>
+<p>看的是官方解答，switch好久没看见了，差点就忘了这么一个循环语句的存在。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int evalRPN(String[] tokens) &#123;</span><br><span class="line">        int n = tokens.length;</span><br><span class="line">        int[] stack = new int[(n + 1) / 2];    //长度</span><br><span class="line">        int index = -1;               //-1?</span><br><span class="line">        for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">            String token = tokens[i];</span><br><span class="line">            switch (token) &#123;</span><br><span class="line">                case &quot;+&quot;:</span><br><span class="line">                    index--;</span><br><span class="line">                    stack[index] += stack[index + 1];</span><br><span class="line">                    break;</span><br><span class="line">                case &quot;-&quot;:</span><br><span class="line">                    index--;</span><br><span class="line">                    stack[index] -= stack[index + 1];</span><br><span class="line">                    break;</span><br><span class="line">                case &quot;*&quot;:</span><br><span class="line">                    index--;</span><br><span class="line">                    stack[index] *= stack[index + 1];</span><br><span class="line">                    break;</span><br><span class="line">                case &quot;/&quot;:</span><br><span class="line">                    index--;</span><br><span class="line">                    stack[index] /= stack[index + 1];</span><br><span class="line">                    break;</span><br><span class="line">                default:</span><br><span class="line">                    index++;</span><br><span class="line">                    stack[index] = Integer.parseInt(token);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return stack[index];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>思路虽然早就知道了，但是细枝末节我还是不行，还有好长的路要走。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
+  id="post-day10"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/03/24/day10/"
+    >代码随想录算法训练营Day10|栈 232 225</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/03/24/day10/" class="article-date">
+  <time datetime="2023-03-24T15:26:06.000Z" itemprop="datePublished">2023-03-24</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="栈-队列的理论基础"><a href="#栈-队列的理论基础" class="headerlink" title="栈 队列的理论基础"></a>栈 队列的理论基础</h2><p>栈，熟悉又友好的结构，408里面关于栈的不美好记忆大概是 运算符号的位置栈进栈出，左缀右缀，很好理解就是不好写。选择题很简单，算法题一般不考栈，我对栈的印象只停留在原理。 现在要实操（望天</p>
+<p>C++ stl库里有栈和队列两个数据结构  此处使用SGI STL</p>
+<p>栈的内部结构主要就是数组以及链表                  vector deque list</p>
+<p>deque 双向队列 底层</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">std::stack&lt;int, std::vector&lt;int&gt; &gt; third;  </span><br><span class="line">std::queue&lt;int, std::list&lt;int&gt;&gt; third; </span><br></pre></td></tr></table></figure>
+
+<p>以上为C++实例</p>
+<h2 id="232-用栈实现队列"><a href="#232-用栈实现队列" class="headerlink" title="232 用栈实现队列"></a>232 用栈实现队列</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/implement-queue-using-stacks/">力扣题目链接</a></p>
+<p>队列</p>
+<p>push放入尾部 </p>
+<p> pop首部移除</p>
+<p> peek返回首部</p>
+<p> empty 判断</p>
+<p>和之前的设计链表一样都是要抽象函数，进行基础编写。</p>
+<p>栈只有一个端口一进一出，队列双端都在，需要两个栈。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">class MyQueue &#123;</span><br><span class="line">    Stack&lt;Integer&gt; stackIn;</span><br><span class="line">    Stack&lt;Integer&gt; stackOut;</span><br><span class="line"></span><br><span class="line">    public MyQueue() &#123;</span><br><span class="line"></span><br><span class="line">        stackIn = new Stack&lt;&gt;();            //初始</span><br><span class="line">        stackOut = new Stack&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public void push(int x) &#123;         //放入</span><br><span class="line"></span><br><span class="line">         stackIn.push(x);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public int pop() &#123;             //移除</span><br><span class="line"></span><br><span class="line">        placetackIn();</span><br><span class="line">        return stackOut.pop();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public int peek() &#123;           //返回</span><br><span class="line"></span><br><span class="line">         placetackIn();</span><br><span class="line">         return stackOut.peek();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public boolean empty() &#123;     //都空</span><br><span class="line"></span><br><span class="line">         return stackIn.isEmpty() &amp;&amp; stackOut.isEmpty();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void placetackIn()&#123;      //转移</span><br><span class="line">        if(!stackOut.isEmpty())</span><br><span class="line">             return;</span><br><span class="line">        while(!stackIn.isEmpty())&#123;      //这里是while</span><br><span class="line">            stackOut.push(stackIn.pop());</span><br><span class="line">        &#125;     </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Your MyQueue object will be instantiated and called as such:</span><br><span class="line"> * MyQueue obj = new MyQueue();</span><br><span class="line"> * obj.push(x);</span><br><span class="line"> * int param_2 = obj.pop();</span><br><span class="line"> * int param_3 = obj.peek();</span><br><span class="line"> * boolean param_4 = obj.empty();</span><br><span class="line"> */</span><br></pre></td></tr></table></figure>
+
+<h2 id="225-用队列实现栈"><a href="#225-用队列实现栈" class="headerlink" title="225 用队列实现栈"></a>225 用队列实现栈</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/implement-stack-using-queues/">力扣题目链接</a></p>
+<p>两个互相实现啊，但是队列的顺序怎么实现栈，队列顺序是固定的又不能翻转</p>
+<p>没想到另一个是用来备份的，队列出就全出没有取巧</p>
+<p>queue or deque</p>
+<p>甚至还可以优化成一个</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">class MyStack &#123;</span><br><span class="line"></span><br><span class="line">      Queue&lt;Integer&gt; queue1; </span><br><span class="line">      Queue&lt;Integer&gt; queue2; </span><br><span class="line"></span><br><span class="line">    public MyStack() &#123;</span><br><span class="line"></span><br><span class="line">      queue1= new LinkedList&lt;&gt;();</span><br><span class="line">      queue2 = new LinkedList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public void push(int x) &#123;</span><br><span class="line"></span><br><span class="line">      queue2.offer(x);</span><br><span class="line">      while(!queue1.isEmpty())&#123;</span><br><span class="line">          queue2.offer(queue1.poll());</span><br><span class="line">      &#125;   </span><br><span class="line">      Queue&lt;Integer&gt;  queueTemp;</span><br><span class="line">      queueTemp = queue1;</span><br><span class="line">      queue1 = queue2;</span><br><span class="line">      queue2 = queueTemp;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public int pop() &#123;</span><br><span class="line"></span><br><span class="line">       return queue1.poll();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public int top() &#123;</span><br><span class="line"></span><br><span class="line">       return queue1.peek();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public boolean empty() &#123;</span><br><span class="line">    </span><br><span class="line">       return queue1.isEmpty();   </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Your MyStack object will be instantiated and called as such:</span><br><span class="line"> * MyStack obj = new MyStack();</span><br><span class="line"> * obj.push(x);</span><br><span class="line"> * int param_2 = obj.pop();</span><br><span class="line"> * int param_3 = obj.top();</span><br><span class="line"> * boolean param_4 = obj.empty();</span><br><span class="line"> */</span><br></pre></td></tr></table></figure>
+
+<p>一个的话，原地排列</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public void push(int x) &#123;</span><br><span class="line">        queue.offer(x);</span><br><span class="line">        int size = queue.size();</span><br><span class="line">        while (size-- &gt; 1)   //这个判断式</span><br><span class="line">            queue.offer(queue.poll());</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>deque没见过结构，虽然知道是队列，替换一下命令就ok了</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
   id="post-day9"
   class="article article-type-post"
   itemscope
@@ -788,72 +934,13 @@
 </article>
 
     
-    <article
-  id="post-hello-world"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/03/13/hello-world/"
-    >Hello World</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/03/13/hello-world/" class="article-date">
-  <time datetime="2023-03-12T16:16:33.986Z" itemprop="datePublished">2023-03-13</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
   </article>
   
 
   
   <nav class="page-nav">
     
-    <a class="extend prev" rel="prev" href="/">上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/">上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">下一页</a>
   </nav>
   
 </section>
