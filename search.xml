@@ -1,9 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>day23</title>
+    <title>代码随想录算法训练营Day23|669 108 538</title>
     <url>/2023/04/06/day23/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script>]]></content>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="669-修剪二叉搜索树"><a href="#669-修剪二叉搜索树" class="headerlink" title="669 修剪二叉搜索树"></a>669 修剪二叉搜索树</h2><p><a href="https://leetcode.cn/problems/trim-a-binary-search-tree/">力扣题目链接</a></p>
+<p>……不得不说，是真难，我到现在第一个觉得一眼难（麻烦）的题</p>
+<p>不成熟的比喻，在挂架（结点）上滑来滑去的铁链（位置）   天平 </p>
+<p>数值的原因，上下层 乃至根节点都会改变，一发动全身（当然更狠的是堆？但没想到递归这么简单（准确来说是思路） 二点直接直线最短（</p>
+<p>突然反应过来是二叉搜索不是二叉平衡，平衡应该真的要上红黑了，那这题是挺简单的</p>
+<p>但是不得不承认思路挺妙</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public TreeNode trimBST(TreeNode root, int low, int high) &#123;</span><br><span class="line">        if (root == null) &#123;</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">        if (root.val &lt; low) &#123;</span><br><span class="line">            return trimBST(root.right, low, high);</span><br><span class="line">        &#125;</span><br><span class="line">        if (root.val &gt; high) &#123;</span><br><span class="line">            return trimBST(root.left, low, high);</span><br><span class="line">        &#125;</span><br><span class="line">                  //用返回值嫁接</span><br><span class="line">        root.left = trimBST(root.left, low, high);</span><br><span class="line">        root.right = trimBST(root.right, low, high);</span><br><span class="line">        return root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="108-将有序数组转换为二叉搜索树"><a href="#108-将有序数组转换为二叉搜索树" class="headerlink" title="108 将有序数组转换为二叉搜索树"></a>108 将有序数组转换为二叉搜索树</h2><p><a href="https://leetcode.cn/problems/convert-sorted-array-to-binary-search-tree/">力扣题目链接</a></p>
+<p>这题就是平衡，可惜是有序数组转换，不是二叉搜索的插入删除（打起来打起来），</p>
+<pre><code>class Solution &#123;
+    public TreeNode sortedArrayToBST(int[] nums) &#123;
+        return sortedArrayToBST(nums, 0, nums.length);
+    &#125;
+    
+    public TreeNode sortedArrayToBST(int[] nums, int left, int right) &#123;
+        if (left &gt;= right) &#123;
+            return null;
+        &#125;
+        if (right - left == 1) &#123;
+            return new TreeNode(nums[left]);
+        &#125;
+        int mid = left + (right - left) / 2;
+        TreeNode root = new TreeNode(nums[mid]);
+        root.left = sortedArrayToBST(nums, left, mid);
+        root.right = sortedArrayToBST(nums, mid + 1, right);
+        return root;
+    &#125;
+&#125;
+   
+</code></pre>
+<p>原来递归觉得建立用的是数组的下标，我怎么把这个给忘了</p>
+<p>把左边全构建完再搞右边</p>
+<h2 id="538-把二叉搜索树转换为累加树"><a href="#538-把二叉搜索树转换为累加树" class="headerlink" title="538 把二叉搜索树转换为累加树"></a>538 把二叉搜索树转换为累加树</h2><p><a href="https://leetcode.cn/problems/convert-bst-to-greater-tree/">力扣题目链接</a></p>
+<p>差点没看懂题意，直接转换成数组，后序遍历有点卡，但是这里是有顺序的从小到大，累加就要反过来</p>
+<pre><code>class Solution &#123;
+    int sum;   //毕竟返回的不是sum而是根，这里是全局变量
+    public TreeNode convertBST(TreeNode root) &#123;
+        sum = 0;
+        convertBST1(root);
+        return root;
+    &#125;
+
+    public void convertBST1(TreeNode root) &#123;
+        if (root == null) &#123;
+            return;
+        &#125;
+        convertBST1(root.right);
+         //返回后开始相加
+        sum += root.val;
+        root.val = sum;
+         
+        convertBST1(root.left);
+    &#125;
+&#125;  
+</code></pre>
+<h2 id="总结直接看代码随想录比较全面"><a href="#总结直接看代码随想录比较全面" class="headerlink" title="总结直接看代码随想录比较全面"></a>总结直接看代码随想录比较全面</h2><p>二叉树的难度不止于此，打基础啊，这些题哪些不是二叉树必定会涉及的题</p>
+]]></content>
   </entry>
   <entry>
     <title>代码随想录算法训练营Day22|235 701 450</title>
