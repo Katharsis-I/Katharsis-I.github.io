@@ -13,7 +13,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>Archives |  亦</title>
+      <title>代码随想录算法训练营Day25|216 17 |  亦</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -55,246 +55,223 @@
       
     <main class="content on">
       <section class="outer">
-  
-  
-  <article class="articles">
+  <article
+  id="post-day25"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
     
-    
-    <h1 class="page-type-title">Archives</h1>
-    
-    
-  
-  
-  
-  
-  
-  
-  <div class="archives-wrap">
-    <div class="archive-year-wrap">
-      <a href="/archives/2023" class="archive-year">2023</a>
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  代码随想录算法训练营Day25|216 17
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/04/08/day25/" class="article-date">
+  <time datetime="2023-04-07T17:14:03.000Z" itemprop="datePublished">2023-04-08</time>
+</a>   
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">406</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">2 min</span>
+        </span>
+    </span>
+</div>
+ 
     </div>
-    <div class="archives">
       
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2023/03/28/day14/" class="archive-article-date">
-  <time datetime="2023-03-28T14:34:47.000Z" itemprop="datePublished">03/28</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2023/03/28/day14/"
-    >代码随想录算法训练营Day14|二叉树理论基础 遍历</a> 
-</h2>
- 
+    <div class="tocbot"></div>
 
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2023/03/27/day13/" class="archive-article-date">
-  <time datetime="2023-03-26T20:16:59.000Z" itemprop="datePublished">03/27</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2023/03/27/day13/"
-    >代码随想录算法训练营Day13|栈与队列 239 347</a> 
-</h2>
- 
 
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2023/03/25/day11/" class="archive-article-date">
-  <time datetime="2023-03-25T15:55:19.000Z" itemprop="datePublished">03/25</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2023/03/25/day11/"
-    >代码随想录算法训练营Day11|栈与队列 20 1047 150</a> 
-</h2>
- 
 
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2023/03/24/day10/" class="archive-article-date">
-  <time datetime="2023-03-24T15:26:06.000Z" itemprop="datePublished">03/24</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2023/03/24/day10/"
-    >代码随想录算法训练营Day10|栈 232 225</a> 
-</h2>
- 
 
-    </header>
-    
-    
-  </div>
-</article>
-      
   
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2023/03/23/day9/" class="archive-article-date">
-  <time datetime="2023-03-23T13:42:03.000Z" itemprop="datePublished">03/23</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
        
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2023/03/23/day9/"
-    >代码随想录算法训练营Day9|（kmp） 回顾哈希、字符串</a> 
-</h2>
- 
+  <h2 id="216-组合总和III"><a href="#216-组合总和III" class="headerlink" title="216 组合总和III"></a>216 组合总和III</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/combination-sum-iii/">力扣题目链接</a></p>
+<p>虽然相加就想到哈希不过显然不太行</p>
+<p>穷举再筛选</p>
+<pre><code>class Solution &#123;
+    LinkedList&lt;Integer&gt; path = new LinkedList&lt;&gt;();
+    List&lt;List&lt;Integer&gt;&gt; ans = new ArrayList&lt;&gt;();
 
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2023/03/22/day8/" class="archive-article-date">
-  <time datetime="2023-03-21T20:31:35.000Z" itemprop="datePublished">03/22</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2023/03/22/day8/"
-    >代码随想录算法训练营Day8|字符串 344、541、05、151 58.2</a> 
-</h2>
- 
+    public List&lt;List&lt;Integer&gt;&gt; combinationSum3(int k, int n) &#123;
+        build(k, n, 1, 0);
+        return ans;
+    &#125;
 
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2023/03/20/Day7/" class="archive-article-date">
-  <time datetime="2023-03-20T15:58:53.000Z" itemprop="datePublished">03/20</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2023/03/20/Day7/"
-    >代码随想录算法训练营Day7|哈希表 454、383、15、18</a> 
-</h2>
- 
+    private void allchoose(int k, int n, int startIndex, int sum) &#123;
 
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2023/03/20/day6/" class="archive-article-date">
-  <time datetime="2023-03-20T11:16:46.000Z" itemprop="datePublished">03/20</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2023/03/20/day6/"
-    >代码随想录算法训练营Day6|哈希表 242、349、201、1</a> 
-</h2>
- 
+        if (sum &gt; n||path.size() &gt; k)
+            return;
 
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2023/03/18/day4/" class="archive-article-date">
-  <time datetime="2023-03-17T16:09:51.000Z" itemprop="datePublished">03/18</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2023/03/18/day4/"
-    >代码随想录算法训练营Day4|继续链表24、19、160、142</a> 
-</h2>
- 
+        if (sum == n &amp;&amp; path.size() == k) &#123;
+            ans.add(new ArrayList&lt;&gt;(path));
+            return;
+        &#125;
 
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2023/03/17/day3/" class="archive-article-date">
-  <time datetime="2023-03-16T16:18:35.000Z" itemprop="datePublished">03/17</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2023/03/17/day3/"
-    >代码随想录算法训练营Day3|链表p1 203、707、206</a> 
-</h2>
- 
+        for(int i = startIndex; i &lt;= 9; i++) &#123;
+            path.add(i);
+            sum += i;
+            allchoose(k, n, i + 1, sum);
+            sum -= i;  // 还原跳到另一叉
+            path.removeLast();
+        &#125;
+    &#125;
+&#125;  
+</code></pre>
+<h2 id="17-电话号码的字母组合"><a href="#17-电话号码的字母组合" class="headerlink" title="17 电话号码的字母组合"></a>17 电话号码的字母组合</h2><p> <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/letter-combinations-of-a-phone-number/">力扣题目链接</a></p>
+<p>字母与数字的关系果然还是要提前输入啊，在之前的基础上加上了字母，n叉树的节点视为一次for的总和，个数为循环次数</p>
+<pre><code>class Solution &#123;
+    List&lt;String&gt; list = new ArrayList&lt;&gt;();
 
-    </header>
-    
-    
-  </div>
-</article>
-      
+    public List&lt;String&gt; letterCombinations(String digits) &#123;
+        if (digits == null || digits.length() == 0) &#123;
+            return list;
+        &#125;
+
+        String[] numString = &#123;&quot;&quot;, &quot;&quot;, &quot;abc&quot;, &quot;def&quot;, &quot;ghi&quot;, &quot;jkl&quot;, &quot;mno&quot;, &quot;pqrs&quot;, &quot;tuv&quot;, &quot;wxyz&quot;&#125;;
+
+        backTracking(digits, numString, 0);
+        return list;
+
+    &#125;
+
+    StringBuilder temp = new StringBuilder();  //单个
+    public void backTracking(String digits, String[] numString, int num) &#123;
+        if (num == digits.length()) &#123;
+            list.add(temp.toString());
+            return;
+        &#125;
+
+        String str = numString[digits.charAt(num) - &#39;0&#39;];
+
+        for (int i = 0; i &lt; str.length(); i++) &#123;
+            temp.append(str.charAt(i));      
+                         //毕竟是遍历，全都可以选择
+            backTracking(digits, numString, num + 1);
+
+            temp.deleteCharAt(temp.length() - 1);  //返回上一级
+        &#125;
+    &#125;
+&#125;    
+</code></pre>
+<p>写代码随想录唯一的失策就是我对库函数不熟，也不是不知道意思，但是不知道有哪些，失策</p>
+ 
+      <!-- reward -->
       
     </div>
-  </div>
-  
-  
-
-  
-  <nav class="page-nav">
     
-    <a class="extend prev" rel="prev" href="/archives/">上一页</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/page/3/">3</a><a class="extend next" rel="next" href="/archives/page/3/">下一页</a>
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/04/08/day25/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+    
+      <a href="/2023/04/06/day24/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">代码随想录算法训练营Day24|回溯 77</div>
+      </a>
+    
   </nav>
+
   
+   
+    
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
 </section>
       <footer class="footer">
   <div class="outer">
@@ -431,6 +408,22 @@
 <script src="/js/lazyload.min.js"></script>
 
 <!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
 
 <script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
 <link

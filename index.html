@@ -152,6 +152,204 @@
     
     
     <article
+  id="post-day25"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/04/08/day25/"
+    >代码随想录算法训练营Day25|216 17</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/04/08/day25/" class="article-date">
+  <time datetime="2023-04-07T17:14:03.000Z" itemprop="datePublished">2023-04-08</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="216-组合总和III"><a href="#216-组合总和III" class="headerlink" title="216 组合总和III"></a>216 组合总和III</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/combination-sum-iii/">力扣题目链接</a></p>
+<p>虽然相加就想到哈希不过显然不太行</p>
+<p>穷举再筛选</p>
+<pre><code>class Solution &#123;
+    LinkedList&lt;Integer&gt; path = new LinkedList&lt;&gt;();
+    List&lt;List&lt;Integer&gt;&gt; ans = new ArrayList&lt;&gt;();
+
+    public List&lt;List&lt;Integer&gt;&gt; combinationSum3(int k, int n) &#123;
+        build(k, n, 1, 0);
+        return ans;
+    &#125;
+
+    private void allchoose(int k, int n, int startIndex, int sum) &#123;
+
+        if (sum &gt; n||path.size() &gt; k)
+            return;
+
+        if (sum == n &amp;&amp; path.size() == k) &#123;
+            ans.add(new ArrayList&lt;&gt;(path));
+            return;
+        &#125;
+
+        for(int i = startIndex; i &lt;= 9; i++) &#123;
+            path.add(i);
+            sum += i;
+            allchoose(k, n, i + 1, sum);
+            sum -= i;  // 还原跳到另一叉
+            path.removeLast();
+        &#125;
+    &#125;
+&#125;  
+</code></pre>
+<h2 id="17-电话号码的字母组合"><a href="#17-电话号码的字母组合" class="headerlink" title="17 电话号码的字母组合"></a>17 电话号码的字母组合</h2><p> <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/letter-combinations-of-a-phone-number/">力扣题目链接</a></p>
+<p>字母与数字的关系果然还是要提前输入啊，在之前的基础上加上了字母，n叉树的节点视为一次for的总和，个数为循环次数</p>
+<pre><code>class Solution &#123;
+    List&lt;String&gt; list = new ArrayList&lt;&gt;();
+
+    public List&lt;String&gt; letterCombinations(String digits) &#123;
+        if (digits == null || digits.length() == 0) &#123;
+            return list;
+        &#125;
+
+        String[] numString = &#123;&quot;&quot;, &quot;&quot;, &quot;abc&quot;, &quot;def&quot;, &quot;ghi&quot;, &quot;jkl&quot;, &quot;mno&quot;, &quot;pqrs&quot;, &quot;tuv&quot;, &quot;wxyz&quot;&#125;;
+
+        backTracking(digits, numString, 0);
+        return list;
+
+    &#125;
+
+    StringBuilder temp = new StringBuilder();  //单个
+    public void backTracking(String digits, String[] numString, int num) &#123;
+        if (num == digits.length()) &#123;
+            list.add(temp.toString());
+            return;
+        &#125;
+
+        String str = numString[digits.charAt(num) - &#39;0&#39;];
+
+        for (int i = 0; i &lt; str.length(); i++) &#123;
+            temp.append(str.charAt(i));      
+                         //毕竟是遍历，全都可以选择
+            backTracking(digits, numString, num + 1);
+
+            temp.deleteCharAt(temp.length() - 1);  //返回上一级
+        &#125;
+    &#125;
+&#125;    
+</code></pre>
+<p>写代码随想录唯一的失策就是我对库函数不熟，也不是不知道意思，但是不知道有哪些，失策</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
+  id="post-day24"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/04/06/day24/"
+    >代码随想录算法训练营Day24|回溯 77</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/04/06/day24/" class="article-date">
+  <time datetime="2023-04-06T00:50:31.000Z" itemprop="datePublished">2023-04-06</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="回溯算法"><a href="#回溯算法" class="headerlink" title="回溯算法"></a>回溯算法</h2><p>回溯是递归的副产品 但是效率不高</p>
+<ul>
+<li>组合问题：N个数里面按一定规则找出k个数的集合</li>
+<li>切割问题：一个字符串按一定规则有几种切割方式</li>
+<li>子集问题：一个N个数的集合里有多少符合条件的子集</li>
+<li>排列问题：N个数按一定规则全排列，有几种排列方式</li>
+<li>棋盘问题：N皇后，解数独等等    （路径呢</li>
+</ul>
+<p>树形   有点像b树</p>
+<h2 id="77-组合"><a href="#77-组合" class="headerlink" title="77 组合"></a>77 组合</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/combinations/">力扣题目链接</a></p>
+<p>for循环的确不错，但是k过多就没办法了</p>
+<p>回溯加for循环，一时间有点转不过来</p>
+<p>注意剪枝</p>
+<pre><code>class Solution &#123;
+    List&lt;List&lt;Integer&gt;&gt; result = new ArrayList&lt;&gt;();
+    LinkedList&lt;Integer&gt; path = new LinkedList&lt;&gt;();
+    public List&lt;List&lt;Integer&gt;&gt; combine(int n, int k) &#123;
+        combineHelper(n, k, 1);    //start
+        return result;
+    &#125;
+
+
+    private void combineHelper(int n, int k, int startIndex)&#123;
+        if (path.size() == k)&#123;            //最终统计长度
+            result.add(new ArrayList&lt;&gt;(path));
+            return;
+        &#125;
+                                        //跳跃间隔由此层for决定
+        for (int i = startIndex; i &lt;= n - (k - path.size()) + 1; i++)&#123;
+            path.add(i);
+            combineHelper(n, k, i + 1);     //startindex加1，二叉树加一层
+            path.removeLast();
+        &#125;
+    &#125;
+&#125;    
+</code></pre>
+<p> 虽然理解思路，但是还是有点混乱</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
   id="post-day23"
   class="article article-type-post"
   itemscope
@@ -187,15 +385,13 @@
 <p>但是不得不承认思路挺妙</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public TreeNode trimBST(TreeNode root, int low, int high) &#123;</span><br><span class="line">        if (root == null) &#123;</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">        if (root.val &lt; low) &#123;</span><br><span class="line">            return trimBST(root.right, low, high);</span><br><span class="line">        &#125;</span><br><span class="line">        if (root.val &gt; high) &#123;</span><br><span class="line">            return trimBST(root.left, low, high);</span><br><span class="line">        &#125;</span><br><span class="line">                  //用返回值嫁接</span><br><span class="line">        root.left = trimBST(root.left, low, high);</span><br><span class="line">        root.right = trimBST(root.right, low, high);</span><br><span class="line">        return root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
-
 <h2 id="108-将有序数组转换为二叉搜索树"><a href="#108-将有序数组转换为二叉搜索树" class="headerlink" title="108 将有序数组转换为二叉搜索树"></a>108 将有序数组转换为二叉搜索树</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/convert-sorted-array-to-binary-search-tree/">力扣题目链接</a></p>
 <p>这题就是平衡，可惜是有序数组转换，不是二叉搜索的插入删除（打起来打起来），</p>
 <pre><code>class Solution &#123;
     public TreeNode sortedArrayToBST(int[] nums) &#123;
         return sortedArrayToBST(nums, 0, nums.length);
     &#125;
-    
+
     public TreeNode sortedArrayToBST(int[] nums, int left, int right) &#123;
         if (left &gt;= right) &#123;
             return null;
@@ -210,7 +406,6 @@
         return root;
     &#125;
 &#125;
-   
 </code></pre>
 <p>原来递归觉得建立用的是数组的下标，我怎么把这个给忘了</p>
 <p>把左边全构建完再搞右边</p>
@@ -232,7 +427,7 @@
          //返回后开始相加
         sum += root.val;
         root.val = sum;
-         
+
         convertBST1(root.left);
     &#125;
 &#125;  
@@ -1226,134 +1421,6 @@ public int minDepth(TreeNode root) &#123;
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int countNodes(TreeNode root) &#123;</span><br><span class="line">        if (root == null) </span><br><span class="line">            return 0;</span><br><span class="line">        Queue&lt;TreeNode&gt; queue = new LinkedList&lt;&gt;();</span><br><span class="line">        queue.offer(root);</span><br><span class="line">        int result = 0;</span><br><span class="line">        while (!queue.isEmpty()) &#123;</span><br><span class="line">            int size = queue.size();</span><br><span class="line">            while (size  &gt; 0) &#123;</span><br><span class="line">                size--;</span><br><span class="line">                TreeNode cur = queue.poll();   //下一个</span><br><span class="line">                result++;</span><br><span class="line">                if (cur.left != null) queue.offer(cur.left);</span><br><span class="line">                if (cur.right != null) queue.offer(cur.right);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>满二叉树就简单多了 重点左子树   or递归</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-day14"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/03/28/day14/"
-    >代码随想录算法训练营Day14|二叉树理论基础 遍历</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/03/28/day14/" class="article-date">
-  <time datetime="2023-03-28T14:34:47.000Z" itemprop="datePublished">2023-03-28</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="二叉树理论基础"><a href="#二叉树理论基础" class="headerlink" title="二叉树理论基础"></a>二叉树理论基础</h2><p>没想到今天全都是二叉树基础，不过也不算意外，毕竟二叉树应用很多（题也很多），道阻且深，408数据结构二叉树也一堆题，困扰我的反而是计算，理解问题不大。</p>
-<p>完全二叉树，概念√</p>
-<p>平衡二叉搜索树，子树高度差不超过1，红黑树相关（改考纲你一直没考……）与map set multimap multiset 相关</p>
-<p>链式 顺序 b树相关 b+</p>
-<p>bps wps 遍历 前中后序  层次（可用递归</p>
-<p>中左右 左中右 左右中    栈</p>
-<p>C++定义</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">struct TreeNode &#123;</span><br><span class="line">    int val;</span><br><span class="line">    TreeNode *left;</span><br><span class="line">    TreeNode *right;</span><br><span class="line">    TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>java定义</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class TreeNode &#123;</span><br><span class="line">    int val;</span><br><span class="line">  	TreeNode left;</span><br><span class="line">  	TreeNode right;</span><br><span class="line">  	TreeNode() &#123;&#125;</span><br><span class="line">  	TreeNode(int val) &#123; this.val = val; &#125;</span><br><span class="line">  	TreeNode(int val, TreeNode left, TreeNode right) &#123;</span><br><span class="line">    		this.val = val;</span><br><span class="line">    		this.left = left;</span><br><span class="line">    		this.right = right;</span><br><span class="line">  	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="二叉树遍历递归-144-94-145"><a href="#二叉树遍历递归-144-94-145" class="headerlink" title="二叉树遍历递归 144 94 145"></a>二叉树遍历递归 144 94 145</h2><p>容易用于遍历，广度 深度</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">// 前序遍历</span><br><span class="line">class Solution &#123;</span><br><span class="line">    public List&lt;Integer&gt; preorderTraversal(TreeNode root) &#123;</span><br><span class="line">        List&lt;Integer&gt; result = new ArrayList&lt;Integer&gt;();</span><br><span class="line">        preorder(root, result);</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void preorder(TreeNode root, List&lt;Integer&gt; result) &#123;</span><br><span class="line">        if (root == null) &#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        result.add(root.val);</span><br><span class="line">        preorder(root.left, result);</span><br><span class="line">        preorder(root.right, result);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">// 中序遍历</span><br><span class="line">class Solution &#123;</span><br><span class="line">    public List&lt;Integer&gt; inorderTraversal(TreeNode root) &#123;</span><br><span class="line">        List&lt;Integer&gt; res = new ArrayList&lt;&gt;();</span><br><span class="line">        inorder(root, res);</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    void inorder(TreeNode root, List&lt;Integer&gt; list) &#123;</span><br><span class="line">        if (root == null) &#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        inorder(root.left, list);</span><br><span class="line">        list.add(root.val);             // 注意这一句</span><br><span class="line">        inorder(root.right, list);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">// 后序遍历</span><br><span class="line">class Solution &#123;</span><br><span class="line">    public List&lt;Integer&gt; postorderTraversal(TreeNode root) &#123;</span><br><span class="line">        List&lt;Integer&gt; res = new ArrayList&lt;&gt;();</span><br><span class="line">        postorder(root, res);</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    void postorder(TreeNode root, List&lt;Integer&gt; list) &#123;</span><br><span class="line">        if (root == null) &#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        postorder(root.left, list);</span><br><span class="line">        postorder(root.right, list);</span><br><span class="line">        list.add(root.val);             // 注意这一句</span><br><span class="line">    &#125;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
-
-<p>C</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">//前序遍历：</span><br><span class="line">void preOrder(struct TreeNode* root, int* ret, int* returnSize) &#123;</span><br><span class="line">    if(root == NULL)</span><br><span class="line">        return;</span><br><span class="line">    ret[(*returnSize)++] = root-&gt;val;</span><br><span class="line">    preOrder(root-&gt;left, ret, returnSize);</span><br><span class="line">    preOrder(root-&gt;right, ret, returnSize);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int* preorderTraversal(struct TreeNode* root, int* returnSize)&#123;</span><br><span class="line">    int* ret = (int*)malloc(sizeof(int) * 100);</span><br><span class="line">    *returnSize = 0;</span><br><span class="line">    preOrder(root, ret, returnSize);</span><br><span class="line">    return ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//中序遍历：</span><br><span class="line">void inOrder(struct TreeNode* node, int* ret, int* returnSize) &#123;</span><br><span class="line">    if(!node)</span><br><span class="line">        return;</span><br><span class="line">    inOrder(node-&gt;left, ret, returnSize);</span><br><span class="line">    ret[(*returnSize)++] = node-&gt;val;</span><br><span class="line">    inOrder(node-&gt;right, ret, returnSize);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int* inorderTraversal(struct TreeNode* root, int* returnSize)&#123;</span><br><span class="line">    int* ret = (int*)malloc(sizeof(int) * 100);</span><br><span class="line">    *returnSize = 0;</span><br><span class="line">    inOrder(root, ret, returnSize);</span><br><span class="line">    return ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//后序遍历：</span><br><span class="line">void postOrder(struct TreeNode* node, int* ret, int* returnSize) &#123;</span><br><span class="line">    if(node == NULL) </span><br><span class="line">        return;</span><br><span class="line">    postOrder(node-&gt;left, ret, returnSize);</span><br><span class="line">    postOrder(node-&gt;right, ret, returnSize);</span><br><span class="line">    ret[(*returnSize)++] = node-&gt;val;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int* postorderTraversal(struct TreeNode* root, int* returnSize)&#123;</span><br><span class="line">    int* ret= (int*)malloc(sizeof(int) * 100);</span><br><span class="line">    *returnSize = 0;</span><br><span class="line">    postOrder(root, ret, returnSize);</span><br><span class="line">    return ret;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
-
-<p>C要用指针，万恶的指针</p>
-<p>复习了一遍前后序，伪代码和真代码还是有很大不同的，只能说记牢规范吧</p>
-<h2 id="二叉树的统一迭代法"><a href="#二叉树的统一迭代法" class="headerlink" title="二叉树的统一迭代法"></a>二叉树的统一迭代法</h2><p>决定还是直接上统一迭代法了，不统一记起来有点麻烦。而且统一迭代并没有那么难。插入NULL为标志罢了。408数据结构貌似有非递归的不过忘了</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public List&lt;Integer&gt; preorderTraversal(TreeNode root) &#123;</span><br><span class="line">        List&lt;Integer&gt; result = new LinkedList&lt;&gt;();</span><br><span class="line">        Stack&lt;TreeNode&gt; st = new Stack&lt;&gt;();</span><br><span class="line">        if (root != null) st.push(root);</span><br><span class="line">        while (!st.empty()) &#123;</span><br><span class="line">            TreeNode node = st.peek();</span><br><span class="line">           </span><br><span class="line">         if (node != null) &#123;</span><br><span class="line">                st.pop();       // 弹出</span><br><span class="line">                if (node.right!=null) st.push(node.right);  </span><br><span class="line">                if (node.left!=null) st.push(node.left);    </span><br><span class="line">                st.push(node);                // 中节点</span><br><span class="line">                st.push(null); // 访问过中节点 标记</span><br><span class="line">                </span><br><span class="line">            &#125; else &#123;          // 空节点</span><br><span class="line">                st.pop();          </span><br><span class="line">                node = st.peek();   </span><br><span class="line">                st.pop();</span><br><span class="line">                result.add(node.val); </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;         </span><br><span class="line"></span><br><span class="line">class Solution &#123;</span><br><span class="line">public List&lt;Integer&gt; inorderTraversal(TreeNode root) &#123;</span><br><span class="line">        List&lt;Integer&gt; result = new LinkedList&lt;&gt;();</span><br><span class="line">    Stack&lt;TreeNode&gt; st = new Stack&lt;&gt;();</span><br><span class="line">    if (root != null) st.push(root);</span><br><span class="line">    while (!st.empty()) &#123;</span><br><span class="line">        TreeNode node = st.peek();</span><br><span class="line">        </span><br><span class="line">      if (node != null) &#123;</span><br><span class="line">            st.pop(); /</span><br><span class="line">            if (node.right!=null) st.push(node.right);  </span><br><span class="line">            st.push(node);                          </span><br><span class="line">            st.push(null); </span><br><span class="line">            if (node.left!=null) st.push(node.left);  </span><br><span class="line">  </span><br><span class="line">        &#125; else &#123; </span><br><span class="line">            st.pop();           </span><br><span class="line">            node = st.peek();    </span><br><span class="line">            st.pop();</span><br><span class="line">            result.add(node.val); </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return result;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Solution &#123;</span><br><span class="line">   public List&lt;Integer&gt; postorderTraversal(TreeNode root) &#123;</span><br><span class="line">        List&lt;Integer&gt; result = new LinkedList&lt;&gt;();</span><br><span class="line">        Stack&lt;TreeNode&gt; st = new Stack&lt;&gt;();</span><br><span class="line">        if (root != null) st.push(root);</span><br><span class="line">        while (!st.empty()) &#123;</span><br><span class="line">            TreeNode node = st.peek();</span><br><span class="line">            </span><br><span class="line">         if (node != null) &#123;</span><br><span class="line">                st.pop(); </span><br><span class="line">                st.push(node);                          </span><br><span class="line">                st.push(null); </span><br><span class="line">                if (node.right!=null) st.push(node.right); </span><br><span class="line">                if (node.left!=null) st.push(node.left);          </span><br><span class="line">                               </span><br><span class="line">            &#125; else &#123; </span><br><span class="line">                st.pop();           </span><br><span class="line">                node = st.peek();    </span><br><span class="line">                st.pop();</span><br><span class="line">                result.add(node.val); </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return result;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>注意中间5句的顺序</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-day13"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/03/27/day13/"
-    >代码随想录算法训练营Day13|栈与队列 239 347</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/03/27/day13/" class="article-date">
-  <time datetime="2023-03-26T20:16:59.000Z" itemprop="datePublished">2023-03-27</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="239-滑动窗口最大值"><a href="#239-滑动窗口最大值" class="headerlink" title="239  滑动窗口最大值"></a>239  滑动窗口最大值</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/sliding-window-maximum/">力扣题目链接</a></p>
-<p>用队列，暴力解遍历。但显然最优解不是这个。队列有返回最大值的函数是挺理想的，问题是需要自己构建函数。如何构建？</p>
-<p>单调队列，维护最大值始终在队列里怎么搞，难不成前后端都要比较吗？</p>
-<p>进去的需要比较，思路模糊还是不会。看了代码随想录，我还是比较倾向于第二种。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int[] maxSlidingWindow(int[] nums, int k) &#123;</span><br><span class="line">        ArrayDeque&lt;Integer&gt; deque = new ArrayDeque&lt;&gt;();</span><br><span class="line">        int n = nums.length;</span><br><span class="line">        int[] res = new int[n - k + 1];</span><br><span class="line">        int idx = 0;</span><br><span class="line">        for(int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">            while(!deque.isEmpty() &amp;&amp; deque.peek() &lt; i - k + 1)&#123;</span><br><span class="line">                deque.poll();</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            while(!deque.isEmpty() &amp;&amp; nums[deque.peekLast()] &lt; nums[i]) &#123;</span><br><span class="line">                deque.pollLast();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            deque.offer(i);</span><br><span class="line">            if(i &gt;= k - 1)&#123;</span><br><span class="line">                res[idx++] = nums[deque.peek()];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="347-前K个高频元素"><a href="#347-前K个高频元素" class="headerlink" title="347 前K个高频元素"></a>347 前K个高频元素</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/top-k-frequent-elements/">力扣题目链接</a></p>
-<p>然而我一眼看的时候觉得用哈希不错，细看不对，数组而不是字母，哈希表查找起来量级不太行还要不断更新。没想到是堆，这个数据结构有讲，不过比较简略，真正的实施并没有，寄，不会。而且用队列实现堆，呃，二叉树我没见过用队列的示例（跪   </p>
-<p>好吧，原来还是用了哈希  map</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">public int[] topKFrequent(int[] nums, int k) &#123;</span><br><span class="line">        Map&lt;Integer,Integer&gt; map = new HashMap&lt;&gt;();</span><br><span class="line">        for(int num:nums)&#123;</span><br><span class="line">            map.put(num,map.getOrDefault(num,0)+1);</span><br><span class="line">        &#125;</span><br><span class="line">                            //从队头到队尾从小到大 priorityqueue</span><br><span class="line">        PriorityQueue&lt;int[]&gt; pq = new PriorityQueue&lt;&gt;((pair1,pair2)-&gt;pair1[1]-pair2[1]);</span><br><span class="line">        for(Map.Entry&lt;Integer,Integer&gt; entry:map.entrySet())&#123;</span><br><span class="line">            if(pq.size()&lt;k)&#123;</span><br><span class="line">                pq.add(new int[]&#123;entry.getKey(),entry.getValue()&#125;);</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                if(entry.getValue()&gt;pq.peek()[1])&#123;</span><br><span class="line">                    pq.poll();       //弹出最少</span><br><span class="line">                    pq.add(new int[]&#123;entry.getKey(),entry.getValue()&#125;);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        int[] ans = new int[k];</span><br><span class="line">        for(int i=k-1;i&gt;=0;i--)&#123;</span><br><span class="line">            ans[i] = pq.poll()[0];</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
  
       <!-- reward -->
       

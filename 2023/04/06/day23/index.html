@@ -115,15 +115,13 @@
 <p>但是不得不承认思路挺妙</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public TreeNode trimBST(TreeNode root, int low, int high) &#123;</span><br><span class="line">        if (root == null) &#123;</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">        if (root.val &lt; low) &#123;</span><br><span class="line">            return trimBST(root.right, low, high);</span><br><span class="line">        &#125;</span><br><span class="line">        if (root.val &gt; high) &#123;</span><br><span class="line">            return trimBST(root.left, low, high);</span><br><span class="line">        &#125;</span><br><span class="line">                  //用返回值嫁接</span><br><span class="line">        root.left = trimBST(root.left, low, high);</span><br><span class="line">        root.right = trimBST(root.right, low, high);</span><br><span class="line">        return root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
-
 <h2 id="108-将有序数组转换为二叉搜索树"><a href="#108-将有序数组转换为二叉搜索树" class="headerlink" title="108 将有序数组转换为二叉搜索树"></a>108 将有序数组转换为二叉搜索树</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/convert-sorted-array-to-binary-search-tree/">力扣题目链接</a></p>
 <p>这题就是平衡，可惜是有序数组转换，不是二叉搜索的插入删除（打起来打起来），</p>
 <pre><code>class Solution &#123;
     public TreeNode sortedArrayToBST(int[] nums) &#123;
         return sortedArrayToBST(nums, 0, nums.length);
     &#125;
-    
+
     public TreeNode sortedArrayToBST(int[] nums, int left, int right) &#123;
         if (left &gt;= right) &#123;
             return null;
@@ -138,7 +136,6 @@
         return root;
     &#125;
 &#125;
-   
 </code></pre>
 <p>原来递归觉得建立用的是数组的下标，我怎么把这个给忘了</p>
 <p>把左边全构建完再搞右边</p>
@@ -160,7 +157,7 @@
          //返回后开始相加
         sum += root.val;
         root.val = sum;
-         
+
         convertBST1(root.left);
     &#125;
 &#125;  
@@ -240,6 +237,15 @@
 
    
   <nav class="article-nav">
+    
+      <a href="/2023/04/06/day24/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            代码随想录算法训练营Day24|回溯 77
+          
+        </div>
+      </a>
     
     
       <a href="/2023/04/05/day22/" class="article-nav-link">
