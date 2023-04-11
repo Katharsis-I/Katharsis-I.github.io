@@ -13,7 +13,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>代码随想录算法训练营Day25|216 17 |  亦</title>
+      <title>代码随想录算法训练营Day28| |  亦</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -56,7 +56,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-day25"
+  id="post-day28"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -67,7 +67,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  代码随想录算法训练营Day25|216 17
+  代码随想录算法训练营Day28|
 </h1>
  
 
@@ -75,15 +75,15 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/04/08/day25/" class="article-date">
-  <time datetime="2023-04-07T17:14:03.000Z" itemprop="datePublished">2023-04-08</time>
+      <a href="/2023/04/11/day28/" class="article-date">
+  <time datetime="2023-04-11T08:56:44.000Z" itemprop="datePublished">2023-04-11</time>
 </a>   
 <div class="word_count">
     <span class="post-time">
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">406</span>
+            <span class="post-count">441</span>
         </span>
     </span>
 
@@ -107,75 +107,102 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="216-组合总和III"><a href="#216-组合总和III" class="headerlink" title="216 组合总和III"></a>216 组合总和III</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/combination-sum-iii/">力扣题目链接</a></p>
-<p>虽然相加就想到哈希不过显然不太行</p>
-<p>穷举再筛选</p>
+  <h2 id="93-复原IP地址"><a href="#93-复原IP地址" class="headerlink" title="93 复原IP地址"></a>93 复原IP地址</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/restore-ip-addresses/">力扣题目链接</a></p>
+<p>和上一题一样，不过检测回文变成了ip判断</p>
 <pre><code>class Solution &#123;
-    LinkedList&lt;Integer&gt; path = new LinkedList&lt;&gt;();
-    List&lt;List&lt;Integer&gt;&gt; ans = new ArrayList&lt;&gt;();
+    List&lt;String&gt; result = new ArrayList&lt;String&gt;();
+    StringBuilder stringBuilder = new StringBuilder();
 
-    public List&lt;List&lt;Integer&gt;&gt; combinationSum3(int k, int n) &#123;
-        build(k, n, 1, 0);
-        return ans;
+    public List&lt;String&gt; restoreIpAddresses(String s) &#123;
+        restoreIpAddressesHandler(s, 0, 0);
+        return result;
     &#125;
 
-    private void allchoose(int k, int n, int startIndex, int sum) &#123;
 
-        if (sum &gt; n||path.size() &gt; k)
-            return;
+    public void restoreIpAddressesHandler(String s, int start, int number) &#123;
 
-        if (sum == n &amp;&amp; path.size() == k) &#123;
-            ans.add(new ArrayList&lt;&gt;(path));
+        if (start == s.length() &amp;&amp; number == 4) &#123;
+            result.add(stringBuilder.toString());
             return;
         &#125;
+        if (start == s.length() || number == 4) &#123;
+            return;
+        &#125;
+                    //这一段的范围……
+        for (int i = start; i &lt; s.length() &amp;&amp; i - start &lt; 3 &amp;&amp; Integer.parseInt(s.substring(start, i + 1)) &gt;= 0
+                &amp;&amp; Integer.parseInt(s.substring(start, i + 1)) &lt;= 255; i++) &#123;
 
-        for(int i = startIndex; i &lt;= 9; i++) &#123;
-            path.add(i);
-            sum += i;
-            allchoose(k, n, i + 1, sum);
-            sum -= i;  // 还原跳到另一叉
+            if (i + 1 - start &gt; 1 &amp;&amp; s.charAt(start) - &#39;0&#39; == 0) &#123;
+                continue;
+            &#125;
+            stringBuilder.append(s.substring(start, i + 1));
+
+            if (number &lt; 3) &#123;
+                stringBuilder.append(&quot;.&quot;);
+            &#125;
+            number++;
+
+            restoreIpAddressesHandler(s, i + 1, number);
+            number--;
+            stringBuilder.delete(start + number, i + number + 2);
+        &#125;
+    &#125; 
+</code></pre>
+<h2 id="78-子集"><a href="#78-子集" class="headerlink" title="78 子集"></a>78 子集</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/subsets/">力扣题目链接</a></p>
+<p>收集树形结构中树的所有节点，说明白不就好了</p>
+<pre><code>class Solution &#123;
+    List&lt;List&lt;Integer&gt;&gt; result = new ArrayList&lt;&gt;();
+    LinkedList&lt;Integer&gt; path = new LinkedList&lt;&gt;();
+    public List&lt;List&lt;Integer&gt;&gt; subsets(int[] nums) &#123;
+        subsetsHelper(nums, 0);
+        return result;
+    &#125;
+
+    private void subsetsHelper(int[] nums, int startIndex)&#123;
+        result.add(new ArrayList&lt;&gt;(path));
+        if (startIndex &gt;= nums.length)&#123;    // ?
+            return;
+        &#125;
+        for (int i = startIndex; i &lt; nums.length; i++)&#123;
+            path.add(nums[i]);
+            subsetsHelper(nums, i + 1);
             path.removeLast();
         &#125;
     &#125;
+&#125; 
+</code></pre>
+<h2 id="90-子集"><a href="#90-子集" class="headerlink" title="90 子集"></a>90 子集</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/subsets-ii/">力扣题目链接</a></p>
+<p>树层还是树枝？</p>
+<pre><code>lass Solution &#123;
+
+  List&lt;List&lt;Integer&gt;&gt; res = new ArrayList&lt;&gt;();
+  LinkedList&lt;Integer&gt; path = new LinkedList&lt;&gt;();
+  
+  public List&lt;List&lt;Integer&gt;&gt; subsetsWithDup( int[] nums ) &#123;
+    Arrays.sort( nums );
+    subsetsWithDupHelper( nums, 0 );
+    return res;
+  &#125;
+
+
+  private void subsetsWithDupHelper( int[] nums, int start ) &#123;
+    res.add( new ArrayList&lt;&gt;( path ) );
+
+    for ( int i = start; i &lt; nums.length; i++ ) &#123;
+     
+      if ( i &gt; start &amp;&amp; nums[i - 1] == nums[i] ) 
+        continue;
+
+   
+      path.add( nums[i] );
+      subsetsWithDupHelper( nums, i + 1 );
+      path.removeLast();
+    &#125;
+  &#125;
+
 &#125;  
 </code></pre>
-<h2 id="17-电话号码的字母组合"><a href="#17-电话号码的字母组合" class="headerlink" title="17 电话号码的字母组合"></a>17 电话号码的字母组合</h2><p> <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/letter-combinations-of-a-phone-number/">力扣题目链接</a></p>
-<p>字母与数字的关系果然还是要提前输入啊，在之前的基础上加上了字母，n叉树的节点视为一次for的总和，个数为循环次数</p>
-<pre><code>class Solution &#123;
-    List&lt;String&gt; list = new ArrayList&lt;&gt;();
-
-    public List&lt;String&gt; letterCombinations(String digits) &#123;
-        if (digits == null || digits.length() == 0) &#123;
-            return list;
-        &#125;
-
-        String[] numString = &#123;&quot;&quot;, &quot;&quot;, &quot;abc&quot;, &quot;def&quot;, &quot;ghi&quot;, &quot;jkl&quot;, &quot;mno&quot;, &quot;pqrs&quot;, &quot;tuv&quot;, &quot;wxyz&quot;&#125;;
-
-        backTracking(digits, numString, 0);
-        return list;
-
-    &#125;
-
-    StringBuilder temp = new StringBuilder();  //单个
-    public void backTracking(String digits, String[] numString, int num) &#123;
-        if (num == digits.length()) &#123;
-            list.add(temp.toString());
-            return;
-        &#125;
-
-        String str = numString[digits.charAt(num) - &#39;0&#39;];
-
-        for (int i = 0; i &lt; str.length(); i++) &#123;
-            temp.append(str.charAt(i));      
-                         //毕竟是遍历，全都可以选择
-            backTracking(digits, numString, num + 1);
-
-            temp.deleteCharAt(temp.length() - 1);  //返回上一级
-        &#125;
-    &#125;
-&#125;    
-</code></pre>
-<p>写代码随想录唯一的失策就是我对库函数不熟，也不是不知道意思，但是不知道有哪些，失策</p>
+<p>回溯的知识轮廓是有了，但是我的实操……最近事太多了</p>
  
       <!-- reward -->
       
@@ -240,7 +267,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/04/08/day25/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/04/11/day28/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -251,19 +278,10 @@
    
   <nav class="article-nav">
     
+    
       <a href="/2023/04/10/day27/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            代码随想录算法训练营Day27|39、40、131
-          
-        </div>
-      </a>
-    
-    
-      <a href="/2023/04/06/day24/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">代码随想录算法训练营Day24|回溯 77</div>
+        <div class="article-nav-title">代码随想录算法训练营Day27|39、40、131</div>
       </a>
     
   </nav>
