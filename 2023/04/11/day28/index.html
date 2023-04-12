@@ -13,7 +13,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>代码随想录算法训练营Day28| |  亦</title>
+      <title>代码随想录算法训练营Day28|93 78 90 |  亦</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -67,7 +67,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  代码随想录算法训练营Day28|
+  代码随想录算法训练营Day28|93 78 90
 </h1>
  
 
@@ -177,7 +177,7 @@
 
   List&lt;List&lt;Integer&gt;&gt; res = new ArrayList&lt;&gt;();
   LinkedList&lt;Integer&gt; path = new LinkedList&lt;&gt;();
-  
+
   public List&lt;List&lt;Integer&gt;&gt; subsetsWithDup( int[] nums ) &#123;
     Arrays.sort( nums );
     subsetsWithDupHelper( nums, 0 );
@@ -189,11 +189,11 @@
     res.add( new ArrayList&lt;&gt;( path ) );
 
     for ( int i = start; i &lt; nums.length; i++ ) &#123;
-     
+
       if ( i &gt; start &amp;&amp; nums[i - 1] == nums[i] ) 
         continue;
 
-   
+
       path.add( nums[i] );
       subsetsWithDupHelper( nums, i + 1 );
       path.removeLast();
@@ -277,6 +277,15 @@
 
    
   <nav class="article-nav">
+    
+      <a href="/2023/04/11/day29/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            代码随想录算法训练营Day29|491 46 47
+          
+        </div>
+      </a>
     
     
       <a href="/2023/04/10/day27/" class="article-nav-link">

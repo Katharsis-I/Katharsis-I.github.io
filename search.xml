@@ -1317,7 +1317,7 @@ if (pre == null || cur.val != pre.val) &#123;    //pre确认是否重复
 ]]></content>
   </entry>
   <entry>
-    <title>代码随想录算法训练营Day28|</title>
+    <title>代码随想录算法训练营Day28|93 78 90</title>
     <url>/2023/04/11/day28/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="93-复原IP地址"><a href="#93-复原IP地址" class="headerlink" title="93 复原IP地址"></a>93 复原IP地址</h2><p><a href="https://leetcode.cn/problems/restore-ip-addresses/">力扣题目链接</a></p>
 <p>和上一题一样，不过检测回文变成了ip判断</p>
@@ -1389,7 +1389,7 @@ if (pre == null || cur.val != pre.val) &#123;    //pre确认是否重复
 
   List&lt;List&lt;Integer&gt;&gt; res = new ArrayList&lt;&gt;();
   LinkedList&lt;Integer&gt; path = new LinkedList&lt;&gt;();
-  
+
   public List&lt;List&lt;Integer&gt;&gt; subsetsWithDup( int[] nums ) &#123;
     Arrays.sort( nums );
     subsetsWithDupHelper( nums, 0 );
@@ -1401,11 +1401,11 @@ if (pre == null || cur.val != pre.val) &#123;    //pre确认是否重复
     res.add( new ArrayList&lt;&gt;( path ) );
 
     for ( int i = start; i &lt; nums.length; i++ ) &#123;
-     
+
       if ( i &gt; start &amp;&amp; nums[i - 1] == nums[i] ) 
         continue;
 
-   
+
       path.add( nums[i] );
       subsetsWithDupHelper( nums, i + 1 );
       path.removeLast();
@@ -1446,5 +1446,132 @@ if (pre == null || cur.val != pre.val) &#123;    //pre确认是否重复
 
 <p>遍历中筛取</p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>代码随想录算法训练营Day29|491 46 47</title>
+    <url>/2023/04/11/day29/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="491-递增子序列"><a href="#491-递增子序列" class="headerlink" title="491 递增子序列"></a>491 递增子序列</h2><p><a href="https://leetcode.cn/problems/non-decreasing-subsequences/">力扣题目链接</a></p>
+<p>全回溯然后剪枝，条件是长度大于2且保持递增，if不递增，跳出，另一枝回溯</p>
+<p>但是注意不能重复  注意continue</p>
+<p>赞同回溯，而不是深度优先搜索，虽然底层相同不过没必要</p>
+<pre><code>class Solution &#123;
+    private List&lt;Integer&gt; path = new ArrayList&lt;&gt;();
+    private List&lt;List&lt;Integer&gt;&gt; res = new ArrayList&lt;&gt;();
+    public List&lt;List&lt;Integer&gt;&gt; findSubsequences(int[] nums) &#123;
+        backtracking(nums,0);
+        return res;
+    &#125;
+
+    private void backtracking (int[] nums, int start) &#123;
+        if (path.size() &gt; 1) &#123;
+            res.add(new ArrayList&lt;&gt;(path));
+        &#125;
+
+        int[] used = new int[201];
+        for (int i = start; i &lt; nums.length; i++)&#123;
+                       //路径不为空 且 递增（因为路径截取位置的不定性所以一个是path.size一个是num数组
+                                //确定已经uesd
+            if (!path.isEmpty() &amp;&amp; nums[i] &lt; path.get(path.size() - 1) ||
+                    (used[nums[i] + 100] == 1)) 
+               continue;
+
+            used[nums[i] + 100] = 1;
+            path.add(nums[i]);
+            backtracking(nums, i + 1);
+            path.remove(path.size() - 1);
+
+        &#125;
+    &#125;
+&#125;     
+</code></pre>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><h2 id="46-全排列"><a href="#46-全排列" class="headerlink" title="46 全排列"></a>46 全排列</h2><p><a href="https://leetcode.cn/problems/permutations/">力扣题目链接</a></p>
+<p>for看起来很美好，问题是n大起来就并不美好了</p>
+<p>因为是全排列。本身也不重复，所以（层次）从0开始，but不能重复，path还是要有，也正是因为（层次）从0遍历的原因，path要输入的就是遍历过的全部了</p>
+<pre><code>class Solution &#123;
+    List&lt;List&lt;Integer&gt;&gt; result = new ArrayList&lt;&gt;();
+    LinkedList&lt;Integer&gt; path = new LinkedList&lt;&gt;();
+    boolean[] used;
+    public List&lt;List&lt;Integer&gt;&gt; permute(int[] nums) &#123;
+        if (nums.length == 0)&#123;
+            return result;
+        &#125;
+        used = new boolean[nums.length];
+
+        permuteHelper(nums);
+
+        return result;
+
+    &#125;
+
+    private void permuteHelper(int[] nums)&#123;
+        if (path.size() == nums.length)&#123;
+            result.add(new ArrayList&lt;&gt;(path));
+            return;
+        &#125;
+        for (int i = 0; i &lt; nums.length; i++)&#123;
+            
+            if (used[i])&#123;
+                continue;
+            &#125;
+
+            used[i] = true;
+            path.add(nums[i]);
+
+            permuteHelper(nums);
+
+            path.removeLast();
+            used[i] = false;
+        &#125;
+    &#125;
+&#125;   
+</code></pre>
+<h2 id="47-全排列II"><a href="#47-全排列II" class="headerlink" title="47 全排列II"></a>47 全排列II</h2><p><a href="https://leetcode.cn/problems/permutations-ii/">力扣题目链接</a></p>
+<p>可包含重复数字，返回不重复 排列</p>
+<p>还是要排序，和之前的某题一样，很多题的内核都是相同的，我现在由衷地相信二刷乃至三刷我所用的时间只会越来越长</p>
+<p><del>并不妨碍这题我没思路写</del>        道阻且长道阻且长</p>
+<pre><code>class Solution &#123;
+    List&lt;List&lt;Integer&gt;&gt; result = new ArrayList&lt;&gt;();
+    List&lt;Integer&gt; path = new ArrayList&lt;&gt;();
+
+    public List&lt;List&lt;Integer&gt;&gt; permuteUnique(int[] nums) &#123;
+        boolean[] used = new boolean[nums.length];
+        Arrays.fill(used, false);
+        Arrays.sort(nums);
+
+        backTrack(nums, used);
+
+        return result;
+    &#125;
+
+    private void backTrack(int[] nums, boolean[] used) &#123;
+        if (path.size() == nums.length) &#123;
+            result.add(new ArrayList&lt;&gt;(path));
+            return;
+        &#125;
+        for (int i = 0; i &lt; nums.length; i++) &#123;
+            //  true 上下层 false 同层，if线  同层使用过代表if和本线相同 跳
+            if (i &gt; 0 &amp;&amp; nums[i] == nums[i - 1] &amp;&amp; used[i - 1] == false) &#123;
+                continue;
+            &#125;
+
+            if (used[i] == false) &#123;
+                used[i] = true;
+                path.add(nums[i]);
+
+                backTrack(nums, used);
+
+                path.remove(path.size() - 1);
+                used[i] = false;//回溯
+            &#125;
+        &#125;
+    &#125;
+&#125;   
+</code></pre>
+]]></content>
+  </entry>
+  <entry>
+    <title>day30</title>
+    <url>/2023/04/12/day30/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script>]]></content>
   </entry>
 </search>
