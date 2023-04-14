@@ -152,6 +152,180 @@
     
     
     <article
+  id="post-day20"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/04/03/day20/"
+    >代码随想录算法训练营Day20|654 617 700 98</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/04/03/day20/" class="article-date">
+  <time datetime="2023-04-03T00:29:27.000Z" itemprop="datePublished">2023-04-03</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="654-最大二叉树"><a href="#654-最大二叉树" class="headerlink" title="654 最大二叉树"></a>654 最大二叉树</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-binary-tree/">力扣题目地址</a></p>
+<p>查找到最大值，然后左右两边递归构造二叉树，说来惭愧，二叉树的构建对我来说仍然是一个重点。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public TreeNode constructMaximumBinaryTree(int[] nums) &#123;</span><br><span class="line">        return constructMaximumBinaryTree1(nums, 0, nums.length);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public TreeNode constructMaximumBinaryTree1(int[] nums, int leftIndex, int rightIndex) &#123;</span><br><span class="line">        if (rightIndex - leftIndex &lt; 1) &#123;</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">        if (rightIndex - leftIndex == 1) &#123;</span><br><span class="line">            return new TreeNode(nums[leftIndex]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        int maxIndex = leftIndex;</span><br><span class="line">        int maxVal = nums[maxIndex];</span><br><span class="line">        for (int i = leftIndex + 1; i &lt; rightIndex; i++) &#123;</span><br><span class="line">            if (nums[i] &gt; maxVal)&#123;</span><br><span class="line">                maxVal = nums[i];</span><br><span class="line">                maxIndex = i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        TreeNode root = new TreeNode(maxVal);</span><br><span class="line">        root.left = constructMaximumBinaryTree1(nums, leftIndex, maxIndex);</span><br><span class="line">        root.right = constructMaximumBinaryTree1(nums, maxIndex + 1, rightIndex);</span><br><span class="line">        return root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><del>参考示例差点以为是双指针</del></p>
+<p>得到最大值，然后左边右边都以相同的方法选出这一个节点，直至全部遍历完，想不到（</p>
+<h2 id="617-合并二叉树"><a href="#617-合并二叉树" class="headerlink" title="617 合并二叉树"></a>617 合并二叉树</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/merge-two-binary-trees/">力扣题目链接</a></p>
+<p>事实证明遍历很重要，就是看你理不理解。回溯有时候真的容易转不过来弯</p>
+<p>层次遍历是我初步的想法，不过看来遍历更加直白。</p>
+<pre><code>class Solution &#123;
+    public TreeNode mergeTrees(TreeNode root1, TreeNode root2) &#123;
+        if (root1 == null) 
+            return root2;
+        if (root2 == null) 
+            return root1;
+        root1.val += root2.val;
+
+        root1.left = mergeTrees(root1.left,root2.left);
+        root1.right = mergeTrees(root1.right,root2.right);
+
+        return root1;
+    &#125;
+&#125;      
+
+class Solution &#123;
+    public TreeNode mergeTrees(TreeNode root1, TreeNode root2) &#123;
+        if (root1 == null) 
+            return root2;
+        if (root2 ==null) 
+            return root1;
+
+        Queue&lt;TreeNode&gt; queue = new LinkedList&lt;&gt;();
+
+        queue.offer(root1);
+        queue.offer(root2);
+
+        while (!queue.isEmpty()) &#123;
+
+            TreeNode node1 = queue.poll();
+            TreeNode node2 = queue.poll();
+
+            node1.val = node1.val + node2.val;
+     //还需要分四种情况，反而觉得没递归好，逻辑问题
+            if (node1.left != null &amp;&amp; node2.left != null) &#123;
+                queue.offer(node1.left);
+                queue.offer(node2.left);
+            &#125;
+
+            if (node1.right != null &amp;&amp; node2.right != null) &#123;
+                queue.offer(node1.right);
+                queue.offer(node2.right);
+            &#125;
+
+            if (node1.left == null &amp;&amp; node2.left != null) &#123;
+                node1.left = node2.left;
+            &#125;
+
+            if (node1.right == null &amp;&amp; node2.right != null) &#123;
+                node1.right = node2.right;
+            &#125;
+        &#125;
+        return root1;
+    &#125;
+&#125; 
+</code></pre>
+<h2 id="700-二叉搜索树中的搜索"><a href="#700-二叉搜索树中的搜索" class="headerlink" title="700 二叉搜索树中的搜索"></a>700 二叉搜索树中的搜索</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/search-in-a-binary-search-tree/">力扣题目地址</a></p>
+<p>本来以为是广度遍历或者深度遍历，找到给定值，再找子树</p>
+<p>但是我忘了这是二叉搜索树，本身就有一定的顺序，这里返回的是位置</p>
+<pre><code> class Solution &#123;
+    public TreeNode searchBST(TreeNode root, int val) &#123;
+        if (root == null || root.val == val) &#123;
+            return root;
+        &#125;
+        if (val &lt; root.val) &#123;
+            return searchBST(root.left, val);
+        &#125; else &#123;
+            return searchBST(root.right, val);
+        &#125;
+    &#125;
+&#125;  
+
+ class Solution &#123;
+    public TreeNode searchBST(TreeNode root, int val) &#123;
+        while (root != null)&#123;
+
+            if (val &lt; root.val)
+               root = root.left;
+            else if (val &gt; root.val) 
+               root = root.right;
+
+            else    
+                return root;
+           &#125;
+
+        return null;
+    &#125;
+&#125;  
+</code></pre>
+<h2 id="98-验证二叉搜索树"><a href="#98-验证二叉搜索树" class="headerlink" title="98 验证二叉搜索树"></a>98 验证二叉搜索树</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/validate-binary-search-tree/">力扣题目链接</a></p>
+<p>递归！  中陷阱了，附庸的附庸不一定是我的附庸，中间节点的左右界</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    TreeNode max;</span><br><span class="line">    public boolean isValidBST(TreeNode root) &#123;</span><br><span class="line">        if (root == null) &#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        boolean left = isValidBST(root.left);</span><br><span class="line">        if (!left) &#123;     //空？</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if (max != null &amp;&amp; root.val &lt;= max.val) &#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        max = root;</span><br><span class="line"></span><br><span class="line">        boolean right = isValidBST(root.right);</span><br><span class="line">        return right;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<pre><code>class Solution &#123;
+    public boolean isValidBST(TreeNode root) &#123;
+        if (root == null) &#123;
+            return true;
+        &#125;
+        Stack&lt;TreeNode&gt; stack = new Stack&lt;&gt;();
+        TreeNode pre = null;
+
+        while (root != null || !stack.isEmpty()) &#123;  //||
+、
+            while (root != null) &#123;
+                stack.push(root);
+                root = root.left;
+            &#125;
+            TreeNode pop = stack.pop();
+            if (pre != null &amp;&amp; pop.val &lt;= pre.val) &#123;
+                return false;
+            &#125;
+
+            pre = pop;
+            root = pop.right;
+        &#125;
+        return true;
+    &#125;
+&#125;
+</code></pre>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
   id="post-day18"
   class="article article-type-post"
   itemscope
@@ -1000,86 +1174,6 @@ public int minDepth(TreeNode root) &#123;
 <p>思路有点蒙，next数组我知道，但是如何判定重复出现的子字符串？先跳了，有空看看视频。</p>
 <h2 id="总结字符串、数组"><a href="#总结字符串、数组" class="headerlink" title="总结字符串、数组"></a>总结字符串、数组</h2><p>主要讲的是前几天的代码题思路总结，思路还好，但是函数我不认识一点也不好。可能也有c++ primer 我看不下去的原因…… 虽然格式大差不差与c，但就是莫名各种不适应，所以函数不认识直接就跪了。</p>
 <p>字符串的基本操作指令，性质我也忘了；数组常常提，但是很少考虑操作的事，还是跪，复习，看前几天的代码题了。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-day8"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/03/22/day8/"
-    >代码随想录算法训练营Day8|字符串 344、541、05、151 58.2</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/03/22/day8/" class="article-date">
-  <time datetime="2023-03-21T20:31:35.000Z" itemprop="datePublished">2023-03-22</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="344-反转字符串"><a href="#344-反转字符串" class="headerlink" title="344 反转字符串"></a>344 反转字符串</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-string/">力扣题目链接</a></p>
-<p>从哈希表到字符串就像晕车下了车一样清新，难度瞬间下来了，不过额外空间只有o(1)，需要原地修改。不能愉快地暴力解，需要回顾前几天的思路了。双指针，毕竟是数组而不是链表，数组可以直接设置最后的指针，而链表需要先遍历长度还是有点多余的。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public void reverseString(char[] s) &#123;</span><br><span class="line">           int f = 0;</span><br><span class="line">           int l = s.length - 1;</span><br><span class="line">           for(int i = 0 ;i &lt; l;i++)&#123;</span><br><span class="line">              char temp = s[l];</span><br><span class="line">               s[l] = s[f];</span><br><span class="line">               s[f] = temp;</span><br><span class="line">               l--;</span><br><span class="line">               f++;</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">           </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="541-反转字符串II"><a href="#541-反转字符串II" class="headerlink" title="541 反转字符串II"></a>541 反转字符串II</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-string-ii/">力扣题目链接</a></p>
-<p>已经快要习惯第一时间看看能不能用双指针了（悲），游标卡尺整体挪动2k，还好？额，双指针是另类遍历，但是2k是直接分段，不太行。直接跳2k？</p>
-<p>不会写，判断字符串的不存在不会写判断条件，所以说实操啊。内层的嵌套就是上一题，但是前置……</p>
-<p>放一下残次品，不行太不行了</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public String reverseStr(String s, int k) &#123;</span><br><span class="line">        char[] ch = s.toCharArray();</span><br><span class="line">        int f = 0;</span><br><span class="line">        int l = s.length - 1;</span><br><span class="line">        if(s[k-1] &amp;&amp; s[2k])&#123;  // 条件</span><br><span class="line">            for( int i = 1;i&lt;l;l++)&#123;</span><br><span class="line">                char temp = s[l];</span><br><span class="line">                s[l] = s[f];</span><br><span class="line">                s[f] = temp;    //  不对 k后指针的定位不行</span><br><span class="line">                l--;</span><br><span class="line">                f++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return ch;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public String reverseStr(String s, int k) &#123;</span><br><span class="line">        char[] ch = s.toCharArray();</span><br><span class="line">        for(int i = 0;i &lt; ch.length;i += 2 * k)&#123;</span><br><span class="line">            int start = i;</span><br><span class="line">            // 判断尾数够不够k个来取决end指针的位置</span><br><span class="line">            int end = Math.min(ch.length - 1,start + k - 1);</span><br><span class="line">            while(start &lt; end)&#123;</span><br><span class="line">                </span><br><span class="line">                char temp = ch[start];</span><br><span class="line">                ch[start] = ch[end];</span><br><span class="line">                ch[end] = temp;</span><br><span class="line"></span><br><span class="line">                start++;</span><br><span class="line">                end--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return new String(ch);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>字符串可以直接看长度的……那就好办多了，我知识忘了太多了。</p>
-<h2 id="05-替换空格"><a href="#05-替换空格" class="headerlink" title="05 替换空格"></a>05 替换空格</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/ti-huan-kong-ge-lcof/">力扣题目链接</a></p>
-<p>暴力不是很简单吗，直接赋值？</p>
-<p>尝试了一下暴力，编译错误，c语言我真要重新看一遍了。</p>
-<p>官方的暴力解，参考</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public String replaceSpace(String s) &#123;</span><br><span class="line">        StringBuilder res = new StringBuilder();</span><br><span class="line">        for(Character c : s.toCharArray())</span><br><span class="line">        &#123;</span><br><span class="line">            if(c == &#x27; &#x27;) res.append(&quot;%20&quot;);</span><br><span class="line">            else res.append(c);</span><br><span class="line">        &#125;</span><br><span class="line">        return res.toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>把空格集体调换位置，字母往后凝聚，没有想到，依稀记得之前碰到过类似的，没想起来啊。或许，很多删除都可以这么做。</p>
-<p>原来如此，不能直接替换，%20是三个啊，糊涂了</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">public String replaceSpace(String s) &#123;</span><br><span class="line">    if(s == null || s.length() == 0)&#123;</span><br><span class="line">        return s;</span><br><span class="line">    &#125;</span><br><span class="line">    //扩充空间，空格数量2倍</span><br><span class="line">    StringBuilder str = new StringBuilder();</span><br><span class="line">    for (int i = 0; i &lt; s.length(); i++) &#123;</span><br><span class="line">        if(s.charAt(i) == &#x27; &#x27;)&#123;</span><br><span class="line">            str.append(&quot;  &quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    //若是没有空格直接返回</span><br><span class="line">    if(str.length() == 0)&#123;</span><br><span class="line">        return s;</span><br><span class="line">    &#125;</span><br><span class="line">    //有空格情况 定义两个指针</span><br><span class="line">    int left = s.length() - 1;//左指针：指向原始字符串最后一个位置</span><br><span class="line">    s += str.toString();</span><br><span class="line">    int right = s.length()-1;//右指针：指向扩展字符串的最后一个位置</span><br><span class="line">    char[] chars = s.toCharArray();</span><br><span class="line">    while(left&gt;=0)&#123;</span><br><span class="line">        if(chars[left] == &#x27; &#x27;)&#123;</span><br><span class="line">            chars[right--] = &#x27;0&#x27;;</span><br><span class="line">            chars[right--] = &#x27;2&#x27;;</span><br><span class="line">            chars[right] = &#x27;%&#x27;;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            chars[right] = chars[left];</span><br><span class="line">        &#125;</span><br><span class="line">        left--;</span><br><span class="line">        right--;</span><br><span class="line">    &#125;</span><br><span class="line">    return new String(chars);  //3步</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>问题是 StringBuilding 这个结构我不知道啊，今天刚翻出来我的java教科书，很多函数都要查一遍。</p>
-<h2 id="151-翻转字符串里的单词"><a href="#151-翻转字符串里的单词" class="headerlink" title="151 翻转字符串里的单词"></a>151 翻转字符串里的单词</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-words-in-a-string/">力扣题目链接</a></p>
-<p>初始思路就是遇到空格把前边的词翻转加入，但是肯定会很麻烦，这我是知道的。看了解析，有点熟悉，看过双翻转，但是不知道原理，原来如此。</p>
-<p>去多余空格、反转，词反转</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">   </span><br><span class="line">    public String reverseWords(String s) &#123;</span><br><span class="line">        // System.out.println(&quot;ReverseWords.reverseWords2() called with: s = [&quot; + s + &quot;]&quot;);</span><br><span class="line">        // 1.去除首尾以及中间多余空格</span><br><span class="line">        StringBuilder sb = removeSpace(s);</span><br><span class="line">        // 2.反转整个字符串</span><br><span class="line">        reverseString(sb, 0, sb.length() - 1);</span><br><span class="line">        // 3.反转各个单词</span><br><span class="line">        reverseEachWord(sb);</span><br><span class="line">        return sb.toString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private StringBuilder removeSpace(String s) &#123;</span><br><span class="line">        // System.out.println(&quot;ReverseWords.removeSpace() called with: s = [&quot; + s + &quot;]&quot;);</span><br><span class="line">        int start = 0;</span><br><span class="line">        int end = s.length() - 1;</span><br><span class="line">        while (s.charAt(start) == &#x27; &#x27;) start++;</span><br><span class="line">        while (s.charAt(end) == &#x27; &#x27;) end--;</span><br><span class="line">        StringBuilder sb = new StringBuilder();</span><br><span class="line">        while (start &lt;= end) &#123;</span><br><span class="line">            char c = s.charAt(start);</span><br><span class="line">            if (c != &#x27; &#x27; || sb.charAt(sb.length() - 1) != &#x27; &#x27;) &#123;</span><br><span class="line">                sb.append(c);</span><br><span class="line">            &#125;</span><br><span class="line">            start++;</span><br><span class="line">        &#125;</span><br><span class="line">        // System.out.println(&quot;ReverseWords.removeSpace returned: sb = [&quot; + sb + &quot;]&quot;);</span><br><span class="line">        return sb;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 反转字符串指定区间[start, end]的字符</span><br><span class="line">     */</span><br><span class="line">    public void reverseString(StringBuilder sb, int start, int end) &#123;</span><br><span class="line">        // System.out.println(&quot;ReverseWords.reverseString() called with: sb = [&quot; + sb + &quot;], start = [&quot; + start + &quot;], end = [&quot; + end + &quot;]&quot;);</span><br><span class="line">        while (start &lt; end) &#123;</span><br><span class="line">            char temp = sb.charAt(start);</span><br><span class="line">            sb.setCharAt(start, sb.charAt(end));</span><br><span class="line">            sb.setCharAt(end, temp);</span><br><span class="line">            start++;</span><br><span class="line">            end--;</span><br><span class="line">        &#125;</span><br><span class="line">        // System.out.println(&quot;ReverseWords.reverseString returned: sb = [&quot; + sb + &quot;]&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void reverseEachWord(StringBuilder sb) &#123;</span><br><span class="line">        int start = 0;</span><br><span class="line">        int end = 1;</span><br><span class="line">        int n = sb.length();</span><br><span class="line">        while (start &lt; n) &#123;</span><br><span class="line">            while (end &lt; n &amp;&amp; sb.charAt(end) != &#x27; &#x27;) &#123;</span><br><span class="line">                end++;</span><br><span class="line">            &#125;</span><br><span class="line">            reverseString(sb, start, end - 1);</span><br><span class="line">            start = end + 1;</span><br><span class="line">            end = start + 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="58-左旋转字符串"><a href="#58-左旋转字符串" class="headerlink" title="58.左旋转字符串"></a>58.左旋转字符串</h2><p>之前见过这道题，所以知道2次翻转。如果没见过，我大概会尝试双指针，字符串化链表（这不麻烦？），新加数组，等等。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public String reverseLeftWords(String s, int n) &#123;</span><br><span class="line">        int len=s.length();</span><br><span class="line">        StringBuilder sb=new StringBuilder(s);</span><br><span class="line">        reverseString(sb,0,n-1);</span><br><span class="line">        reverseString(sb,n,len-1);</span><br><span class="line">        return sb.reverse().toString();</span><br><span class="line">    &#125;</span><br><span class="line">     public void reverseString(StringBuilder sb, int start, int end) &#123;</span><br><span class="line">        while (start &lt; end) &#123;</span><br><span class="line">            char temp = sb.charAt(start);</span><br><span class="line">            sb.setCharAt(start, sb.charAt(end));</span><br><span class="line">            sb.setCharAt(end, temp);</span><br><span class="line">            start++;</span><br><span class="line">            end--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>最近几天忙死了，真的，我周末会回过头好好看的</p>
-<p>毕设，开会，无意义的路途，熬夜，要死了     而且java新手，很多函数不懂</p>
  
       <!-- reward -->
       
