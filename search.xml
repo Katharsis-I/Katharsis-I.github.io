@@ -1,6 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>代码随想录算法训练营Day35|</title>
+    <url>/2023/04/18/day35/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="860-柠檬水找零"><a href="#860-柠檬水找零" class="headerlink" title="860 柠檬水找零"></a>860 柠檬水找零</h2><p><a href="https://leetcode.cn/problems/lemonade-change/">力扣题目链接</a></p>
+<p>挺简单的，小时候或多或少都会拿钱出去买东西，也有各种脑筋急转弯等等等等</p>
+<p><del>而现在移动支付已经一扫天下，但是老人呢</del></p>
+<pre><code>class Solution &#123;
+    public boolean lemonadeChange(int[] bills) &#123;
+        int five = 0;
+        int ten = 0;
+
+        for (int i = 0; i &lt; bills.length; i++) &#123;
+            if (bills[i] == 5) &#123;
+                five++;
+            &#125; 
+            if (bills[i] == 10) &#123;
+                five--;
+                ten++;
+            &#125; else if (bills[i] == 20) &#123;
+                if (ten &gt; 0) &#123;
+                    ten--;
+                    five--;
+                &#125; else &#123;
+                    five -= 3;
+                &#125;
+            &#125;
+            if (five &lt; 0 || ten &lt; 0)
+                return false;
+        &#125;
+        
+        return true;
+    &#125;
+&#125;    
+</code></pre>
+<h2 id="406-根据身高重建队列"><a href="#406-根据身高重建队列" class="headerlink" title="406 根据身高重建队列"></a>406 根据身高重建队列</h2><p><a href="https://leetcode.cn/problems/queue-reconstruction-by-height/">力扣题目链接</a></p>
+<p>简而言之就是看后面那个元素排序</p>
+<p>又或者说，还是两个不等式</p>
+<p>先身高，然后看跳过几个插入</p>
+<p>随想录所提供的代码不理解</p>
+<pre><code>class Solution &#123;
+    public int[][] reconstructQueue(int[][] people) &#123;
+        Arrays.sort(people, (a, b) -&gt; &#123;
+            if (a[0] == b[0]) return a[1] - b[1];
+            return b[0] - a[0];
+        &#125;);
+
+        LinkedList&lt;int[]&gt; que = new LinkedList&lt;&gt;();
+
+        for (int[] p : people) &#123;
+            que.add(p[1],p);
+        &#125;
+
+        return que.toArray(new int[people.length][]);
+    &#125;
+&#125;   
+</code></pre>
+<h2 id="452-用最少数量的箭引爆地球"><a href="#452-用最少数量的箭引爆地球" class="headerlink" title="452 用最少数量的箭引爆地球"></a>452 用最少数量的箭引爆地球</h2><p><a href="https://leetcode.cn/problems/minimum-number-of-arrows-to-burst-balloons/">力扣题目链接</a></p>
+<p>直接看重叠区间</p>
+<p>代码的确不知道怎么写，但是take it</p>
+<pre><code>class Solution &#123;
+    public int findMinArrowShots(int[][] points)
+        Arrays.sort(points, (a, b) -&gt; Integer.compare(a[0], b[0]));
+
+        int count = 1;  
+        for (int i = 1; i &lt; points.length; i++) &#123;
+            if (points[i][0] &gt; points[i - 1][1]) &#123; 
+                count++; // 没重
+            &#125; else &#123;       //重了
+                points[i][1] = Math.min(points[i][1], points[i - 1][1]); 
+            &#125;
+        &#125;
+        return count;
+    &#125;
+&#125;   
+</code></pre>
+]]></content>
+  </entry>
+  <entry>
     <title>代码随想录算法训练营Day34|1005 134 135</title>
     <url>/2023/04/17/day34/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="1005-K次取反后最大化的数组和"><a href="#1005-K次取反后最大化的数组和" class="headerlink" title="1005 K次取反后最大化的数组和"></a>1005 K次取反后最大化的数组和</h2><p><a href="https://leetcode.cn/problems/maximize-sum-of-array-after-k-negations/">力扣题目链接</a></p>

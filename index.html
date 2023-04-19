@@ -152,6 +152,124 @@
     
     
     <article
+  id="post-day35"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/04/18/day35/"
+    >代码随想录算法训练营Day35|</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/04/18/day35/" class="article-date">
+  <time datetime="2023-04-18T09:25:07.000Z" itemprop="datePublished">2023-04-18</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="860-柠檬水找零"><a href="#860-柠檬水找零" class="headerlink" title="860 柠檬水找零"></a>860 柠檬水找零</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/lemonade-change/">力扣题目链接</a></p>
+<p>挺简单的，小时候或多或少都会拿钱出去买东西，也有各种脑筋急转弯等等等等</p>
+<p><del>而现在移动支付已经一扫天下，但是老人呢</del></p>
+<pre><code>class Solution &#123;
+    public boolean lemonadeChange(int[] bills) &#123;
+        int five = 0;
+        int ten = 0;
+
+        for (int i = 0; i &lt; bills.length; i++) &#123;
+            if (bills[i] == 5) &#123;
+                five++;
+            &#125; 
+            if (bills[i] == 10) &#123;
+                five--;
+                ten++;
+            &#125; else if (bills[i] == 20) &#123;
+                if (ten &gt; 0) &#123;
+                    ten--;
+                    five--;
+                &#125; else &#123;
+                    five -= 3;
+                &#125;
+            &#125;
+            if (five &lt; 0 || ten &lt; 0)
+                return false;
+        &#125;
+        
+        return true;
+    &#125;
+&#125;    
+</code></pre>
+<h2 id="406-根据身高重建队列"><a href="#406-根据身高重建队列" class="headerlink" title="406 根据身高重建队列"></a>406 根据身高重建队列</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/queue-reconstruction-by-height/">力扣题目链接</a></p>
+<p>简而言之就是看后面那个元素排序</p>
+<p>又或者说，还是两个不等式</p>
+<p>先身高，然后看跳过几个插入</p>
+<p>随想录所提供的代码不理解</p>
+<pre><code>class Solution &#123;
+    public int[][] reconstructQueue(int[][] people) &#123;
+        Arrays.sort(people, (a, b) -&gt; &#123;
+            if (a[0] == b[0]) return a[1] - b[1];
+            return b[0] - a[0];
+        &#125;);
+
+        LinkedList&lt;int[]&gt; que = new LinkedList&lt;&gt;();
+
+        for (int[] p : people) &#123;
+            que.add(p[1],p);
+        &#125;
+
+        return que.toArray(new int[people.length][]);
+    &#125;
+&#125;   
+</code></pre>
+<h2 id="452-用最少数量的箭引爆地球"><a href="#452-用最少数量的箭引爆地球" class="headerlink" title="452 用最少数量的箭引爆地球"></a>452 用最少数量的箭引爆地球</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-number-of-arrows-to-burst-balloons/">力扣题目链接</a></p>
+<p>直接看重叠区间</p>
+<p>代码的确不知道怎么写，但是take it</p>
+<pre><code>class Solution &#123;
+    public int findMinArrowShots(int[][] points)
+        Arrays.sort(points, (a, b) -&gt; Integer.compare(a[0], b[0]));
+
+        int count = 1;  
+        for (int i = 1; i &lt; points.length; i++) &#123;
+            if (points[i][0] &gt; points[i - 1][1]) &#123; 
+                count++; // 没重
+            &#125; else &#123;       //重了
+                points[i][1] = Math.min(points[i][1], points[i - 1][1]); 
+            &#125;
+        &#125;
+        return count;
+    &#125;
+&#125;   
+</code></pre>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
   id="post-day34"
   class="article article-type-post"
   itemscope
@@ -1104,115 +1222,13 @@ public:
 </article>
 
     
-    <article
-  id="post-day23"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/04/06/day23/"
-    >代码随想录算法训练营Day23|669 108 538</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/04/06/day23/" class="article-date">
-  <time datetime="2023-04-05T18:00:52.000Z" itemprop="datePublished">2023-04-06</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="669-修剪二叉搜索树"><a href="#669-修剪二叉搜索树" class="headerlink" title="669 修剪二叉搜索树"></a>669 修剪二叉搜索树</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/trim-a-binary-search-tree/">力扣题目链接</a></p>
-<p>……不得不说，是真难，我到现在第一个觉得一眼难（麻烦）的题</p>
-<p>不成熟的比喻，在挂架（结点）上滑来滑去的铁链（位置）   天平 </p>
-<p>数值的原因，上下层 乃至根节点都会改变，一发动全身（当然更狠的是堆？但没想到递归这么简单（准确来说是思路） 二点直接直线最短（</p>
-<p>突然反应过来是二叉搜索不是二叉平衡，平衡应该真的要上红黑了，那这题是挺简单的</p>
-<p>但是不得不承认思路挺妙</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public TreeNode trimBST(TreeNode root, int low, int high) &#123;</span><br><span class="line">        if (root == null) &#123;</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">        if (root.val &lt; low) &#123;</span><br><span class="line">            return trimBST(root.right, low, high);</span><br><span class="line">        &#125;</span><br><span class="line">        if (root.val &gt; high) &#123;</span><br><span class="line">            return trimBST(root.left, low, high);</span><br><span class="line">        &#125;</span><br><span class="line">                  //用返回值嫁接</span><br><span class="line">        root.left = trimBST(root.left, low, high);</span><br><span class="line">        root.right = trimBST(root.right, low, high);</span><br><span class="line">        return root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="108-将有序数组转换为二叉搜索树"><a href="#108-将有序数组转换为二叉搜索树" class="headerlink" title="108 将有序数组转换为二叉搜索树"></a>108 将有序数组转换为二叉搜索树</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/convert-sorted-array-to-binary-search-tree/">力扣题目链接</a></p>
-<p>这题就是平衡，可惜是有序数组转换，不是二叉搜索的插入删除（打起来打起来），</p>
-<pre><code>class Solution &#123;
-    public TreeNode sortedArrayToBST(int[] nums) &#123;
-        return sortedArrayToBST(nums, 0, nums.length);
-    &#125;
-
-    public TreeNode sortedArrayToBST(int[] nums, int left, int right) &#123;
-        if (left &gt;= right) &#123;
-            return null;
-        &#125;
-        if (right - left == 1) &#123;
-            return new TreeNode(nums[left]);
-        &#125;
-        int mid = left + (right - left) / 2;
-        TreeNode root = new TreeNode(nums[mid]);
-        root.left = sortedArrayToBST(nums, left, mid);
-        root.right = sortedArrayToBST(nums, mid + 1, right);
-        return root;
-    &#125;
-&#125;
-</code></pre>
-<p>原来递归觉得建立用的是数组的下标，我怎么把这个给忘了</p>
-<p>把左边全构建完再搞右边</p>
-<h2 id="538-把二叉搜索树转换为累加树"><a href="#538-把二叉搜索树转换为累加树" class="headerlink" title="538 把二叉搜索树转换为累加树"></a>538 把二叉搜索树转换为累加树</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/convert-bst-to-greater-tree/">力扣题目链接</a></p>
-<p>差点没看懂题意，直接转换成数组，后序遍历有点卡，但是这里是有顺序的从小到大，累加就要反过来</p>
-<pre><code>class Solution &#123;
-    int sum;   //毕竟返回的不是sum而是根，这里是全局变量
-    public TreeNode convertBST(TreeNode root) &#123;
-        sum = 0;
-        convertBST1(root);
-        return root;
-    &#125;
-
-    public void convertBST1(TreeNode root) &#123;
-        if (root == null) &#123;
-            return;
-        &#125;
-        convertBST1(root.right);
-         //返回后开始相加
-        sum += root.val;
-        root.val = sum;
-
-        convertBST1(root.left);
-    &#125;
-&#125;  
-</code></pre>
-<h2 id="总结直接看代码随想录比较全面"><a href="#总结直接看代码随想录比较全面" class="headerlink" title="总结直接看代码随想录比较全面"></a>总结直接看代码随想录比较全面</h2><p>二叉树的难度不止于此，打基础啊，这些题哪些不是二叉树必定会涉及的题</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
   </article>
   
 
   
   <nav class="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
   </nav>
   
 </section>
