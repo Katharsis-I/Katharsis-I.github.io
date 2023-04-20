@@ -152,6 +152,175 @@
     
     
     <article
+  id="post-day37"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/04/20/day37/"
+    >day37</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/04/20/day37/" class="article-date">
+  <time datetime="2023-04-20T06:27:54.000Z" itemprop="datePublished">2023-04-20</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+   
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
+  id="post-day36"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/04/20/day36/"
+    >代码随想录算法训练营Day36|435 763 56</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/04/20/day36/" class="article-date">
+  <time datetime="2023-04-20T06:27:43.000Z" itemprop="datePublished">2023-04-20</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="435-无重叠区间"><a href="#435-无重叠区间" class="headerlink" title="435 无重叠区间"></a>435 无重叠区间</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/non-overlapping-intervals/">力扣题目链接</a></p>
+<p>只用输出数量  如果是输出区间就麻烦了</p>
+<pre><code>class Solution &#123;
+    public int eraseOverlapIntervals(int[][] intervals) &#123;
+        Arrays.sort(intervals, (a,b)-&gt; &#123;
+            return Integer.compare(a[0],b[0]);
+        &#125;);
+
+        int count = 1;
+        for(int i = 1;i &lt; intervals.length;i++)&#123;
+            if(intervals[i][0] &lt; intervals[i-1][1])&#123;
+                intervals[i][1] = Math.min(intervals[i - 1][1], intervals[i][1]);
+                continue;
+            &#125;else&#123;
+                count++;
+            &#125;    
+        &#125;
+        return intervals.length - count;
+    &#125;
+&#125;
+  
+</code></pre>
+<h2 id="763-划分字母区间"><a href="#763-划分字母区间" class="headerlink" title="763 划分字母区间"></a>763 划分字母区间</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/partition-labels/">力扣题目链接</a></p>
+<p>一开始没有理解，“每个字母最多出现在一个片段中”</p>
+<p>也就是说不能和其他片段重叠，还是区间问题</p>
+<p>一开始联想到的是哈希，但是那适用于验证问题而不是分割 单纯分割的话……不行 跪了</p>
+<pre><code>class Solution &#123;
+    public List&lt;Integer&gt; partitionLabels(String S) &#123;
+        List&lt;Integer&gt; list = new LinkedList&lt;&gt;();
+        int[] edge = new int[26];
+        char[] chars = S.toCharArray();
+
+        for (int i = 0; i &lt; chars.length; i++) &#123;
+            edge[chars[i] - &#39;a&#39;] = i;
+        &#125;        //刷新边缘
+
+        int idx = 0;
+        int last = -1;
+        for (int i = 0; i &lt; chars.length; i++) &#123;
+            idx = Math.max(idx,edge[chars[i] - &#39;a&#39;]);
+            if (i == idx) &#123;
+                list.add(i - last);
+                last = i;
+            &#125;
+        &#125;
+        return list;
+    &#125;
+&#125;
+
+   
+</code></pre>
+<h2 id="56-合并区间"><a href="#56-合并区间" class="headerlink" title="56 合并区间"></a>56 合并区间</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/merge-intervals/">力扣题目链接</a></p>
+<p>没什么好说的，区间检测</p>
+<pre><code>class Solution &#123;
+    public int[][] merge(int[][] intervals) &#123;
+        List&lt;int[]&gt; res = new LinkedList&lt;&gt;();
+        Arrays.sort(intervals, (x, y) -&gt; Integer.compare(x[0], y[0]));
+        int start = intervals[0][0];
+        int end = intervals[0][1];
+
+        for (int i = 1; i &lt; intervals.length; i++) &#123;
+            if (intervals[i][0] &gt; end) &#123;
+                res.add(new int[]&#123;start, end&#125;);
+                start = intervals[i][0];
+                end = intervals[i][1];
+            &#125; else &#123;           //合并
+                end = Math.max(end, intervals[i][1]);
+            &#125;
+        &#125;
+
+        res.add(new int[]&#123;start, end&#125;);
+        return res.toArray(new int[res.size()][]);
+    &#125;
+&#125;
+&#125;
+  
+</code></pre>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
   id="post-day35"
   class="article article-type-post"
   itemscope
@@ -1006,204 +1175,6 @@ public:
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    List&lt;List&lt;String&gt;&gt; lists = new ArrayList&lt;&gt;();</span><br><span class="line">    Deque&lt;String&gt; deque = new LinkedList&lt;&gt;();</span><br><span class="line">    public List&lt;List&lt;String&gt;&gt; partition(String s) &#123;</span><br><span class="line">        backTracking(s, 0);</span><br><span class="line">        return lists;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void backTracking(String s, int startIndex) &#123;</span><br><span class="line"></span><br><span class="line">        if (startIndex &gt;= s.length()) &#123;</span><br><span class="line">            lists.add(new ArrayList(deque));</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for (int i = startIndex; i &lt; s.length(); i++) &#123;</span><br><span class="line"> </span><br><span class="line">            if (isPalindrome(s, startIndex, i)) &#123;</span><br><span class="line">                String str = s.substring(startIndex, i + 1);</span><br><span class="line">                deque.addLast(str);</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            backTracking(s, i + 1);</span><br><span class="line"></span><br><span class="line">            deque.removeLast();</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private boolean isPalindrome(String s, int startIndex, int end) &#123;</span><br><span class="line">        for (int i = startIndex, j = end; i &lt; j; i++, j--) &#123;</span><br><span class="line">            if (s.charAt(i) != s.charAt(j)) &#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>遍历中筛取</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-day25"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/04/08/day25/"
-    >代码随想录算法训练营Day25|216 17</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/04/08/day25/" class="article-date">
-  <time datetime="2023-04-07T17:14:03.000Z" itemprop="datePublished">2023-04-08</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="216-组合总和III"><a href="#216-组合总和III" class="headerlink" title="216 组合总和III"></a>216 组合总和III</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/combination-sum-iii/">力扣题目链接</a></p>
-<p>虽然相加就想到哈希不过显然不太行</p>
-<p>穷举再筛选</p>
-<pre><code>class Solution &#123;
-    LinkedList&lt;Integer&gt; path = new LinkedList&lt;&gt;();
-    List&lt;List&lt;Integer&gt;&gt; ans = new ArrayList&lt;&gt;();
-
-    public List&lt;List&lt;Integer&gt;&gt; combinationSum3(int k, int n) &#123;
-        build(k, n, 1, 0);
-        return ans;
-    &#125;
-
-    private void allchoose(int k, int n, int startIndex, int sum) &#123;
-
-        if (sum &gt; n||path.size() &gt; k)
-            return;
-
-        if (sum == n &amp;&amp; path.size() == k) &#123;
-            ans.add(new ArrayList&lt;&gt;(path));
-            return;
-        &#125;
-
-        for(int i = startIndex; i &lt;= 9; i++) &#123;
-            path.add(i);
-            sum += i;
-            allchoose(k, n, i + 1, sum);
-            sum -= i;  // 还原跳到另一叉
-            path.removeLast();
-        &#125;
-    &#125;
-&#125;  
-</code></pre>
-<h2 id="17-电话号码的字母组合"><a href="#17-电话号码的字母组合" class="headerlink" title="17 电话号码的字母组合"></a>17 电话号码的字母组合</h2><p> <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/letter-combinations-of-a-phone-number/">力扣题目链接</a></p>
-<p>字母与数字的关系果然还是要提前输入啊，在之前的基础上加上了字母，n叉树的节点视为一次for的总和，个数为循环次数</p>
-<pre><code>class Solution &#123;
-    List&lt;String&gt; list = new ArrayList&lt;&gt;();
-
-    public List&lt;String&gt; letterCombinations(String digits) &#123;
-        if (digits == null || digits.length() == 0) &#123;
-            return list;
-        &#125;
-
-        String[] numString = &#123;&quot;&quot;, &quot;&quot;, &quot;abc&quot;, &quot;def&quot;, &quot;ghi&quot;, &quot;jkl&quot;, &quot;mno&quot;, &quot;pqrs&quot;, &quot;tuv&quot;, &quot;wxyz&quot;&#125;;
-
-        backTracking(digits, numString, 0);
-        return list;
-
-    &#125;
-
-    StringBuilder temp = new StringBuilder();  //单个
-    public void backTracking(String digits, String[] numString, int num) &#123;
-        if (num == digits.length()) &#123;
-            list.add(temp.toString());
-            return;
-        &#125;
-
-        String str = numString[digits.charAt(num) - &#39;0&#39;];
-
-        for (int i = 0; i &lt; str.length(); i++) &#123;
-            temp.append(str.charAt(i));      
-                         //毕竟是遍历，全都可以选择
-            backTracking(digits, numString, num + 1);
-
-            temp.deleteCharAt(temp.length() - 1);  //返回上一级
-        &#125;
-    &#125;
-&#125;    
-</code></pre>
-<p>写代码随想录唯一的失策就是我对库函数不熟，也不是不知道意思，但是不知道有哪些，失策</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-day24"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/04/06/day24/"
-    >代码随想录算法训练营Day24|回溯 77</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/04/06/day24/" class="article-date">
-  <time datetime="2023-04-06T00:50:31.000Z" itemprop="datePublished">2023-04-06</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="回溯算法"><a href="#回溯算法" class="headerlink" title="回溯算法"></a>回溯算法</h2><p>回溯是递归的副产品 但是效率不高</p>
-<ul>
-<li>组合问题：N个数里面按一定规则找出k个数的集合</li>
-<li>切割问题：一个字符串按一定规则有几种切割方式</li>
-<li>子集问题：一个N个数的集合里有多少符合条件的子集</li>
-<li>排列问题：N个数按一定规则全排列，有几种排列方式</li>
-<li>棋盘问题：N皇后，解数独等等    （路径呢</li>
-</ul>
-<p>树形   有点像b树</p>
-<h2 id="77-组合"><a href="#77-组合" class="headerlink" title="77 组合"></a>77 组合</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/combinations/">力扣题目链接</a></p>
-<p>for循环的确不错，但是k过多就没办法了</p>
-<p>回溯加for循环，一时间有点转不过来</p>
-<p>注意剪枝</p>
-<pre><code>class Solution &#123;
-    List&lt;List&lt;Integer&gt;&gt; result = new ArrayList&lt;&gt;();
-    LinkedList&lt;Integer&gt; path = new LinkedList&lt;&gt;();
-    public List&lt;List&lt;Integer&gt;&gt; combine(int n, int k) &#123;
-        combineHelper(n, k, 1);    //start
-        return result;
-    &#125;
-
-
-    private void combineHelper(int n, int k, int startIndex)&#123;
-        if (path.size() == k)&#123;            //最终统计长度
-            result.add(new ArrayList&lt;&gt;(path));
-            return;
-        &#125;
-                                        //跳跃间隔由此层for决定
-        for (int i = startIndex; i &lt;= n - (k - path.size()) + 1; i++)&#123;
-            path.add(i);
-            combineHelper(n, k, i + 1);     //startindex加1，二叉树加一层
-            path.removeLast();
-        &#125;
-    &#125;
-&#125;    
-</code></pre>
-<p> 虽然理解思路，但是还是有点混乱</p>
  
       <!-- reward -->
       

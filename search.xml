@@ -1,6 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>day37</title>
+    <url>/2023/04/20/day37/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script>]]></content>
+  </entry>
+  <entry>
+    <title>代码随想录算法训练营Day36|435 763 56</title>
+    <url>/2023/04/20/day36/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="435-无重叠区间"><a href="#435-无重叠区间" class="headerlink" title="435 无重叠区间"></a>435 无重叠区间</h2><p><a href="https://leetcode.cn/problems/non-overlapping-intervals/">力扣题目链接</a></p>
+<p>只用输出数量  如果是输出区间就麻烦了</p>
+<pre><code>class Solution &#123;
+    public int eraseOverlapIntervals(int[][] intervals) &#123;
+        Arrays.sort(intervals, (a,b)-&gt; &#123;
+            return Integer.compare(a[0],b[0]);
+        &#125;);
+
+        int count = 1;
+        for(int i = 1;i &lt; intervals.length;i++)&#123;
+            if(intervals[i][0] &lt; intervals[i-1][1])&#123;
+                intervals[i][1] = Math.min(intervals[i - 1][1], intervals[i][1]);
+                continue;
+            &#125;else&#123;
+                count++;
+            &#125;    
+        &#125;
+        return intervals.length - count;
+    &#125;
+&#125;
+  
+</code></pre>
+<h2 id="763-划分字母区间"><a href="#763-划分字母区间" class="headerlink" title="763 划分字母区间"></a>763 划分字母区间</h2><p><a href="https://leetcode.cn/problems/partition-labels/">力扣题目链接</a></p>
+<p>一开始没有理解，“每个字母最多出现在一个片段中”</p>
+<p>也就是说不能和其他片段重叠，还是区间问题</p>
+<p>一开始联想到的是哈希，但是那适用于验证问题而不是分割 单纯分割的话……不行 跪了</p>
+<pre><code>class Solution &#123;
+    public List&lt;Integer&gt; partitionLabels(String S) &#123;
+        List&lt;Integer&gt; list = new LinkedList&lt;&gt;();
+        int[] edge = new int[26];
+        char[] chars = S.toCharArray();
+
+        for (int i = 0; i &lt; chars.length; i++) &#123;
+            edge[chars[i] - &#39;a&#39;] = i;
+        &#125;        //刷新边缘
+
+        int idx = 0;
+        int last = -1;
+        for (int i = 0; i &lt; chars.length; i++) &#123;
+            idx = Math.max(idx,edge[chars[i] - &#39;a&#39;]);
+            if (i == idx) &#123;
+                list.add(i - last);
+                last = i;
+            &#125;
+        &#125;
+        return list;
+    &#125;
+&#125;
+
+   
+</code></pre>
+<h2 id="56-合并区间"><a href="#56-合并区间" class="headerlink" title="56 合并区间"></a>56 合并区间</h2><p><a href="https://leetcode.cn/problems/merge-intervals/">力扣题目链接</a></p>
+<p>没什么好说的，区间检测</p>
+<pre><code>class Solution &#123;
+    public int[][] merge(int[][] intervals) &#123;
+        List&lt;int[]&gt; res = new LinkedList&lt;&gt;();
+        Arrays.sort(intervals, (x, y) -&gt; Integer.compare(x[0], y[0]));
+        int start = intervals[0][0];
+        int end = intervals[0][1];
+
+        for (int i = 1; i &lt; intervals.length; i++) &#123;
+            if (intervals[i][0] &gt; end) &#123;
+                res.add(new int[]&#123;start, end&#125;);
+                start = intervals[i][0];
+                end = intervals[i][1];
+            &#125; else &#123;           //合并
+                end = Math.max(end, intervals[i][1]);
+            &#125;
+        &#125;
+
+        res.add(new int[]&#123;start, end&#125;);
+        return res.toArray(new int[res.size()][]);
+    &#125;
+&#125;
+&#125;
+  
+</code></pre>
+]]></content>
+  </entry>
+  <entry>
     <title>代码随想录算法训练营Day35|</title>
     <url>/2023/04/18/day35/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="860-柠檬水找零"><a href="#860-柠檬水找零" class="headerlink" title="860 柠檬水找零"></a>860 柠檬水找零</h2><p><a href="https://leetcode.cn/problems/lemonade-change/">力扣题目链接</a></p>

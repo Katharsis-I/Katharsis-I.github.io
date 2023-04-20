@@ -152,6 +152,166 @@
     
     
     <article
+  id="post-d2"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/03/16/d2/"
+    >代码随想录算法训练营Day2|数组977、209、59</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/03/16/d2/" class="article-date">
+  <time datetime="2023-03-16T12:13:16.000Z" itemprop="datePublished">2023-03-16</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="977-有序数组的平方"><a href="#977-有序数组的平方" class="headerlink" title="977 有序数组的平方"></a>977 有序数组的平方</h2><style></style>
+
+<p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/squares-of-a-sorted-array/">力扣</a></p>
+<p>没有看见题目建议是双指针，也没看见进阶要求时间复杂度为O（n），是我的错，当即写了暴力解，然后时间超时（望天）明明我昨天才感慨完双指针……</p>
+<p>垃圾暴力解（继续望天）因为直接超时所以我连自己的代码质量都不知道（继续继续望天</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int[] sortedSquares(int[] nums) &#123;</span><br><span class="line">            int s=nums.length;</span><br><span class="line">            int[] sq = new int[nums.length];</span><br><span class="line">            for(int i=0;i&lt;=s-1;i++)&#123;</span><br><span class="line">                sq[i]=nums[i]*nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">            for(int j=1;j&lt;=s-1;j++)&#123;</span><br><span class="line">                for(int k=1;k&lt;=s;s++)&#123;</span><br><span class="line">                    if(sq[k]&lt;sq[k-1])&#123;</span><br><span class="line">                        int temp=sq[k];</span><br><span class="line">                        sq[k]=sq[k-1];</span><br><span class="line">                        sq[k-1]=temp;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            return sq;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>代码随想录的暴力解</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;int&gt; sortedSquares(vector&lt;int&gt;&amp; A) &#123;</span><br><span class="line">        for (int i = 0; i &lt; A.size(); i++) &#123;</span><br><span class="line">            A[i] *= A[i];</span><br><span class="line">        &#125;</span><br><span class="line">        sort(A.begin(), A.end()); // 快速排序</span><br><span class="line">        return A;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>核心代码模式可以直接快排吗？？？</p>
+<p>自己写的暴力解显现出了另一个问题：数组的溢出，鉴于自己真的太久没看基础了，这种错误当然是会犯的啊哈哈哈，不行，我真的得要重新过一遍了。</p>
+<p><u>java.lang.ArrayIndexOutOfBoundsException: Index 5 out of bounds for length 5</u></p>
+<p>java的数组报错，下标越界，length、int[0]直接套就会出现这种事，混乱</p>
+<p>双指针思路看懂了，毕竟是有负数的数组，平方后绝对值说不定是最大的，那么就从排序的最大值开始排好了，最大值只会从两边出现，所以就用双指针一个头一个尾开始比较。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int[] sortedSquares(int[] nums) &#123;</span><br><span class="line">         int last =nums.length-1;</span><br><span class="line">         int first = 0;</span><br><span class="line">         int[] sq = new int[nums.length];</span><br><span class="line">         int index = sq.length-1;</span><br><span class="line">         while(first&lt;=last)&#123;</span><br><span class="line">             if(nums[first]*nums[first]&gt;nums[last]*nums[last])&#123;</span><br><span class="line">                 sq[index--]=nums[first]*nums[first];</span><br><span class="line">                 first++;</span><br><span class="line">             &#125;else&#123;</span><br><span class="line">                 sq[index--]=nums[last]*nums[last];</span><br><span class="line">                 last--;</span><br><span class="line">             &#125;</span><br><span class="line">         &#125;</span><br><span class="line">         return sq;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>(思路不是问题，问题是我不会写代码，啊)</p>
+<h2 id="209-长度最小的子数组"><a href="#209-长度最小的子数组" class="headerlink" title="209 长度最小的子数组"></a>209 长度最小的子数组</h2><style></style>
+
+<p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-size-subarray-sum/">力扣</a></p>
+<p>初始反而没想出来暴力解，反而在想边框，先长度为2，再长度为3滑动，不过这也是两层for循环，而且理解起来也麻烦，不提不提，比暴力解还要麻烦。还是双指针，两个指针框起来的就是数组。实操，思路还是要实操，所以怎么写</p>
+<p>A先不动，滑B，大于数值，滑A，一直到相等，时间复杂度O（n）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int minSubArrayLen(int target, int[] nums) &#123;</span><br><span class="line">       int A = 0;</span><br><span class="line">       int sum = 0;</span><br><span class="line">       int correct = Integer.MAX_VALUE;</span><br><span class="line">       for(int B = 0;B&lt;nums.length;B++)&#123;</span><br><span class="line">           sum+=nums[B];</span><br><span class="line">           while(sum&gt;=target)&#123;  //本来觉得if可以，然后示例挂了。后来想了一下发现，减一次也不一定就能重回目标值，毕竟数字又不是均等的</span><br><span class="line">               correct = Math.min(correct,B-A+1);</span><br><span class="line">               sum-=nums[A];</span><br><span class="line">               A++;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       return correct ==Integer.MAX_VALUE ? 0 : correct;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="59-螺旋矩阵II"><a href="#59-螺旋矩阵II" class="headerlink" title="59 螺旋矩阵II"></a>59 螺旋矩阵II</h2><style></style>
+
+<p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/spiral-matrix-ii/">力扣</a></p>
+<p>乍一看没什么，但是再一想就感觉麻烦度蹭蹭的上涨，这可不是具体给个数，而是固定化的步骤，用数组表示，划分区间，但是我对数组的掌控度很不够。从行、从列调控二维数组，内圈的尺寸也需要代码规定，让我想起了解函数设一堆x的代数式，不过还是简洁不起来。</p>
+<p>比之前的难，去视频看了一眼最后几行是什么意思，是最后一圈</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int[][] generateMatrix(int n) &#123;</span><br><span class="line">       int loop = 0;</span><br><span class="line">       int [][] res = new int[n][n];</span><br><span class="line">       int start = 0;</span><br><span class="line">       int min = 1;</span><br><span class="line">       int i,j;</span><br><span class="line"></span><br><span class="line">       while(loop++ &lt; n/2)&#123;     //上</span><br><span class="line">           for(j=start;j&lt;n-loop;j++)&#123;</span><br><span class="line">               res[start][j]=min++;</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">           for(i=start;i&lt;n-loop;i++)&#123;    //右</span><br><span class="line">               res[i][j]=min++;</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">           for(;j&gt;=loop;j--)&#123;    //下</span><br><span class="line">               res[i][j]=min++;</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">           for(;i&gt;=loop;i--)&#123;      //左</span><br><span class="line">               res[i][j]=min++;</span><br><span class="line"></span><br><span class="line">           start++;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       if(n%2==1)&#123;</span><br><span class="line">           res[start][start]=min;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>实际表达出来仅仅是while加4个for,简洁明了，这就是代码的魅力所在啊</p>
+<p>loop、start、n，三者控制 i、j的位置，然后就min一直加下去。</p>
+<p>n-loop,让我想起经典勾股定理证明图形，4个长方形加中间正方形等于大正方形。</p>
+<p>我逐渐明白了一切.jpg</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
+  id="post-day1"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/03/15/day1/"
+    >代码随想录算法训练营Day1|数组、二分、移除</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/03/15/day1/" class="article-date">
+  <time datetime="2023-03-15T12:27:02.000Z" itemprop="datePublished">2023-03-15</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="代码随想录算法训练营Day1-数组、二分、移除"><a href="#代码随想录算法训练营Day1-数组、二分、移除" class="headerlink" title="代码随想录算法训练营Day1|数组、二分、移除"></a>代码随想录算法训练营Day1|数组、二分、移除</h1><h2 id="数组理论（非常基础的数据结构）"><a href="#数组理论（非常基础的数据结构）" class="headerlink" title="数组理论（非常基础的数据结构）"></a>数组理论（非常基础的数据结构）</h2><p>当初学408的时候，甚至追到大一的c语言课程，数组都是非常重要的知识点，理解起来并没有那么困难，不过直到如今指针依然是让我脑壳疼的存在，也不是地址的连续性与计算。非要描述的话，就是定义、描述？</p>
+<p>数组就像是队伍的行列，也可以打个比方为生物课本里一排排的植物细胞显微镜下的状态……一个细胞占一小段连续的内存。只要知道基准点和下标，地址非常好求，按图索骥。</p>
+<p>对，二维数组指针让人头疼，每行的首指针貌似（记忆过于久远了），不过这针对的是c语言，个人目前打算研究Java。而Java没有指针真是个好消息。而Java的二维数组嘛，就像是不同的书的名字，每个名字后面跟着目录，从一开始就互不关联。</p>
+<p>说回数组本身，408简直不能忽视。数据结构就不用多说了，与其相似的还有栈、链表，数组可以用链表表示，不过过于麻烦。图，广度搜索、深度搜索等等都是以数组为基础（今年代码题竟然不考算法，考图，我……）。排序、搜索不用多说。计网pass，计网都是各种协议。操作系统的文件系统与数组的内存可以说是差不离，都是以起始点，每个文件的大小来进行计算，不同的大概只有文件系统需要考虑的位数指代多少内存。计组，与操作系统同理，深化到了程序指令的内存地址。荣耀归于计算机组成原理——  只要会计组，操作系统简直不在话下（问题是我寄了啊啊啊……）  如果数组不熟练，我会翻出王道书和C primer plus再看一遍，真的，关于数组过长时间没看过了。</p>
+<h2 id="704-二分查找"><a href="#704-二分查找" class="headerlink" title="704.二分查找"></a>704.二分查找</h2><style></style>
+
+<p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-search/">力扣</a></p>
+<p>408数据结构接触过（但是你没实操啊没实操），变形我记得可以用双指针法，历年真题里面不少双指针，王道甚至某一年的真题给的三指针震撼我一整年。虽然，咳，这题暂时还没那么高大上……</p>
+<p>简而言之就是明确界限，左边界限、右边界限、由此确定的中间的比较值。根据比较值与目标值的比较大小关系再把中间值定为新的左or右界限，取新中间值，如此往复直到找到。</p>
+<p>虽然思路很明确，但是对我来说最大的问题是——不知道如何下手。</p>
+<p>定义谁？for循环肯定是双层，判断条件怎么写，就是一头雾水。</p>
+<p>所以说啊（痛心疾首），实践出真知，你纸上谈兵不还是什么都没干吗？这是我用一年得出的惨痛教训T_T</p>
+<p>先定义左右，然后是middle，不过首先是while循环这个我倒是没想到的，比较之后如何确定新边界是个关键点。由此引申出区间的定义，要不要最右边的那个数。两种定义，写法会有微妙的不同。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> class Solution &#123;</span><br><span class="line">    public int search(int[] nums, int target) &#123;</span><br><span class="line">         int left = 0;</span><br><span class="line">         int right = nums.length-1;</span><br><span class="line">         while(left &lt;= right)&#123;</span><br><span class="line">             int middle = left +((right - left)/2);// &gt;&gt;1 位运算呐</span><br><span class="line">             if(nums[middle] &gt; target)&#123;</span><br><span class="line">                 right = middle - 1;</span><br><span class="line">             &#125;else if (nums[middle] &lt; target)&#123;</span><br><span class="line">                 left = middle + 1;</span><br><span class="line">             &#125;else &#123;</span><br><span class="line">                 return middle;</span><br><span class="line">             &#125;</span><br><span class="line">         &#125;</span><br><span class="line">         return -1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>（全比较版本）</p>
+<p>抛去右边的话（因为递增顺序，右边一般来说不用），while循环直接&lt;,length不减，左区间重定位middle，右区间保持middle+1。</p>
+<p>size（）函数不能用，面对编译一脸懵逼，上次编译失败是‘ ‘这对符号错误，而且又和指针有关，最后也没解决…… Java，果然还是用length</p>
+<h2 id="27-移除元素"><a href="#27-移除元素" class="headerlink" title="27.移除元素"></a>27.移除元素</h2><style></style>
+
+<p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-element/">力扣</a></p>
+<p>简单地删除元素就没什么好说的，直接遍历for走起，问题是，这是数组，只能覆盖，突然就觉得链表不那么面目可憎了（</p>
+<p>双指针真是太好用了，暴力解速度没问题但是内存稍微高一点。每日一轮自己的实操。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int removeElement(int[] nums, int val) &#123;</span><br><span class="line">         int num=nums.length;</span><br><span class="line">         for(int i=0;i&lt;num;i++)&#123;</span><br><span class="line">              if(nums[i]==val)&#123;</span><br><span class="line">                for(int j=i+1;j&lt;num;j++)&#123;</span><br><span class="line">                    nums[j-1]=nums[j];</span><br><span class="line">                &#125;</span><br><span class="line">            i--;</span><br><span class="line">            num--;</span><br><span class="line">         &#125;</span><br><span class="line">         &#125;</span><br><span class="line">      return num;   </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里是快慢指针，简而言之就是把快指针遍历过的元素用慢指针在原数组上原地誊写。遇到要删除的元素，快指针跳过，慢指针无情把这格覆盖掉。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int removeElement(int[] nums, int val) &#123;</span><br><span class="line">         int slowIndex = 0;</span><br><span class="line">        for (int fastIndex = 0; fastIndex &lt; nums.length; fastIndex++) &#123;</span><br><span class="line">            if (nums[fastIndex] != val) &#123;</span><br><span class="line">                nums[slowIndex] = nums[fastIndex];</span><br><span class="line">                slowIndex++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return slowIndex;</span><br><span class="line">    &#125;   </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>此处用的是代码随想录上的示例代码。</p>
+<h2 id="其余"><a href="#其余" class="headerlink" title="其余"></a>其余</h2><p>二分查找除了704，还有35 34两题，有空要看看。</p>
+<p>marktext真好用啊，typora付费有点不舍，可惜如果我要买点什么我会先打算买marginnote 3</p>
+<p>痛苦做毕设，等毕设做完就能愉快搞代码了</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
   id="post-hello-world"
   class="article article-type-post"
   itemscope
