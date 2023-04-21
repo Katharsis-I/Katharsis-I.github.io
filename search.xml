@@ -1,9 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>day37</title>
+    <title>代码随想录算法训练营Day37|738 968 总结</title>
     <url>/2023/04/20/day37/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script>]]></content>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="738-单调递增的数字"><a href="#738-单调递增的数字" class="headerlink" title="738 单调递增的数字"></a>738 单调递增的数字</h2><p><a href="https://leetcode.cn/problems/monotone-increasing-digits/">力扣题目链接</a></p>
+<p>区间？两个条件的限制</p>
+<pre><code>class Solution &#123;
+    public int monotoneIncreasingDigits(int n) &#123;
+        String s = String.valueOf(n);
+        char[] chars = s.toCharArray();
+        int start = s.length();
+        for (int i = s.length() - 2; i &gt;= 0; i--) &#123;
+            if (chars[i] &gt; chars[i + 1]) &#123;
+                chars[i]--;
+                start = i+1;
+            &#125;
+        &#125;
+        for (int i = start; i &lt; s.length(); i++) &#123;
+            chars[i] = &#39;9&#39;;
+        &#125;
+        return Integer.parseInt(String.valueOf(chars));
+    &#125;
+&#125; 
+</code></pre>
+<h2 id="968-监控二叉树"><a href="#968-监控二叉树" class="headerlink" title="968 监控二叉树"></a>968 监控二叉树</h2><p><a href="https://leetcode.cn/problems/binary-tree-cameras/">力扣题目链接</a></p>
+<p>真不会，虽然有大致的思路但是真不会，是回溯，但是，如何回溯是不会</p>
+<p>如何计数？只能看示例 <del>然后示例也一脸懵</del></p>
+<pre><code>class Solution &#123;
+    int  res=0;
+    public int minCameraCover(TreeNode root) &#123;
+        if(minCame(root)==0)&#123;
+            res++;
+        &#125;
+        return res;
+    &#125;
+    
+  
+    public int minCame(TreeNode root)&#123;
+        if(root==null)&#123;
+            return 2;
+        &#125;
+        int left=minCame(root.left);
+        int  right=minCame(root.right);
+
+        if(left==2&amp;&amp;right==2)&#123;
+            //(2,2)
+            return 0;
+        &#125;else if(left==0||right==0)&#123;
+            res++;
+            return 1;
+        &#125;else&#123;
+            return 2;
+        &#125;
+    &#125;
+&#125;      
+</code></pre>
+<p>总结，贪心大概只有思路内核相同，其它并无区别 突出一个灵活</p>
+]]></content>
   </entry>
   <entry>
     <title>代码随想录算法训练营Day36|435 763 56</title>
@@ -88,7 +141,7 @@
 ]]></content>
   </entry>
   <entry>
-    <title>代码随想录算法训练营Day35|</title>
+    <title>代码随想录算法训练营Day35|860 406 452</title>
     <url>/2023/04/18/day35/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="860-柠檬水找零"><a href="#860-柠檬水找零" class="headerlink" title="860 柠檬水找零"></a>860 柠檬水找零</h2><p><a href="https://leetcode.cn/problems/lemonade-change/">力扣题目链接</a></p>
 <p>挺简单的，小时候或多或少都会拿钱出去买东西，也有各种脑筋急转弯等等等等</p>
@@ -116,7 +169,7 @@
             if (five &lt; 0 || ten &lt; 0)
                 return false;
         &#125;
-        
+
         return true;
     &#125;
 &#125;    
