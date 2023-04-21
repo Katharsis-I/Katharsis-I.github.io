@@ -1,6 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>day39</title>
+    <url>/2023/04/21/day39/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script>]]></content>
+  </entry>
+  <entry>
+    <title>代码随想录算法训练营Day38|动态规划 509 70 746</title>
+    <url>/2023/04/21/day38/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="动态规划简要介绍"><a href="#动态规划简要介绍" class="headerlink" title="动态规划简要介绍"></a>动态规划简要介绍</h2><p>简称DP 和上一个状态有关</p>
+<p>确定dp数组 下标  递推公式  初始化 遍历顺序</p>
+<h2 id="509-斐波那契数"><a href="#509-斐波那契数" class="headerlink" title="509  斐波那契数"></a>509  斐波那契数</h2><p><a href="https://leetcode.cn/problems/fibonacci-number/">力扣题目链接</a></p>
+<pre><code>class Solution &#123;
+    public int fib(int n) &#123;
+        if (n &lt; 2) return n;             
+        int[] dp = new int[n + 1];
+        dp[0] = 0;
+        dp[1] = 1;
+        for (int index = 2; index &lt;= n; index++)&#123;
+            dp[index] = dp[index - 1] + dp[index - 2];
+        &#125;
+        return dp[n];
+    &#125;
+&#125;     
+</code></pre>
+<h2 id="70-爬楼梯"><a href="#70-爬楼梯" class="headerlink" title="70 爬楼梯"></a>70 爬楼梯</h2><p><a href="https://leetcode.cn/problems/climbing-stairs/">力扣题目链接</a></p>
+<p>递归？直接看有哪些可到n 不过不是动态规划</p>
+<pre><code>public int climbStairs(int n) &#123;
+    int[] dp = new int[n + 1];
+    dp[0] = 1;
+    dp[1] = 1;
+    for (int i = 2; i &lt;= n; i++) &#123;
+        dp[i] = dp[i - 1] + dp[i - 2];
+    &#125;
+    return dp[n];
+&#125;
+</code></pre>
+<h2 id="746-使用最小花费爬楼梯"><a href="#746-使用最小花费爬楼梯" class="headerlink" title="746 使用最小花费爬楼梯"></a>746 使用最小花费爬楼梯</h2><p><a href="https://leetcode.cn/problems/min-cost-climbing-stairs/">力扣题目链接</a></p>
+<p>本来以为需要贪心，毕竟每一步是有花费的，不过……为什么不直接了当最后统计最小呢 是我想太多了</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int minCostClimbingStairs(int[] cost) &#123;</span><br><span class="line">        int len = cost.length;</span><br><span class="line">        int[] dp = new int[len + 1];</span><br><span class="line">        dp[0] = 0;</span><br><span class="line">        dp[1] = 0;</span><br><span class="line">        for (int i = 2; i &lt;= len; i++) &#123;</span><br><span class="line">            dp[i] = Math.min(dp[i - 1] + cost[i - 1],</span><br><span class="line">                             dp[i - 2] + cost[i - 2]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return dp[len];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+  </entry>
+  <entry>
     <title>代码随想录算法训练营Day37|738 968 总结</title>
     <url>/2023/04/20/day37/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="738-单调递增的数字"><a href="#738-单调递增的数字" class="headerlink" title="738 单调递增的数字"></a>738 单调递增的数字</h2><p><a href="https://leetcode.cn/problems/monotone-increasing-digits/">力扣题目链接</a></p>
@@ -34,8 +75,8 @@
         &#125;
         return res;
     &#125;
-    
-  
+
+
     public int minCame(TreeNode root)&#123;
         if(root==null)&#123;
             return 2;
