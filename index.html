@@ -164,7 +164,7 @@
        
 <h2 itemprop="name">
   <a class="article-title" href="/2023/04/21/day39/"
-    >day39</a> 
+    >代码随想录算法训练营Day39|62 63</a> 
 </h2>
  
 
@@ -179,7 +179,17 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-   
+  <h2 id="62-不同路径"><a href="#62-不同路径" class="headerlink" title="62 不同路径"></a>62 不同路径</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/unique-paths/">力扣题目链接</a></p>
+<p>回溯   也叫做深搜？</p>
+<p>二叉树叶子节点倒也没错，毕竟回溯到最后的条件限定也不能完全依照二叉树</p>
+<p>但是动态呢</p>
+<p>爬梯子变成多维？   数学公式虽然能直接推……</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public static int uniquePaths(int m, int n) &#123;</span><br><span class="line">       int[][] dp = new int[m][n];</span><br><span class="line"></span><br><span class="line">       for (int i = 0; i &lt; m; i++) &#123;</span><br><span class="line">           dp[i][0] = 1;</span><br><span class="line">       &#125;</span><br><span class="line">       for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">           dp[0][i] = 1;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       for (int i = 1; i &lt; m; i++) &#123;</span><br><span class="line">           for (int j = 1; j &lt; n; j++) &#123;</span><br><span class="line">               dp[i][j] = dp[i-1][j]+dp[i][j-1];</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       return dp[m-1][n-1];</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="63-不同路径"><a href="#63-不同路径" class="headerlink" title="63 不同路径"></a>63 不同路径</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/unique-paths-ii/">力扣题目链接</a></p>
+<p>障碍的判定 break不行，按照上题的逻辑需要立刻置0</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int uniquePathsWithObstacles(int[][] obstacleGrid) &#123;</span><br><span class="line">        int m = obstacleGrid.length;</span><br><span class="line">        int n = obstacleGrid[0].length;</span><br><span class="line">        int[][] dp = new int[m][n];</span><br><span class="line"></span><br><span class="line">        if (obstacleGrid[m - 1][n - 1] == 1 || obstacleGrid[0][0] == 1) &#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for (int i = 0; i &lt; m &amp;&amp; obstacleGrid[i][0] == 0; i++) &#123;</span><br><span class="line">            dp[i][0] = 1;</span><br><span class="line">        &#125;</span><br><span class="line">        for (int j = 0; j &lt; n &amp;&amp; obstacleGrid[0][j] == 0; j++) &#123;</span><br><span class="line">            dp[0][j] = 1;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for (int i = 1; i &lt; m; i++) &#123;</span><br><span class="line">            for (int j = 1; j &lt; n; j++) &#123;</span><br><span class="line">                dp[i][j] = (obstacleGrid[i][j] == 0) ? dp[i - 1][j] + dp[i][j - 1] : 0;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return dp[m - 1][n - 1];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ 
       <!-- reward -->
       
     </div>
