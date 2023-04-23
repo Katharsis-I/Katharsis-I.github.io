@@ -152,6 +152,248 @@
     
     
     <article
+  id="post-day18"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/03/31/day18/"
+    >代码随想录算法训练营Day18|513 112 106</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/03/31/day18/" class="article-date">
+  <time datetime="2023-03-30T20:58:50.000Z" itemprop="datePublished">2023-03-31</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="223-找树左下角的值"><a href="#223-找树左下角的值" class="headerlink" title="223 找树左下角的值"></a>223 找树左下角的值</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-bottom-left-tree-value/">力扣题目链接</a></p>
+<p>层序，递归毕竟确定的不一定是最后一层。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int findBottomLeftValue(TreeNode root) &#123;</span><br><span class="line">        Queue&lt;TreeNode&gt; queue = new LinkedList&lt;&gt;();</span><br><span class="line">        queue.offer(root);</span><br><span class="line">        int res = 0;</span><br><span class="line">        while(!queue.isEmpty())&#123;</span><br><span class="line">            int size = queue.size();</span><br><span class="line">            for(int i = 0; i &lt; size; i++)&#123;</span><br><span class="line">                TreeNode poll = queue.poll();</span><br><span class="line">                if(i == 0)&#123;</span><br><span class="line">                    res = poll.val;</span><br><span class="line">                &#125;</span><br><span class="line">                if(poll.left != null)&#123;</span><br><span class="line">                    queue.offer(poll.left);</span><br><span class="line">                &#125;</span><br><span class="line">                if(poll.right != null)&#123;</span><br><span class="line">                    queue.offer(poll.right);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="112-路经总和"><a href="#112-路经总和" class="headerlink" title="112 路经总和"></a>112 路经总和</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/path-sum/">力扣题目链接</a></p>
+<p>不好说迭代好还是递归好，返回值单设变量？还是其他 不知道怎么设置判断条件</p>
+<p>递归的代码有一点看不懂，不太行</p>
+<p>迭代一路相加，递归一路相减</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">class solution &#123;</span><br><span class="line">   public boolean haspathsum(treenode root, int targetsum) &#123;</span><br><span class="line">        if (root == null) &#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        targetsum -= root.val;</span><br><span class="line">        if (root.left == null &amp;&amp; root.right == null) &#123;</span><br><span class="line">            return targetsum == 0;</span><br><span class="line">        &#125;</span><br><span class="line">        if (root.left != null) &#123;</span><br><span class="line">            boolean left = haspathsum(root.left, targetsum);</span><br><span class="line">            if (left) &#123;     </span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        if (root.right != null) &#123;</span><br><span class="line">            boolean right = haspathsum(root.right, targetsum);</span><br><span class="line">            if (right) &#123;     </span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">public boolean haspathsum(treenode root, int targetsum) &#123;</span><br><span class="line">        if(root == null) return false;</span><br><span class="line">        stack&lt;treenode&gt; stack1 = new stack&lt;&gt;();</span><br><span class="line">        stack&lt;integer&gt; stack2 = new stack&lt;&gt;();</span><br><span class="line">        stack1.push(root);</span><br><span class="line">        stack2.push(root.val);</span><br><span class="line">        while(!stack1.isempty()) &#123;</span><br><span class="line">            int size = stack1.size();</span><br><span class="line">            for(int i = 0; i &lt; size; i++) &#123;</span><br><span class="line">                treenode node = stack1.pop();</span><br><span class="line">                int sum = stack2.pop();</span><br><span class="line"></span><br><span class="line">                if(node.left == null &amp;&amp; node.right == null &amp;&amp; sum == targetsum) &#123;</span><br><span class="line">                    return true;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                if(node.right != null)&#123;</span><br><span class="line">                    stack1.push(node.right);</span><br><span class="line">                    stack2.push(sum + node.right.val);</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                if(node.left != null) &#123;</span><br><span class="line">                    stack1.push(node.left);</span><br><span class="line">                    stack2.push(sum + node.left.val);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>求路径总和 113</p>
+<p>迭代反而不太行，怎么回溯路径，全记录路径太占空间了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">class solution &#123;</span><br><span class="line">    public List&lt;List&lt;Integer&gt;&gt; pathsum(TreeNode root, int targetsum) &#123;</span><br><span class="line">        List&lt;List&lt;Integer&gt;&gt; res = new ArrayList&lt;&gt;();</span><br><span class="line">        if (root == null) </span><br><span class="line">            return res；</span><br><span class="line">        List&lt;Integer&gt; path = new LinkedList&lt;&gt;();</span><br><span class="line">        preorderdfs(root, targetsum, res, path);</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void preorderdfs(TreeNode root, int targetsum, List&lt;List&lt;Integer&gt;&gt; res, List&lt;Integer&gt; path) &#123;</span><br><span class="line">        path.add(root.val);</span><br><span class="line">        if (root.left == null &amp;&amp; root.right == null) &#123;</span><br><span class="line">            if (targetsum - root.val == 0) &#123;</span><br><span class="line">                res.add(new ArrayList&lt;&gt;(path));</span><br><span class="line">            &#125;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if (root.left != null) &#123;</span><br><span class="line">            preorderdfs(root.left, targetsum - root.val, res, path);</span><br><span class="line">            path.remove(path.size() - 1);  //返回上一层，递归 香槟塔</span><br><span class="line">        &#125;</span><br><span class="line">        if (root.right != null) &#123;</span><br><span class="line">            preorderdfs(root.right, targetsum - root.val, res, path);</span><br><span class="line">            path.remove(path.size() - 1);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="106-从中序与后序遍历序列构造二叉树"><a href="#106-从中序与后序遍历序列构造二叉树" class="headerlink" title="106 从中序与后序遍历序列构造二叉树"></a>106 从中序与后序遍历序列构造二叉树</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/construct-binary-tree-from-inorder-and-postorder-traversal/">力扣题目链接</a></p>
+<p>用中序遍历和后序遍历确定二叉树是可以做到的，不过如何用程序实现，是个问题，这个我确实没什么思路，我不会，看视频。</p>
+<p>如果不为空，那么取后序数组最后一个元素作为节点元素 找到后序数组最后一个元素在中序数组的位置，作为切割点 切割中序数组 切割后序数组 递归处理左区间和右区间</p>
+<p>中后</p>
+<pre><code>class Solution &#123;
+    Map&lt;Integer, Integer&gt; map;  // 查找
+    public TreeNode buildTree(int[] inorder, int[] postorder) &#123;
+        map = new HashMap&lt;&gt;();
+        for (int i = 0; i &lt; inorder.length; i++) &#123; // map保存
+            map.put(inorder[i], i);
+        &#125;
+
+        return findNode(inorder,  0, inorder.length, postorder,0, postorder.length);  // 前闭后开
+    &#125;
+//前闭后开
+    public TreeNode findNode(int[] inorder, int inBegin, int inEnd, int[] postorder, int postBegin, int postEnd) &#123;
+
+        if (inBegin &gt;= inEnd || postBegin &gt;= postEnd) &#123;  // 不满足左闭右开 空
+            return null;
+        &#125;
+        int rootIndex = map.get(postorder[postEnd - 1]);  // 后序最后一个在中序位置
+        TreeNode root = new TreeNode(inorder[rootIndex]);  
+        int lenOfLeft = rootIndex - inBegin;  // 确定后序个数
+        root.left = findNode(inorder, inBegin, rootIndex,
+                            postorder, postBegin, postBegin + lenOfLeft);
+        root.right = findNode(inorder, rootIndex + 1, inEnd,
+                            postorder, postBegin + lenOfLeft, postEnd - 1);
+
+        return root;
+    &#125;
+&#125; 
+</code></pre>
+<p>前中</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">lass Solution &#123;</span><br><span class="line">    Map&lt;Integer, Integer&gt; map;</span><br><span class="line">    public TreeNode buildTree(int[] preorder, int[] inorder) &#123;</span><br><span class="line">        map = new HashMap&lt;&gt;();</span><br><span class="line">        for (int i = 0; i &lt; inorder.length; i++) &#123; </span><br><span class="line">            map.put(inorder[i], i);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return findNode(preorder, 0, preorder.length, inorder,  0, inorder.length);  // 前闭后开</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public TreeNode findNode(int[] preorder, int preBegin, int preEnd, int[] inorder, int inBegin, int inEnd) &#123;</span><br><span class="line"></span><br><span class="line">        if (preBegin &gt;= preEnd || inBegin &gt;= inEnd) &#123;  </span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">        int rootIndex = map.get(preorder[preBegin]); </span><br><span class="line">        TreeNode root = new TreeNode(inorder[rootIndex]); </span><br><span class="line">        int lenOfLeft = rootIndex - inBegin;  </span><br><span class="line">        root.left = findNode(preorder, preBegin + 1, preBegin + lenOfLeft + 1,</span><br><span class="line">                            inorder, inBegin, rootIndex);</span><br><span class="line">        root.right = findNode(preorder, preBegin + lenOfLeft + 1, preEnd,</span><br><span class="line">                            inorder, rootIndex + 1, inEnd);</span><br><span class="line"></span><br><span class="line">        return root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
+  id="post-day17"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/03/30/day17/"
+    >代码随想录算法训练营Day17|110 257 404</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/03/30/day17/" class="article-date">
+  <time datetime="2023-03-30T14:54:02.000Z" itemprop="datePublished">2023-03-30</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="110-平衡二叉树"><a href="#110-平衡二叉树" class="headerlink" title="110 平衡二叉树"></a>110 平衡二叉树</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/balanced-binary-tree/">力扣题目链接</a></p>
+<p>平衡二叉树啊，令人熟悉，是红黑树的基础，是基础的关键。如何判断，递归，左右子树高度判断。递归是很重要的代码实现方式，必须要时常体会。迭代理解我反而更容易适应，但是代码反而比递归难一些。</p>
+<pre><code>class Solution &#123;
+    public boolean isBalanced(TreeNode root) &#123;
+                return getHeight(root) != -1;
+    &#125;
+
+    private int getHeight(TreeNode root)&#123;
+        if(root == null)
+           return 0;
+
+        int leftHeight = getHeight(root.left);
+        if(leftHeight == -1)
+            return -1;
+
+        int rightHeight = getHeight(root.right);
+        if(rightHeight == -1)
+            return -1;
+
+        if(Math.abs(leftHeight-rightHeight)&gt;1)&#123;
+            return -1;
+        &#125;
+
+        return Math.max(leftHeight,rightHeight)+1;
+
+    &#125;
+&#125;
+</code></pre>
+<h2 id="257-二叉树的所有遍历"><a href="#257-二叉树的所有遍历" class="headerlink" title="257 二叉树的所有遍历"></a>257 二叉树的所有遍历</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-paths/">力扣题目链接</a></p>
+<p>递归遍历  （代码的字母 命名 符号错误找起来治血压</p>
+<pre><code>class Solution &#123;
+    public List&lt;String&gt; binaryTreePaths(TreeNode root) &#123;
+        List&lt;String&gt; res = new ArrayList&lt;&gt;();
+        if(root == null)&#123;
+            return res;
+        &#125;
+        List&lt;Integer&gt; paths = new ArrayList&lt;&gt;();
+        traversal(root,paths,res);
+        return res;
+
+    &#125;
+
+    private void traversal(TreeNode root,List&lt;Integer&gt; paths,List&lt;String&gt; res)&#123;
+        paths.add(root.val);
+        if(root.left == null &amp;&amp; root.right == null)&#123;
+            StringBuilder midout = new StringBuilder();
+            for(int i = 0;i&lt;paths.size()-1;i++)&#123;
+                midout.append(paths.get(i)).append(&quot;-&gt;&quot;);
+            &#125;
+            midout.append(paths.get(paths.size()-1));
+            res.add(midout.toString());
+            return;
+        &#125;
+
+        if(root.left != null)&#123;
+            traversal(root.left,paths,res);
+            paths.remove(paths.size()-1);
+        &#125;
+        if(root.right != null)&#123;
+            traversal(root.right,paths,res);
+            paths.remove(paths.size()-1);
+        &#125;
+
+    &#125;
+</code></pre>
+<p>迭代</p>
+<pre><code>public List&lt;String&gt; binaryTreePaths(TreeNode root) &#123;
+        List&lt;String&gt; result = new ArrayList&lt;&gt;();
+        if (root == null)
+            return result;
+        Stack&lt;Object&gt; stack = new Stack&lt;&gt;();
+        stack.push(root);
+        stack.push(root.val + &quot;&quot;);
+        while (!stack.isEmpty()) &#123;
+            String path = (String) stack.pop();
+            TreeNode node = (TreeNode) stack.pop();
+            if (node.left == null &amp;&amp; node.right == null) &#123;
+                result.add(path);
+            &#125;
+            if (node.right != null) &#123;
+                stack.push(node.right);
+                stack.push(path + &quot;-&gt;&quot; + node.right.val);
+            &#125;
+            if (node.left != null) &#123;
+                stack.push(node.left);
+                stack.push(path + &quot;-&gt;&quot; + node.left.val);
+            &#125;
+        &#125;
+        return result;
+    &#125;
+&#125;
+</code></pre>
+<h2 id="404-左叶子之和"><a href="#404-左叶子之和" class="headerlink" title="404 左叶子之和"></a>404 左叶子之和</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/sum-of-left-leaves/">力扣题目链接</a></p>
+<p>叶子在父节点左边</p>
+<p>node-&gt;left != NULL &amp;&amp; node-&gt;left-&gt;left == NULL &amp;&amp; node-&gt;left-&gt;right == NULL</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int sumOfLeftLeaves(TreeNode root) &#123;</span><br><span class="line">        if (root == null) return 0;</span><br><span class="line">        int leftValue = sumOfLeftLeaves(root.left);    </span><br><span class="line">        int rightValue = sumOfLeftLeaves(root.right);  </span><br><span class="line"></span><br><span class="line">        int real = 0;</span><br><span class="line">        if (root.left != null &amp;&amp; root.left.left == null &amp;&amp; root.left.right == null) &#123; </span><br><span class="line">            real = root.left.val;</span><br><span class="line">        &#125;</span><br><span class="line">        int sum = real + leftValue + rightValue;  </span><br><span class="line">        return sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>递归说简单但是逻辑是必须要捋顺的</p>
+<p>层序迭代，比较直观</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int sumOfLeftLeaves(TreeNode root) &#123;</span><br><span class="line">        int sum = 0;</span><br><span class="line">        if (root == null) </span><br><span class="line">            return 0;</span><br><span class="line">        Queue&lt;TreeNode&gt; queue = new LinkedList&lt;&gt;();</span><br><span class="line">        queue.offer(root);</span><br><span class="line">        while (!queue.isEmpty()) &#123;</span><br><span class="line">            int size = queue.size();</span><br><span class="line">            while (size &gt; 0) &#123;</span><br><span class="line">                size--;</span><br><span class="line">                TreeNode node = queue.poll();</span><br><span class="line">                if (node.left != null) &#123; </span><br><span class="line">                    queue.offer(node.left);    //</span><br><span class="line">                    if (node.left.left == null &amp;&amp; node.left.right == null)&#123; // 左叶子节点</span><br><span class="line">                        sum += node.left.val;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                if (node.right != null) </span><br><span class="line">                    queue.offer(node.right);  //这两句就是一层层下推</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
   id="post-day15"
   class="article article-type-post"
   itemscope
@@ -838,175 +1080,6 @@ public int minDepth(TreeNode root) &#123;
 
 <p>最近几天忙死了，真的，我周末会回过头好好看的</p>
 <p>毕设，开会，无意义的路途，熬夜，要死了     而且java新手，很多函数不懂</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-Day7"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/03/20/Day7/"
-    >代码随想录算法训练营Day7|哈希表 454、383、15、18</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/03/20/Day7/" class="article-date">
-  <time datetime="2023-03-20T15:58:53.000Z" itemprop="datePublished">2023-03-20</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="454-四数相加"><a href="#454-四数相加" class="headerlink" title="454 四数相加"></a>454 四数相加</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/4sum-ii/">力扣题目链接</a></p>
-<p>四个数组，每个取一个，相加为0。的确没想到这个思路，好好学习。</p>
-<p>和之前的哈希表题目密切相关，算是进阶题。四组，两组两组合并，A、B组的和，查找C、D组的相应和，就是这样。</p>
-<p>unordered_map 类型  key为和  value为次数</p>
-<p>剩下的就交给昨天的步骤了。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int fourSumCount(int[] nums1, int[] nums2, int[] nums3, int[] nums4) &#123;</span><br><span class="line">        Map&lt;Integer,Integer&gt; map = new HashMap&lt;&gt;();   //定义先</span><br><span class="line">        int temp;</span><br><span class="line">        int res = 0;         // 计时</span><br><span class="line">        for(int i : nums1)&#123;</span><br><span class="line">            for(int j : nums2)&#123;</span><br><span class="line">                temp = i +j;</span><br><span class="line">                if(map.containsKey(temp))&#123;</span><br><span class="line">                    map.put(temp,map.get(temp)+1);      //给和</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    map.put(temp,1);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for(int i : nums3)&#123;</span><br><span class="line">            for(int j : nums4)&#123;</span><br><span class="line">                temp= i+j;</span><br><span class="line">                if(map.containsKey(0-temp))&#123;          //去和</span><br><span class="line">                    res+=map.get(0-temp);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="383-赎金信"><a href="#383-赎金信" class="headerlink" title="383 赎金信"></a>383 赎金信</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/ransom-note/">力扣题目链接</a></p>
-<p>暴力解就是杂志和信两层for循环，还算好，不过要求不能重复使用字母，还要删除使用过的字母，嗯……数组的删除我会吗，我不会</p>
-<p>哈希就简单多了，毕竟只有26个选项 26个坑</p>
-<p>map 比数组消耗大，“  map要维护红黑树或者哈希表，而且还要做哈希函数，是费时的！数据量大的话就能体现出来差别了。 所以数组更加简单直接有效 ”   我还是要想想，自己的惯有思维一般得出的结论会是map比数组好，，，针对性</p>
-<p>for(int i = ???) 表示没见过，不过知道大致意思了</p>
-<p>toCharArray( )也没见过，字符串操作应该？</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public boolean canConstruct(String ransomNote, String magazine) &#123;</span><br><span class="line">               int[] hash = new int[26];</span><br><span class="line">               for(char c :magazine.toCharArray())&#123;</span><br><span class="line">                   hash[c - &#x27;a&#x27;] += 1;</span><br><span class="line">               &#125;</span><br><span class="line">               for(char c : ransomNote.toCharArray())&#123;</span><br><span class="line">                   hash[c - &#x27;a&#x27;] -=1;</span><br><span class="line">               &#125;</span><br><span class="line">               for(int i : hash)&#123;</span><br><span class="line">                   if(i&lt;0)&#123;</span><br><span class="line">                       return false;</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;</span><br><span class="line">               return true;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="15-三数之和"><a href="#15-三数之和" class="headerlink" title="15 三数之和"></a>15 三数之和</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/3sum/">力扣题目链接</a></p>
-<p>啊，我一开始就在想三指针，不过三指针的逻辑不知道怎么理顺，约等于两层for循环？还是折半查找类型，快排？哈希表，用四数相加思路？但是题目不允许包含重复三元组，可以吗？well，忘了，只给了一个数组。那还是用三指针吧。</p>
-<p>代码随想录是双指针，a、b、c的去重很关键，学习了，代码执行数组的顺序也很重要。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public List&lt;List&lt;Integer&gt;&gt; threeSum(int[] nums) &#123;</span><br><span class="line">          List&lt;List&lt;Integer&gt;&gt; result = new ArrayList&lt;&gt;();</span><br><span class="line">          Arrays.sort(nums);  </span><br><span class="line">          for (int i = 0; i &lt; nums.length; i++) &#123;</span><br><span class="line">	        if (nums[i] &gt; 0) &#123; </span><br><span class="line">                return result;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            if (i &gt; 0 &amp;&amp; nums[i] == nums[i - 1]) &#123;  // 去重a   i    i-1</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            int left = i + 1;</span><br><span class="line">            int right = nums.length - 1;</span><br><span class="line">            while (right &gt; left) &#123;</span><br><span class="line">                int sum = nums[i] + nums[left] + nums[right];</span><br><span class="line">                if (sum &gt; 0) &#123;</span><br><span class="line">                    right--;</span><br><span class="line">                &#125; else if (sum &lt; 0) &#123;</span><br><span class="line">                    left++;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    result.add(Arrays.asList(nums[i], nums[left], nums[right]));     // 找到一个三元组之后再去重</span><br><span class="line">                    while (right &gt; left &amp;&amp; nums[right] == nums[right - 1]) right--;        //while if</span><br><span class="line">                    while (right &gt; left &amp;&amp; nums[left] == nums[left + 1]) left++;</span><br><span class="line">                    </span><br><span class="line">                    right--; </span><br><span class="line">                    left++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="18-四数之和"><a href="#18-四数之和" class="headerlink" title="18 四数之和"></a>18 四数之和</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/4sum/">力扣题目链接</a></p>
-<p>四数之和，总不能三指针吧，或许可以一半指针一半哈希？还是直接全部哈希？for循环用得上吗？不行，指针与哈希的衔接会很复杂吧。而且目标值可以是任意值了。4数的去重？……</p>
-<p>在三数之和的基础上加for循环吗，是比for加哈希好一点，去重更加复杂了</p>
-<p>示例代码，主要是最近在搞毕设，明天要开会，最近几天质量差一些</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public List&lt;List&lt;Integer&gt;&gt; fourSum(int[] nums, int target) &#123;</span><br><span class="line">        List&lt;List&lt;Integer&gt;&gt; result = new ArrayList&lt;&gt;();</span><br><span class="line">        Arrays.sort(nums);</span><br><span class="line">       </span><br><span class="line">        for (int i = 0; i &lt; nums.length; i++) &#123;</span><br><span class="line">		</span><br><span class="line">            if (nums[i] &gt; 0 &amp;&amp; nums[i] &gt; target) &#123;</span><br><span class="line">                return result;</span><br><span class="line">            &#125;</span><br><span class="line">		</span><br><span class="line">            if (i &gt; 0 &amp;&amp; nums[i - 1] == nums[i]) &#123;    // i去重</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            for (int j = i + 1; j &lt; nums.length; j++) &#123;</span><br><span class="line"></span><br><span class="line">                if (j &gt; i + 1 &amp;&amp; nums[j - 1] == nums[j]) &#123;  // j去重</span><br><span class="line">                    continue;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                int left = j + 1;</span><br><span class="line">                int right = nums.length - 1;</span><br><span class="line">                while (right &gt; left) &#123;//long</span><br><span class="line">                    long sum = (long) nums[i] + nums[j] + nums[left] + nums[right];</span><br><span class="line">                    if (sum &gt; target) &#123;</span><br><span class="line">                        right--;</span><br><span class="line">                    &#125; else if (sum &lt; target) &#123;</span><br><span class="line">                        left++;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        result.add(Arrays.asList(nums[i], nums[j], nums[left], nums[right]));</span><br><span class="line">                        // left、right去重</span><br><span class="line">                        while (right &gt; left &amp;&amp; nums[right] == nums[right - 1]) right--;</span><br><span class="line">                        while (right &gt; left &amp;&amp; nums[left] == nums[left + 1]) left++;</span><br><span class="line"></span><br><span class="line">                        left++;</span><br><span class="line">                        right--;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>很多基础操作代码都不会，哈希表使人快乐（</p>
-<p>任重道远，等我搞完毕设————</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-day6"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/03/20/day6/"
-    >代码随想录算法训练营Day6|哈希表 242、349、201、1</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/03/20/day6/" class="article-date">
-  <time datetime="2023-03-20T11:16:46.000Z" itemprop="datePublished">2023-03-20</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="哈希表理论基础"><a href="#哈希表理论基础" class="headerlink" title="哈希表理论基础"></a>哈希表理论基础</h2><p>408学数据结构的时候哈希表不是重点，只是一个会考但是不会考代码的选择题方面的考点，所以我只是有点印象了现在。重新学吧，况且是要真刀实枪上代码，come on。</p>
-<p>哈希表，根据关键码的值直接进行访问的数据结构，用来快速判断一个元素是否出现在集合里。</p>
-<p>哈希函数，well，有印象了，索引。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">index=hashFunction(name)</span><br><span class="line">hashFunction = hashCode(name)％tableSize</span><br></pre></td></tr></table></figure>
-
-<p>哈希碰撞，拉链法，线性探测法。</p>
-<p>拉链法，冲突元素存储在链表中。</p>
-<p>线性探测法，往下顺延找空位。</p>
-<p>哈希结构  数组、集合、映射</p>
-<p>代码随想录的表崩了，而且我也有点混乱，c++的std：：set/multiset/unordered_set?</p>
-<p>java还是看菜鸟吧</p>
-<p>总之，快速判断元素是否存在用哈希，牺牲空间换时间。</p>
-<h2 id="242-有效的字母异位词"><a href="#242-有效的字母异位词" class="headerlink" title="242 有效的字母异位词"></a>242 有效的字母异位词</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/valid-anagram/">力扣题目链接</a></p>
-<p>暴力解法，明显两层for循环。</p>
-<p>现在学哈希，用哈希。不过看了代码随想录的思路，这个思路我曾经想过的，额外设一个数组，对相应的位置加减，看最后数值是否为0，没想到这个思路是哈希啊。</p>
-<p><del>而且的确chatAt( )这个函数我不知道，我小白。</del></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public boolean isAnagram(String s, String t) &#123;</span><br><span class="line">          int[] record = new int[26];</span><br><span class="line">          for(int i = 0;i &lt; s.length();i++)&#123;</span><br><span class="line">              record[s.charAt(i) - &#x27;a&#x27;]++;</span><br><span class="line">          &#125;</span><br><span class="line">          for(int i =0;i&lt; t.length();i++)&#123;</span><br><span class="line">              record[t.charAt(i) - &#x27;a&#x27;]--;</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">          for(int count: record)&#123;</span><br><span class="line">              if(count != 0)&#123;</span><br><span class="line">                  return false;</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">          return true;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="349-两个数组的交集"><a href="#349-两个数组的交集" class="headerlink" title="349 两个数组的交集"></a>349 两个数组的交集</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/intersection-of-two-arrays/">力扣题目链接</a></p>
-<p>unordered_set  一种哈希数据结构</p>
-<p>（坦白地说我一开始想到的是双指针）</p>
-<p>multiset、set为红黑树基底，well，问题是，我用的是java，而且就算是c也不用c++啊</p>
-<p>不太会哈希啊，Java的哈希……要去专门找找教程了</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">import java.util.HashSet;</span><br><span class="line">import java.util.Set;</span><br><span class="line"></span><br><span class="line">class Solution &#123;</span><br><span class="line">    public int[] intersection(int[] nums1, int[] nums2) &#123;</span><br><span class="line">           if(nums1==null || nums1.length == 0 ||nums2 == null ||nums2.length == 0)&#123;</span><br><span class="line">               return new int[0];</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">    Set&lt;Integer&gt; set1 = new HashSet&lt;&gt;();</span><br><span class="line">    Set&lt;Integer&gt; resSet = new HashSet&lt;&gt;();   </span><br><span class="line">    for (int i : nums1) &#123;</span><br><span class="line">            set1.add(i);</span><br><span class="line">        &#125;</span><br><span class="line">    for (int i : nums2) &#123;</span><br><span class="line">            if (set1.contains(i)) &#123;</span><br><span class="line">                resSet.add(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; </span><br><span class="line"></span><br><span class="line">        int[] arr = new int[resSet.size()];</span><br><span class="line">        int j = 0;</span><br><span class="line">        for(int i : resSet)&#123;</span><br><span class="line">            arr[j++] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        return arr;   </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="202-快乐数"><a href="#202-快乐数" class="headerlink" title="202 快乐数"></a>202 快乐数</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/happy-number/">力扣题目链接</a></p>
-<p>的确不会。最让我棘手的是，不会位数操作，虽然之前就碰到过要每位如何如何，但是除10的操作我总是搞不好……不会，的确不会。</p>
-<p>把计算中所得的数加入哈希表，检测是否重复，受教了。</p>
-<p>哈希表的结构————</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public boolean isHappy(int n) &#123;</span><br><span class="line">         Set&lt;Integer&gt; record = new HashSet&lt;&gt;();</span><br><span class="line">        while (n != 1 &amp;&amp; !record.contains(n)) &#123;</span><br><span class="line">            record.add(n);</span><br><span class="line">            n = getNextNumber(n);</span><br><span class="line">        &#125;</span><br><span class="line">        return n == 1;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    private int getNextNumber(int n) &#123;</span><br><span class="line">        int res = 0;</span><br><span class="line">        while (n &gt; 0) &#123;</span><br><span class="line">            int temp = n % 10;</span><br><span class="line">            res += temp * temp;</span><br><span class="line">            n = n / 10;</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="1-两数之和"><a href="#1-两数之和" class="headerlink" title="1 两数之和"></a>1 两数之和</h2><p>暴力解很容易想出来，不过我自己想的是遍历，遍历找目标值减的差。好吧，也是两层for循环。</p>
-<p>不过最优解还是哈希（怨念</p>
-<p>map    key value 结构    key 数值    value 下标</p>
-<p>map 存放访问过的元素     {key：数据元素，value：数组元素对应的下标}</p>
-<p>哈希表查找的是另一个匹配的值 <del>什么啊，换成哈希表不就是和我一样吗</del></p>
-<p>所以，我真的要好好学哈希表。</p>
-<p>Java在哈希表方面是怎么表示的啊</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public int[] twoSum(int[] nums, int target) &#123;</span><br><span class="line">    int[] res = new int[2];</span><br><span class="line">    if(nums == null || nums.length == 0)&#123;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">    Map&lt;Integer, Integer&gt; map = new HashMap&lt;&gt;();</span><br><span class="line">    for(int i = 0; i &lt; nums.length; i++)&#123;</span><br><span class="line">        int temp = target - nums[i];   /</span><br><span class="line">        if(map.containsKey(temp))&#123;</span><br><span class="line">            res[1] = i;            //这一段是?</span><br><span class="line">            res[0] = map.get(temp);</span><br><span class="line">            break;</span><br><span class="line">        &#125;</span><br><span class="line">        map.put(nums[i], i);        &#125;</span><br><span class="line">    return res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>综上所述，遭到了哈希表的毒打，代码随想录哈希表表示是C++，Java……</p>
-<p>更不用去想明天的了（悲）啊啊啊啊    不会写，不会写</p>
-<p>去找视频了（挥白旗</p>
  
       <!-- reward -->
       

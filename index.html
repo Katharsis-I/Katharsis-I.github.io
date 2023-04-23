@@ -152,6 +152,112 @@
     
     
     <article
+  id="post-day42"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/04/24/day42/"
+    >day42</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/04/24/day42/" class="article-date">
+  <time datetime="2023-04-23T21:26:33.000Z" itemprop="datePublished">2023-04-24</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+   
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
+  id="post-day41"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/04/23/day41/"
+    >代码随想录算法训练营Day41|343 96</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/04/23/day41/" class="article-date">
+  <time datetime="2023-04-22T19:09:20.000Z" itemprop="datePublished">2023-04-23</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>不得不说这两题真的都很难，虽然是搭积木，但是没有图纸</p>
+<h2 id="343-整数拆分"><a href="#343-整数拆分" class="headerlink" title="343 整数拆分"></a>343 整数拆分</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/integer-break/">力扣题目链接</a></p>
+<p>dp[i]  (i-j) * j  dp[i-j] * j</p>
+<p>dp[0] dp[1]不该初始化 无意义</p>
+<p>直接dp[2]=1</p>
+<p>当然是拆分成近似的数相乘最好，说起来不到一个星期前看到过类似的题，直接说拆两个，但是这题可不会指定2</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int integerBreak(int n) &#123;</span><br><span class="line">        int[] dp = new int[n+1];</span><br><span class="line">        dp[2] = 1;</span><br><span class="line">        for(int i = 3; i &lt;= n; i++) &#123;</span><br><span class="line">            for(int j = 1; j &lt;= i-j; j++) &#123;</span><br><span class="line"></span><br><span class="line">                dp[i] = Math.max(dp[i], Math.max(j*(i-j), j*dp[i-j]));</span><br><span class="line"></span><br><span class="line">                </span><br><span class="line">                //j * dp[i - j] 拆分i为多个</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="96-不同的二叉搜索树"><a href="#96-不同的二叉搜索树" class="headerlink" title="96 不同的二叉搜索树"></a>96 不同的二叉搜索树</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/unique-binary-search-trees/">力扣题目链接</a></p>
+<p>之前的二叉树滑动比喻，差不多</p>
+<p>元素1为头结点搜索树的数量 = 右子树有2个元素的搜索树数量 * 左子树有0个元素的搜索树数量</p>
+<p>元素2为头结点搜索树的数量 = 右子树有1个元素的搜索树数量 * 左子树有1个元素的搜索树数量</p>
+<p>大方向 主轴 的滑动</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int numTrees(int n) &#123;</span><br><span class="line">        int[] dp = new int[n + 1];</span><br><span class="line">        dp[0] = 1;</span><br><span class="line">        dp[1] = 1;</span><br><span class="line">        for (int i = 2; i &lt;= n; i++) &#123;</span><br><span class="line">            for (int j = 1; j &lt;= i; j++) &#123;</span><br><span class="line">                dp[i] += dp[j - 1] * dp[i - j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
   id="post-day39"
   class="article article-type-post"
   itemscope
@@ -925,229 +1031,6 @@ public:
 <p>误区一是的，脑测最终结果是sum初始</p>
 <p>（为什么脑测误区解释还是脑测……电脑做毕设c盘东西重定义路径了，vscode直接gcc查不到，啊啊啊啊）</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int maxSubArray(int[] nums) &#123;</span><br><span class="line">        if (nums.length == 1)&#123;</span><br><span class="line">            return nums[0];</span><br><span class="line">        &#125;</span><br><span class="line">        int sum = Integer.MIN_VALUE;</span><br><span class="line">        int count = 0;</span><br><span class="line">        for (int i = 0; i &lt; nums.length; i++)&#123;</span><br><span class="line">            count += nums[i];</span><br><span class="line">            sum = Math.max(sum, count); ）</span><br><span class="line">            if (count &lt;= 0)&#123;</span><br><span class="line">                count = 0; // 相当于重置最大子序起始位置，因为遇到负数一定是拉低总和</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">       return sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-day30"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/04/12/day30/"
-    >代码随想录算法训练营Day30|332 51 37 *</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/04/12/day30/" class="article-date">
-  <time datetime="2023-04-12T14:59:37.000Z" itemprop="datePublished">2023-04-12</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="回溯总结"><a href="#回溯总结" class="headerlink" title="回溯总结"></a>回溯总结</h2><p>还是直接看网页比较好</p>
-<p><a target="_blank" rel="noopener" href="https://programmercarl.com/%E5%9B%9E%E6%BA%AF%E6%80%BB%E7%BB%93.html#%E8%A7%A3%E6%95%B0%E7%8B%AC%E9%97%AE%E9%A2%98">代码随想录</a></p>
-<h2 id="332-重新安排行程"><a href="#332-重新安排行程" class="headerlink" title="332 重新安排行程"></a>332 重新安排行程</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reconstruct-itinerary/">力扣题目链接</a></p>
-<p>刚开始甚至没有看懂题……简单的来说就就是把零碎的线段连成一道线</p>
-<p>如果存在多种有效的行程，请你按字符自然排序返回最小的行程组合 </p>
-<p>的确很容易让人想起来深度搜索，路径方面我又想到了迷宫寻找路径，不过显然深度搜索和这题并不是一个思路  </p>
-<p>竟然还是回溯？不过想必剪枝更加麻烦，而且还有闭环</p>
-<h2 id="51-N皇后"><a href="#51-N皇后" class="headerlink" title="51 N皇后"></a>51 N皇后</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/n-queens/">力扣题目链接</a></p>
-<p>判断斜线只需要一个简单的的2参数for循环，是我想像的过于困难了</p>
-<p>但是这并不代表代码就好写了，二维数组的定义</p>
-<h2 id="37-解数独"><a href="#37-解数独" class="headerlink" title="37 解数独"></a>37 解数独</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/sudoku-solver/">力扣题目链接</a></p>
-<p>n皇后进阶 我单方面宣布投降（</p>
-<p>看了代码其实还好，注意嵌套的规则</p>
-<p>不要以为实现一个步骤多么麻烦也不要以为多么简单，再怎么复杂的代码也是由for while if等语句堆出来的</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-day29"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/04/11/day29/"
-    >代码随想录算法训练营Day29|491 46 47</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/04/11/day29/" class="article-date">
-  <time datetime="2023-04-11T09:25:43.000Z" itemprop="datePublished">2023-04-11</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="491-递增子序列"><a href="#491-递增子序列" class="headerlink" title="491 递增子序列"></a>491 递增子序列</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/non-decreasing-subsequences/">力扣题目链接</a></p>
-<p>全回溯然后剪枝，条件是长度大于2且保持递增，if不递增，跳出，另一枝回溯</p>
-<p>但是注意不能重复  注意continue</p>
-<p>赞同回溯，而不是深度优先搜索，虽然底层相同不过没必要</p>
-<pre><code>class Solution &#123;
-    private List&lt;Integer&gt; path = new ArrayList&lt;&gt;();
-    private List&lt;List&lt;Integer&gt;&gt; res = new ArrayList&lt;&gt;();
-    public List&lt;List&lt;Integer&gt;&gt; findSubsequences(int[] nums) &#123;
-        backtracking(nums,0);
-        return res;
-    &#125;
-
-    private void backtracking (int[] nums, int start) &#123;
-        if (path.size() &gt; 1) &#123;
-            res.add(new ArrayList&lt;&gt;(path));
-        &#125;
-
-        int[] used = new int[201];
-        for (int i = start; i &lt; nums.length; i++)&#123;
-                       //路径不为空 且 递增（因为路径截取位置的不定性所以一个是path.size一个是num数组
-                                //确定已经uesd
-            if (!path.isEmpty() &amp;&amp; nums[i] &lt; path.get(path.size() - 1) ||
-                    (used[nums[i] + 100] == 1)) 
-               continue;
-
-            used[nums[i] + 100] = 1;
-            path.add(nums[i]);
-            backtracking(nums, i + 1);
-            path.remove(path.size() - 1);
-
-        &#125;
-    &#125;
-&#125;     
-</code></pre>
-<h2 id=""><a href="#" class="headerlink" title=""></a></h2><h2 id="46-全排列"><a href="#46-全排列" class="headerlink" title="46 全排列"></a>46 全排列</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/permutations/">力扣题目链接</a></p>
-<p>for看起来很美好，问题是n大起来就并不美好了</p>
-<p>因为是全排列。本身也不重复，所以（层次）从0开始，but不能重复，path还是要有，也正是因为（层次）从0遍历的原因，path要输入的就是遍历过的全部了</p>
-<pre><code>class Solution &#123;
-    List&lt;List&lt;Integer&gt;&gt; result = new ArrayList&lt;&gt;();
-    LinkedList&lt;Integer&gt; path = new LinkedList&lt;&gt;();
-    boolean[] used;
-    public List&lt;List&lt;Integer&gt;&gt; permute(int[] nums) &#123;
-        if (nums.length == 0)&#123;
-            return result;
-        &#125;
-        used = new boolean[nums.length];
-
-        permuteHelper(nums);
-
-        return result;
-
-    &#125;
-
-    private void permuteHelper(int[] nums)&#123;
-        if (path.size() == nums.length)&#123;
-            result.add(new ArrayList&lt;&gt;(path));
-            return;
-        &#125;
-        for (int i = 0; i &lt; nums.length; i++)&#123;
-
-            if (used[i])&#123;
-                continue;
-            &#125;
-
-            used[i] = true;
-            path.add(nums[i]);
-
-            permuteHelper(nums);
-
-            path.removeLast();
-            used[i] = false;
-        &#125;
-    &#125;
-&#125;   
-</code></pre>
-<h2 id="47-全排列II"><a href="#47-全排列II" class="headerlink" title="47 全排列II"></a>47 全排列II</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/permutations-ii/">力扣题目链接</a></p>
-<p>可包含重复数字，返回不重复 排列</p>
-<p>还是要排序，和之前的某题一样，很多题的内核都是相同的，我现在由衷地相信二刷乃至三刷我所用的时间只会越来越长</p>
-<p><del>并不妨碍这题我没思路写</del>        道阻且长道阻且长</p>
-<pre><code>class Solution &#123;
-    List&lt;List&lt;Integer&gt;&gt; result = new ArrayList&lt;&gt;();
-    List&lt;Integer&gt; path = new ArrayList&lt;&gt;();
-
-    public List&lt;List&lt;Integer&gt;&gt; permuteUnique(int[] nums) &#123;
-        boolean[] used = new boolean[nums.length];
-        Arrays.fill(used, false);
-        Arrays.sort(nums);
-
-        backTrack(nums, used);
-
-        return result;
-    &#125;
-
-    private void backTrack(int[] nums, boolean[] used) &#123;
-        if (path.size() == nums.length) &#123;
-            result.add(new ArrayList&lt;&gt;(path));
-            return;
-        &#125;
-        for (int i = 0; i &lt; nums.length; i++) &#123;
-            //  true 上下层 false 同层，if线  同层使用过代表if和本线相同 跳
-            if (i &gt; 0 &amp;&amp; nums[i] == nums[i - 1] &amp;&amp; used[i - 1] == false) &#123;
-                continue;
-            &#125;
-
-            if (used[i] == false) &#123;
-                used[i] = true;
-                path.add(nums[i]);
-
-                backTrack(nums, used);
-
-                path.remove(path.size() - 1);
-                used[i] = false;//回溯
-            &#125;
-        &#125;
-    &#125;
-&#125;   
-</code></pre>
  
       <!-- reward -->
       
