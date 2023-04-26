@@ -152,6 +152,198 @@
     
     
     <article
+  id="post-day32"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/04/16/day32/"
+    >代码随想录算法训练营Day32|122 55 45</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/04/16/day32/" class="article-date">
+  <time datetime="2023-04-15T19:34:47.000Z" itemprop="datePublished">2023-04-16</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="122-买卖股票的最佳实际II"><a href="#122-买卖股票的最佳实际II" class="headerlink" title="122 买卖股票的最佳实际II"></a>122 买卖股票的最佳实际II</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-ii/">力扣题目链接</a></p>
+<p>有点类似于脑筋急转弯，不过还好  我主要卡在了“万一不知道下一天的价格怎么办”（那就真成命运的选择了）</p>
+<pre><code>class Solution &#123;
+    public int maxProfit(int[] price) &#123;
+        int result = 0;
+        for (int i = 1; i &lt; price.length; i++) &#123;
+            result += Math.max(prices[i] - prices[i - 1], 0);
+        &#125;
+        return result;
+    &#125;
+&#125;
+</code></pre>
+<h2 id="55-跳跃游戏"><a href="#55-跳跃游戏" class="headerlink" title="55 跳跃游戏"></a>55 跳跃游戏</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/jump-game/">力扣题目链接</a></p>
+<p>这个还是很简单的，很想举出一个反例，不过貌似没有什么逻辑可以推出来……</p>
+<pre><code> class Solution &#123;
+    public boolean canJump(int[] nums) &#123;
+        
+        if (nums.length == 1) &#123;
+            return true;
+        &#125;
+        
+        int boundary = 0;
+        for (int i = 0; i &lt;= boundary; i++) &#123;
+            boundary = Math.max(boundary, i + nums[i]);
+                 //如果没有math函数的话我大概会用if else，不过显然
+            if (boundary &gt;= nums.length - 1) &#123;
+                return true;
+            &#125;
+        &#125;
+        return false;
+    &#125;
+&#125;
+</code></pre>
+<h2 id="45-跳跃游戏II"><a href="#45-跳跃游戏II" class="headerlink" title="45 跳跃游戏II"></a>45 跳跃游戏II</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/jump-game-ii/">力扣题目链接</a></p>
+<p>表示最直接的方法的特殊情况不太好想，但是迂回一点的方法又有点不太理解……well</p>
+<p>想想一下搭扣？</p>
+<pre><code>class Solution &#123;
+public:
+    int jump(vector&lt;int&gt;&amp; nums) &#123;
+        int curDistance = 0;    // 最终
+        int ans = 0;            
+        int nextDistance = 0;   //实时更新
+        for (int i = 0; i &lt; nums.size() - 1; i++) &#123; 
+            nextDistance = max(nums[i] + i, nextDistance); 
+            if (i == curDistance) &#123;                 
+                curDistance = nextDistance;         
+                ans++;
+            &#125;
+        &#125;
+        return ans;
+    &#125;
+&#125;;
+</code></pre>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
+  id="post-day31"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/04/14/day31/"
+    >代码随想录算法训练营Day31|贪心455 376 53</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/04/14/day31/" class="article-date">
+  <time datetime="2023-04-14T01:57:30.000Z" itemprop="datePublished">2023-04-14</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>贪心的套路就是没有套路，随心所欲，常识性推导加举反例</p>
+<p>局部最优到全局最优</p>
+<h2 id="455-分发饼干"><a href="#455-分发饼干" class="headerlink" title="455 分发饼干"></a>455 分发饼干</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/assign-cookies/">力扣题目链接</a></p>
+<p>贪心啊，要的是思路 </p>
+<p>后序，总是略微有点反直觉（当然你排序换一下就没事了……</p>
+<pre><code>class Solution &#123;
+    public int findContentChildren(int[] g, int[] s) &#123;
+        Arrays.sort(g);
+        Arrays.sort(s);
+        int chi = 0;
+        int count = 0;
+        for (int i = 0; i &lt; s.length &amp;&amp; chi &lt; g.length; i++) &#123;
+            if (s[i] &gt;= g[chi]) &#123;
+                chi++;
+                count++;
+            &#125;
+        &#125;
+        return count;
+    &#125; 
+</code></pre>
+<h2 id="376-摆动序列"><a href="#376-摆动序列" class="headerlink" title="376 摆动序列"></a>376 摆动序列</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/wiggle-subsequence/">力扣题目链接</a></p>
+<p>平坡 单调中平坡 数组两端</p>
+<pre><code>class Solution &#123;
+    public int wiggleMaxLength(int[] nums) &#123;
+
+        if (nums.length &lt;= 1) &#123;
+            return nums.length;
+        &#125;
+
+        int cur = 0;
+        int pre = 0;
+        int count = 1;
+        for (int i = 1; i &lt; nums.length; i++) &#123;
+            curDiff = nums[i] - nums[i - 1];
+            if ((cur &gt; 0 &amp;&amp; pre &lt;= 0) || (cur &lt; 0 &amp;&amp; pre &gt;= 0)) &#123;
+                count++;
+                pre = cur;
+            &#125;
+        &#125;
+        return count;
+    &#125;
+&#125;  
+</code></pre>
+<h2 id="53-最大子序和"><a href="#53-最大子序和" class="headerlink" title="53 最大子序和"></a>53 最大子序和</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-subarray/">力扣题目链接</a></p>
+<p>误区一是的，脑测最终结果是sum初始</p>
+<p>（为什么脑测误区解释还是脑测……电脑做毕设c盘东西重定义路径了，vscode直接gcc查不到，啊啊啊啊）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int maxSubArray(int[] nums) &#123;</span><br><span class="line">        if (nums.length == 1)&#123;</span><br><span class="line">            return nums[0];</span><br><span class="line">        &#125;</span><br><span class="line">        int sum = Integer.MIN_VALUE;</span><br><span class="line">        int count = 0;</span><br><span class="line">        for (int i = 0; i &lt; nums.length; i++)&#123;</span><br><span class="line">            count += nums[i];</span><br><span class="line">            sum = Math.max(sum, count); ）</span><br><span class="line">            if (count &lt;= 0)&#123;</span><br><span class="line">                count = 0; // 相当于重置最大子序起始位置，因为遇到负数一定是拉低总和</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">       return sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
   id="post-day30"
   class="article article-type-post"
   itemscope
@@ -933,391 +1125,6 @@
 <p>不过本题不提这个，递归……也麻烦起来了</p>
 <p>5种情况其实都挺好理解，不过的确不知道怎么写才好</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;          //外包装</span><br><span class="line">    public TreeNode deleteNode(TreeNode root, int key) &#123;</span><br><span class="line">        root = delete(root,key);</span><br><span class="line">        return root;</span><br><span class="line">    &#125;</span><br><span class="line">              //递归主函数</span><br><span class="line">    private TreeNode delete(TreeNode root, int key) &#123;</span><br><span class="line">        if (root == null)   // 1</span><br><span class="line">            return null;</span><br><span class="line"></span><br><span class="line">        if (root.val &gt; key) &#123;   //目标在父节点左</span><br><span class="line">            root.left = delete(root.left,key);</span><br><span class="line">        &#125; else if (root.val &lt; key) &#123;</span><br><span class="line">            root.right = delete(root.right,key);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            if (root.left == null)  //拐</span><br><span class="line">               return root.right;</span><br><span class="line">            if (root.right == null)</span><br><span class="line">               return root.left;</span><br><span class="line">            TreeNode tmp = root.right;  //旋转</span><br><span class="line">            while (tmp.left != null) &#123;</span><br><span class="line">                tmp = tmp.left;</span><br><span class="line">            &#125;</span><br><span class="line">            root.val = tmp.val;</span><br><span class="line">            root.right = delete(root.right,tmp.val);</span><br><span class="line">        &#125;</span><br><span class="line">        return root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-day21"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/04/04/day21/"
-    >代码随想录算法训练营Day21|530 501 236</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/04/04/day21/" class="article-date">
-  <time datetime="2023-04-03T20:08:28.000Z" itemprop="datePublished">2023-04-04</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="530-二叉搜索树的最小绝对差"><a href="#530-二叉搜索树的最小绝对差" class="headerlink" title="530 二叉搜索树的最小绝对差"></a>530 二叉搜索树的最小绝对差</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-absolute-difference-in-bst/">力扣题目链接</a></p>
-<p>任意两节点的差的绝对值的最小值，二叉树啊，可以直接遍历到数组中然后排序然后双指针吗 <del>快排？还是，双指针应该什么思路</del></p>
-<p>加上指针不是太会，看了讲解才豁然开朗</p>
-<p>每次最后用一下min</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    TreeNode pre;</span><br><span class="line">    int result = Integer.MAX_VALUE;</span><br><span class="line"></span><br><span class="line">    public int getMinimumDifference(TreeNode root) &#123;</span><br><span class="line">       if(root==null)</span><br><span class="line">         return 0;</span><br><span class="line">       traversal(root);</span><br><span class="line">       return result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void traversal(TreeNode root)&#123;</span><br><span class="line">        if(root==null)</span><br><span class="line">           return;</span><br><span class="line"></span><br><span class="line">        traversal(root.left);</span><br><span class="line"></span><br><span class="line">        if(pre!=null)&#123;</span><br><span class="line">            result = Math.min(result,root.val-pre.val);</span><br><span class="line">        &#125;</span><br><span class="line">        pre = root;          // 定位指针</span><br><span class="line">        traversal(root.right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<pre><code> class Solution &#123;
-    TreeNode pre;
-    Stack&lt;TreeNode&gt; stack;
-    public int getMinimumDifference(TreeNode root) &#123;
-        if (root == null)       
-            return 0;
-        stack = new Stack&lt;&gt;();
-        TreeNode cur = root;
-        int result = Integer.MAX_VALUE;
-
-        while (cur != null || !stack.isEmpty()) &#123;
-            if (cur != null) &#123;
-                stack.push(cur); 
-                cur = cur.left; 
-            &#125;else &#123;
-                cur = stack.pop(); 
-                if (pre != null) &#123; 
-                    result = Math.min(result, cur.val - pre.val);
-                &#125;
-
-                pre = cur;
-                cur = cur.right; 
-            &#125;
-        &#125;
-        return result;
-    &#125;
-&#125;    
-</code></pre>
-<h2 id="501-二叉搜索树中的众数"><a href="#501-二叉搜索树中的众数" class="headerlink" title="501 二叉搜索树中的众数"></a>501 二叉搜索树中的众数</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-mode-in-binary-search-tree/">力扣题目链接</a></p>
-<p>频率最高，刚开始以为哈希表重现，     毕竟已经是搜索了，不一定就是哈希</p>
-<p>但是如果频率相同何如？</p>
-<p>哈希</p>
-<pre><code>class Solution &#123;
-    public int[] findMode(TreeNode root) &#123;
-
-        Map&lt;Integer, Integer&gt; map = new HashMap&lt;&gt;();
-        List&lt;Integer&gt; list = new ArrayList&lt;&gt;();
-  
-        if (root == null) 
-        return list.stream().mapToInt(Integer::intValue).toArray();
-
-        searchBST(root, map);
- //这段……
-        List&lt;Map.Entry&lt;Integer, Integer&gt;&gt; mapList = map.entrySet().stream()
-                .sorted((c1, c2) -&gt; c2.getValue().compareTo(c1.getValue()))
-                .collect(Collectors.toList());
-
-        list.add(mapList.get(0).getKey());
-
-        for (int i = 1; i &lt; mapList.size(); i++) &#123;
-          if (mapList.get(i).getValue() == mapList.get(i - 1).getValue()) &#123;
-
-                list.add(mapList.get(i).getKey());
-
-            &#125; else &#123;
-                break;
-            &#125;
-        &#125;
-        return list.stream().mapToInt(Integer::intValue).toArray();
-    &#125;
-
-    void searchBST(TreeNode curr, Map&lt;Integer, Integer&gt; map) &#123;
-        if (curr == null) 
-            return;
-        map.put(curr.val, map.getOrDefault(curr.val, 0) + 1);
-        searchBST(curr.left, map);
-        searchBST(curr.right, map);
-    &#125;
-
-&#125;  
-
-class Solution &#123;
-    ArrayList&lt;Integer&gt; resList;
-    int maxCount;
-    int count;
-    TreeNode pre;
-
-    public int[] findMode(TreeNode root) &#123;
-        resList = new ArrayList&lt;&gt;();
-        maxCount = 0;
-        count = 0;
-        pre = null;
-        findMode1(root);
-
-        int[] res = new int[resList.size()];
-        for (int i = 0; i &lt; resList.size(); i++) &#123;
-            res[i] = resList.get(i);
-        &#125;
-        return res;
-    &#125;
-
-    public void findMode1(TreeNode root) &#123;
-        if (root == null) &#123;
-            return;
-        &#125;
-        findMode1(root.left);
-
-        int rootValue = root.val;
-
-        if (pre == null || rootValue != pre.val) &#123;
-            count = 1;
-        &#125; else &#123;
-            count++;
-        &#125;
-
-        if (count &gt; maxCount) &#123;
-
-            resList.clear();
-            resList.add(rootValue);
-            maxCount = count;
-
-        &#125; else if (count == maxCount) &#123;
-
-            resList.add(rootValue);
-
-        &#125;
-        pre = root;
-
-        findMode1(root.right);
-    &#125;
-&#125;    
-
-
-
-if (pre == null || cur.val != pre.val) &#123;    //pre确认是否重复
-                    count = 1;
-                &#125;else &#123;
-                    count++;
-                &#125;
-</code></pre>
-<h2 id="236-二叉树的最近公共祖先"><a href="#236-二叉树的最近公共祖先" class="headerlink" title="236 二叉树的最近公共祖先"></a>236 二叉树的最近公共祖先</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/">力扣题目链接</a></p>
-<p>正如同，可惜二叉树不能够由下而上</p>
-<p>原来是回溯，受教，遍历后的回溯的确很适合。遍历确定子树，回溯确定共同节点</p>
-<p>但是怎么回溯确定共同点呢</p>
-<p>这里回溯返回值很重要，正因为需要回溯的节点判断，那么返回值要能确定节点，所以函数类型就是 节点 </p>
-<p>自身亦是祖先</p>
-<pre><code>class Solution &#123;
-    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) &#123;
-        if (root == null || root == p || root == q) &#123; 
-            return root;
-        &#125;
-
-        TreeNode left = lowestCommonAncestor(root.left, p, q);
-        TreeNode right = lowestCommonAncestor(root.right, p, q);
-
-        if(left == null &amp;&amp; right == null) &#123; 
-            return null;
-        &#125;else if(left == null &amp;&amp; right != null) &#123; 
-            return right;
-        &#125;else if(left != null &amp;&amp; right == null) &#123; 
-            return left;
-        &#125;else &#123; 
-            return root;        //重点是这行（个人认为，思路问题
-        &#125;
-    &#125;
-&#125;  
-</code></pre>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/" rel="tag"> </a></li></ul>
-
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-day20"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/04/03/day20/"
-    >代码随想录算法训练营Day20|654 617 700 98</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/04/03/day20/" class="article-date">
-  <time datetime="2023-04-03T00:29:27.000Z" itemprop="datePublished">2023-04-03</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="654-最大二叉树"><a href="#654-最大二叉树" class="headerlink" title="654 最大二叉树"></a>654 最大二叉树</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-binary-tree/">力扣题目地址</a></p>
-<p>查找到最大值，然后左右两边递归构造二叉树，说来惭愧，二叉树的构建对我来说仍然是一个重点。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public TreeNode constructMaximumBinaryTree(int[] nums) &#123;</span><br><span class="line">        return constructMaximumBinaryTree1(nums, 0, nums.length);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public TreeNode constructMaximumBinaryTree1(int[] nums, int leftIndex, int rightIndex) &#123;</span><br><span class="line">        if (rightIndex - leftIndex &lt; 1) &#123;</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">        if (rightIndex - leftIndex == 1) &#123;</span><br><span class="line">            return new TreeNode(nums[leftIndex]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        int maxIndex = leftIndex;</span><br><span class="line">        int maxVal = nums[maxIndex];</span><br><span class="line">        for (int i = leftIndex + 1; i &lt; rightIndex; i++) &#123;</span><br><span class="line">            if (nums[i] &gt; maxVal)&#123;</span><br><span class="line">                maxVal = nums[i];</span><br><span class="line">                maxIndex = i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        TreeNode root = new TreeNode(maxVal);</span><br><span class="line">        root.left = constructMaximumBinaryTree1(nums, leftIndex, maxIndex);</span><br><span class="line">        root.right = constructMaximumBinaryTree1(nums, maxIndex + 1, rightIndex);</span><br><span class="line">        return root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><del>参考示例差点以为是双指针</del></p>
-<p>得到最大值，然后左边右边都以相同的方法选出这一个节点，直至全部遍历完，想不到（</p>
-<h2 id="617-合并二叉树"><a href="#617-合并二叉树" class="headerlink" title="617 合并二叉树"></a>617 合并二叉树</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/merge-two-binary-trees/">力扣题目链接</a></p>
-<p>事实证明遍历很重要，就是看你理不理解。回溯有时候真的容易转不过来弯</p>
-<p>层次遍历是我初步的想法，不过看来遍历更加直白。</p>
-<pre><code>class Solution &#123;
-    public TreeNode mergeTrees(TreeNode root1, TreeNode root2) &#123;
-        if (root1 == null) 
-            return root2;
-        if (root2 == null) 
-            return root1;
-        root1.val += root2.val;
-
-        root1.left = mergeTrees(root1.left,root2.left);
-        root1.right = mergeTrees(root1.right,root2.right);
-
-        return root1;
-    &#125;
-&#125;      
-
-class Solution &#123;
-    public TreeNode mergeTrees(TreeNode root1, TreeNode root2) &#123;
-        if (root1 == null) 
-            return root2;
-        if (root2 ==null) 
-            return root1;
-
-        Queue&lt;TreeNode&gt; queue = new LinkedList&lt;&gt;();
-
-        queue.offer(root1);
-        queue.offer(root2);
-
-        while (!queue.isEmpty()) &#123;
-
-            TreeNode node1 = queue.poll();
-            TreeNode node2 = queue.poll();
-
-            node1.val = node1.val + node2.val;
-     //还需要分四种情况，反而觉得没递归好，逻辑问题
-            if (node1.left != null &amp;&amp; node2.left != null) &#123;
-                queue.offer(node1.left);
-                queue.offer(node2.left);
-            &#125;
-
-            if (node1.right != null &amp;&amp; node2.right != null) &#123;
-                queue.offer(node1.right);
-                queue.offer(node2.right);
-            &#125;
-
-            if (node1.left == null &amp;&amp; node2.left != null) &#123;
-                node1.left = node2.left;
-            &#125;
-
-            if (node1.right == null &amp;&amp; node2.right != null) &#123;
-                node1.right = node2.right;
-            &#125;
-        &#125;
-        return root1;
-    &#125;
-&#125; 
-</code></pre>
-<h2 id="700-二叉搜索树中的搜索"><a href="#700-二叉搜索树中的搜索" class="headerlink" title="700 二叉搜索树中的搜索"></a>700 二叉搜索树中的搜索</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/search-in-a-binary-search-tree/">力扣题目地址</a></p>
-<p>本来以为是广度遍历或者深度遍历，找到给定值，再找子树</p>
-<p>但是我忘了这是二叉搜索树，本身就有一定的顺序，这里返回的是位置</p>
-<pre><code> class Solution &#123;
-    public TreeNode searchBST(TreeNode root, int val) &#123;
-        if (root == null || root.val == val) &#123;
-            return root;
-        &#125;
-        if (val &lt; root.val) &#123;
-            return searchBST(root.left, val);
-        &#125; else &#123;
-            return searchBST(root.right, val);
-        &#125;
-    &#125;
-&#125;  
-
- class Solution &#123;
-    public TreeNode searchBST(TreeNode root, int val) &#123;
-        while (root != null)&#123;
-
-            if (val &lt; root.val)
-               root = root.left;
-            else if (val &gt; root.val) 
-               root = root.right;
-
-            else    
-                return root;
-           &#125;
-
-        return null;
-    &#125;
-&#125;  
-</code></pre>
-<h2 id="98-验证二叉搜索树"><a href="#98-验证二叉搜索树" class="headerlink" title="98 验证二叉搜索树"></a>98 验证二叉搜索树</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/validate-binary-search-tree/">力扣题目链接</a></p>
-<p>递归！  中陷阱了，附庸的附庸不一定是我的附庸，中间节点的左右界</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    TreeNode max;</span><br><span class="line">    public boolean isValidBST(TreeNode root) &#123;</span><br><span class="line">        if (root == null) &#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        boolean left = isValidBST(root.left);</span><br><span class="line">        if (!left) &#123;     //空？</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if (max != null &amp;&amp; root.val &lt;= max.val) &#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        max = root;</span><br><span class="line"></span><br><span class="line">        boolean right = isValidBST(root.right);</span><br><span class="line">        return right;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<pre><code>class Solution &#123;
-    public boolean isValidBST(TreeNode root) &#123;
-        if (root == null) &#123;
-            return true;
-        &#125;
-        Stack&lt;TreeNode&gt; stack = new Stack&lt;&gt;();
-        TreeNode pre = null;
-
-        while (root != null || !stack.isEmpty()) &#123;  //||
-、
-            while (root != null) &#123;
-                stack.push(root);
-                root = root.left;
-            &#125;
-            TreeNode pop = stack.pop();
-            if (pre != null &amp;&amp; pop.val &lt;= pre.val) &#123;
-                return false;
-            &#125;
-
-            pre = pop;
-            root = pop.right;
-        &#125;
-        return true;
-    &#125;
-&#125;
-</code></pre>
  
       <!-- reward -->
       
