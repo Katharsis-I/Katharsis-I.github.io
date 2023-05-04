@@ -13,7 +13,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>Archives |  亦</title>
+      <title>代码随想录算法训练营Day51|309 714 |  亦</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -55,246 +55,176 @@
       
     <main class="content on">
       <section class="outer">
-  
-  
-  <article class="articles">
+  <article
+  id="post-day51"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
     
-    
-    <h1 class="page-type-title">Archives</h1>
-    
-    
-  
-  
-  
-  
-  
-  
-  <div class="archives-wrap">
-    <div class="archive-year-wrap">
-      <a href="/archives/2023" class="archive-year">2023</a>
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  代码随想录算法训练营Day51|309 714
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/05/05/day51/" class="article-date">
+  <time datetime="2023-05-04T17:15:01.000Z" itemprop="datePublished">2023-05-05</time>
+</a>   
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">393</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">2 min</span>
+        </span>
+    </span>
+</div>
+ 
     </div>
-    <div class="archives">
       
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2023/05/05/day52/" class="archive-article-date">
-  <time datetime="2023-05-04T17:15:15.000Z" itemprop="datePublished">05/05</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2023/05/05/day52/"
-    >day52</a> 
-</h2>
- 
+    <div class="tocbot"></div>
 
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2023/05/05/day51/" class="archive-article-date">
-  <time datetime="2023-05-04T17:15:01.000Z" itemprop="datePublished">05/05</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2023/05/05/day51/"
-    >代码随想录算法训练营Day51|309 714</a> 
-</h2>
- 
 
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2023/05/05/day50/" class="archive-article-date">
-  <time datetime="2023-05-04T17:14:49.000Z" itemprop="datePublished">05/05</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2023/05/05/day50/"
-    >代码随想录算法训练营Day50|123 188</a> 
-</h2>
- 
 
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2023/05/02/day49/" class="archive-article-date">
-  <time datetime="2023-05-01T21:00:10.000Z" itemprop="datePublished">05/02</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2023/05/02/day49/"
-    >代码随想录算法训练营Day49|121 122</a> 
-</h2>
- 
 
-    </header>
-    
-    
-  </div>
-</article>
-      
   
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2023/05/02/day48/" class="archive-article-date">
-  <time datetime="2023-05-01T21:00:01.000Z" itemprop="datePublished">05/02</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
        
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2023/05/02/day48/"
-    >代码随想录算法训练营Day48|198 213 337</a> 
-</h2>
- 
+  <h2 id="309-最佳买卖股票时机含冷冻期"><a href="#309-最佳买卖股票时机含冷冻期" class="headerlink" title="309 最佳买卖股票时机含冷冻期"></a>309 最佳买卖股票时机含冷冻期</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-cooldown/">力扣题目链接</a></p>
+<p>冷冻期使划分更多了</p>
+<p>而且这几题的初始化更为复杂 与递推公式有很大关系</p>
+<p><del>分类讨论</del></p>
+<p>有 今天买 之前买</p>
+<p>卖出 之前卖了 有冷冻没冷冻都买了 </p>
+<p>今天卖</p>
+<p>冷冻期</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int maxProfit(int[] prices) &#123;</span><br><span class="line">        if (prices == null || prices.length &lt; 2) &#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        int[][] dp = new int[prices.length][2];</span><br><span class="line"></span><br><span class="line">        dp[0][0] = 0;</span><br><span class="line">        dp[0][1] = -prices[0];</span><br><span class="line">        dp[1][0] = Math.max(dp[0][0], dp[0][1] + prices[1]);</span><br><span class="line">        dp[1][1] = Math.max(dp[0][1], -prices[1]);</span><br><span class="line"></span><br><span class="line">        for (int i = 2; i &lt; prices.length; i++) &#123;</span><br><span class="line">            dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i]);</span><br><span class="line">            dp[i][1] = Math.max(dp[i - 1][1], dp[i - 2][0] - prices[i]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return dp[prices.length - 1][0];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2023/04/29/day46/" class="archive-article-date">
-  <time datetime="2023-04-29T15:41:20.000Z" itemprop="datePublished">04/29</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2023/04/29/day46/"
-    >代码随想录算法训练营Day46|139 多重背包</a> 
-</h2>
+<h2 id="714-买卖股票的最佳时机含手续费"><a href="#714-买卖股票的最佳时机含手续费" class="headerlink" title="714 买卖股票的最佳时机含手续费"></a>714 买卖股票的最佳时机含手续费</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/">力扣题目链接</a></p>
+<p>只是需要多一个减去手续费的操作 但是对我来说还是很复杂的程度</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public int maxProfit(int[] prices, int fee) &#123;</span><br><span class="line">    int len = prices.length;</span><br><span class="line">    int[][] dp = new int[len][2];</span><br><span class="line">    dp[0][0] = -prices[0];</span><br><span class="line">    for (int i = 1; i &lt; len; i++) &#123;</span><br><span class="line">        dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] - prices[i]);</span><br><span class="line">        dp[i][1] = Math.max(dp[i - 1][0] + prices[i] - fee, dp[i - 1][1]);</span><br><span class="line">    &#125;</span><br><span class="line">    return Math.max(dp[len - 1][0], dp[len - 1][1]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public int maxProfit(int[] prices, int fee) &#123;</span><br><span class="line">    int len = prices.length;</span><br><span class="line">    int[][] dp = new int[len][2];</span><br><span class="line">    dp[0][0] = -prices[0] - fee;</span><br><span class="line">    for (int i = 1; i &lt; len; i++) &#123;</span><br><span class="line">        dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] - prices[i] - fee);</span><br><span class="line">        dp[i][1] = Math.max(dp[i - 1][0] + prices[i], dp[i - 1][1]);</span><br><span class="line">    &#125;</span><br><span class="line">    return Math.max(dp[len - 1][0], dp[len - 1][1]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
  
-
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2023/04/28/day45/" class="archive-article-date">
-  <time datetime="2023-04-27T21:24:00.000Z" itemprop="datePublished">04/28</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2023/04/28/day45/"
-    >代码随想录算法训练营Day45|70 322 279</a> 
-</h2>
- 
-
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2023/04/27/day44/" class="archive-article-date">
-  <time datetime="2023-04-26T20:28:18.000Z" itemprop="datePublished">04/27</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2023/04/27/day44/"
-    >代码随想录算法训练营Day44|完全背包 518 377</a> 
-</h2>
- 
-
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2023/04/27/day43/" class="archive-article-date">
-  <time datetime="2023-04-26T20:28:10.000Z" itemprop="datePublished">04/27</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2023/04/27/day43/"
-    >代码随想录算法训练营Day43|1049 494 474</a> 
-</h2>
- 
-
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2023/04/24/day42/" class="archive-article-date">
-  <time datetime="2023-04-23T21:26:33.000Z" itemprop="datePublished">04/24</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2023/04/24/day42/"
-    >代码随想录算法训练营Day42|背包问题01 416</a> 
-</h2>
- 
-
-    </header>
-    
-    
-  </div>
-</article>
-      
+      <!-- reward -->
       
     </div>
-  </div>
-  
-  
-
-  
-  <nav class="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/5/">5</a><a class="extend next" rel="next" href="/archives/page/2/">下一页</a>
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/05/05/day51/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2023/05/05/day52/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            day52
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2023/05/05/day50/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">代码随想录算法训练营Day50|123 188</div>
+      </a>
+    
   </nav>
+
   
+   
+    
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
 </section>
       <footer class="footer">
   <div class="outer">
@@ -431,6 +361,22 @@
 <script src="/js/lazyload.min.js"></script>
 
 <!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
 
 <script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
 <link

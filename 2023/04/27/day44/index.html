@@ -13,7 +13,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>day44 |  亦</title>
+      <title>代码随想录算法训练营Day44|完全背包 518 377 |  亦</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -67,7 +67,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  day44
+  代码随想录算法训练营Day44|完全背包 518 377
 </h1>
  
 
@@ -83,7 +83,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">0</span>
+            <span class="post-count">521</span>
         </span>
     </span>
 
@@ -92,20 +92,37 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">1 min</span>
+            <span class="post-count">2 min</span>
         </span>
     </span>
 </div>
  
     </div>
       
+    <div class="tocbot"></div>
+
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-   
+  <h2 id="完全背包理论基础"><a href="#完全背包理论基础" class="headerlink" title="完全背包理论基础"></a>完全背包理论基础</h2><p>有N件物品和一个最多能背重量为W的背包。第i件物品的重量是weight[i]，得到的价值是value[i] 。每件物品都有无限个（也就是可以放入背包多次），求解将哪些物品装入背包里物品价值总和最大。   </p>
+<p>遍历顺序反而不重要    但是我坦白 我不会    一开始我以为可能与性价比有关，不过显然那不太行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">private static void testCompletePack()&#123;</span><br><span class="line">    int[] weight = &#123;1, 3, 4&#125;;</span><br><span class="line">    int[] value = &#123;15, 20, 30&#125;;</span><br><span class="line">    int bagWeight = 4;</span><br><span class="line">    int[] dp = new int[bagWeight + 1];</span><br><span class="line">    for (int i = 0; i &lt; weight.length; i++)&#123;    // 物品</span><br><span class="line">        for (int j = weight[i]; j &lt;= bagWeight; j++)&#123; // 容量</span><br><span class="line">            dp[j] = Math.max(dp[j], dp[j - weight[i]] + value[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    for (int maxValue : dp)&#123;</span><br><span class="line">        System.out.println(maxValue + &quot;   &quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private static void testCompletePackAnotherWay()&#123;</span><br><span class="line">    int[] weight = &#123;1, 3, 4&#125;;</span><br><span class="line">    int[] value = &#123;15, 20, 30&#125;;</span><br><span class="line">    int bagWeight = 4;</span><br><span class="line">    int[] dp = new int[bagWeight + 1];</span><br><span class="line">    for (int i = 1; i &lt;= bagWeight; i++)&#123; // 容量</span><br><span class="line">        for (int j = 0; j &lt; weight.length; j++)&#123; // 物品</span><br><span class="line">            if (i - weight[j] &gt;= 0)&#123;</span><br><span class="line">                dp[i] = Math.max(dp[i], dp[i - weight[j]] + value[j]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    for (int maxValue : dp)&#123;</span><br><span class="line">        System.out.println(maxValue + &quot;   &quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="518-零钱兑换II"><a href="#518-零钱兑换II" class="headerlink" title="518 零钱兑换II"></a>518 零钱兑换II</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/coin-change-ii/">力扣题目链接</a></p>
+<p>显然如上题完全背包</p>
+<p>与前几天的换零钱略有关？不过不适用于这种要求普适性的就是了  那是贪心</p>
+<p>外层遍历物品，内层遍历背包</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int change(int amount, int[] coins) &#123;</span><br><span class="line">        int[] dp = new int[amount + 1];</span><br><span class="line">        dp[0] = 1;</span><br><span class="line">        for (int i = 0; i &lt; coins.length; i++) &#123;</span><br><span class="line">            for (int j = coins[i]; j &lt;= amount; j++) &#123;</span><br><span class="line">                dp[j] += dp[j - coins[i]];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[amount];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="377-组合总和IV"><a href="#377-组合总和IV" class="headerlink" title="377 组合总和IV"></a>377 组合总和IV</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/combination-sum-iv/">力扣题目链接</a></p>
+<p><del>二叉树遍历 四数之和</del></p>
+<p>完全背包进一步的变种</p>
+<p>外层背包，内层物品</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int combinationSum4(vector&lt;int&gt;&amp; nums, int target) &#123;</span><br><span class="line">        vector&lt;int&gt; dp(target + 1, 0);</span><br><span class="line">        dp[0] = 1;</span><br><span class="line">        for (int i = 0; i &lt;= target; i++) &#123; </span><br><span class="line">            for (int j = 0; j &lt; nums.size(); j++) &#123; </span><br><span class="line">                if (i - nums[j] &gt;= 0 &amp;&amp; dp[i] &lt; INT_MAX - dp[i - nums[j]]) &#123;</span><br><span class="line">                    dp[i] += dp[i - nums[j]];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[target];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+ 
       <!-- reward -->
       
     </div>
@@ -179,6 +196,15 @@
 
    
   <nav class="article-nav">
+    
+      <a href="/2023/04/28/day45/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            代码随想录算法训练营Day45|70 322 279
+          
+        </div>
+      </a>
     
     
       <a href="/2023/04/27/day43/" class="article-nav-link">
