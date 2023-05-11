@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>代码随想录算法训练营Day84|84</title>
+    <title>代码随想录算法训练营Day60|84</title>
     <url>/2023/05/12/day60/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="84-柱状图中最大的矩形"><a href="#84-柱状图中最大的矩形" class="headerlink" title="84.柱状图中最大的矩形"></a>84.柱状图中最大的矩形</h2><p><a href="https://leetcode.cn/problems/largest-rectangle-in-histogram/">力扣题目链接</a></p>
 <p>本来我以为是增 谁知道是减……</p>
