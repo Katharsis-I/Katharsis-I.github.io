@@ -13,7 +13,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>Archives: 2023 |  亦</title>
+      <title>代码随想录算法训练营Day59|503 42 |  亦</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -55,246 +55,175 @@
       
     <main class="content on">
       <section class="outer">
-  
-  
-  <article class="articles">
+  <article
+  id="post-day59"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
     
-    
-    <h1 class="page-type-title">2023</h1>
-    
-    
-  
-  
-  
-  
-  
-  
-  <div class="archives-wrap">
-    <div class="archive-year-wrap">
-      <a href="/archives/2023" class="archive-year">2023</a>
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  代码随想录算法训练营Day59|503 42
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/05/12/day59/" class="article-date">
+  <time datetime="2023-05-11T16:02:49.000Z" itemprop="datePublished">2023-05-12</time>
+</a>   
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">361</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">1 min</span>
+        </span>
+    </span>
+</div>
+ 
     </div>
-    <div class="archives">
       
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2023/03/28/day14/" class="archive-article-date">
-  <time datetime="2023-03-28T14:34:47.000Z" itemprop="datePublished">03/28</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2023/03/28/day14/"
-    >代码随想录算法训练营Day14|二叉树理论基础 遍历</a> 
-</h2>
- 
+    <div class="tocbot"></div>
 
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2023/03/27/day13/" class="archive-article-date">
-  <time datetime="2023-03-26T20:16:59.000Z" itemprop="datePublished">03/27</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2023/03/27/day13/"
-    >代码随想录算法训练营Day13|栈与队列 239 347</a> 
-</h2>
- 
 
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2023/03/25/day11/" class="archive-article-date">
-  <time datetime="2023-03-25T15:55:19.000Z" itemprop="datePublished">03/25</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2023/03/25/day11/"
-    >代码随想录算法训练营Day11|栈与队列 20 1047 150</a> 
-</h2>
- 
 
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2023/03/24/day10/" class="archive-article-date">
-  <time datetime="2023-03-24T15:26:06.000Z" itemprop="datePublished">03/24</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2023/03/24/day10/"
-    >代码随想录算法训练营Day10|栈 232 225</a> 
-</h2>
- 
 
-    </header>
-    
-    
-  </div>
-</article>
-      
   
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2023/03/23/day9/" class="archive-article-date">
-  <time datetime="2023-03-23T13:42:03.000Z" itemprop="datePublished">03/23</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
        
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2023/03/23/day9/"
-    >代码随想录算法训练营Day9|（kmp） 回顾哈希、字符串</a> 
-</h2>
- 
+  <h2 id="503-下一个更大元素II"><a href="#503-下一个更大元素II" class="headerlink" title="503 下一个更大元素II"></a>503 下一个更大元素II</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/next-greater-element-ii/">力扣题目链接</a></p>
+<p>可否队列</p>
+<p>拼接两个的确没想到……   当然可以分类模拟专门讨论首尾 但是……容易被绕进去</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int[] nextGreaterElements(int[] nums) &#123;</span><br><span class="line">        if(nums == null || nums.length &lt;= 1) &#123;</span><br><span class="line">            return new int[]&#123;-1&#125;;</span><br><span class="line">        &#125;</span><br><span class="line">        int size = nums.length;</span><br><span class="line">        int[] result = new int[size];</span><br><span class="line">        Arrays.fill(result,-1);/</span><br><span class="line">        Stack&lt;Integer&gt; st= new Stack&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        for(int i = 0; i &lt; 2*size; i++) &#123;</span><br><span class="line">            while(!st.empty() &amp;&amp; nums[i % size] &gt; nums[st.peek()]) &#123;</span><br><span class="line">                result[st.peek()] = nums[i % size];//更新result</span><br><span class="line">                st.pop();</span><br><span class="line">            &#125;</span><br><span class="line">            st.push(i % size);</span><br><span class="line">        &#125;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2023/03/22/day8/" class="archive-article-date">
-  <time datetime="2023-03-21T20:31:35.000Z" itemprop="datePublished">03/22</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2023/03/22/day8/"
-    >代码随想录算法训练营Day8|字符串 344、541、05、151 58.2</a> 
-</h2>
+<h2 id="42-接雨水"><a href="#42-接雨水" class="headerlink" title="42 接雨水"></a>42 接雨水</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/trapping-rain-water/">力扣题目链接</a></p>
+<p>单调栈就是递增？</p>
+<p>忘了可以用双指针……</p>
+<p> 不过动态规划我绝对想不出来</p>
+<p>等等，虽然是单调栈，坑的地形也是多种多样的，多加代码</p>
+<p>但是请注意双指针面积计算是一块一块算，左高右高差 高度差</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int trap(int[] height)&#123;</span><br><span class="line">        int size = height.length;</span><br><span class="line"></span><br><span class="line">        if (size &lt;= 2)</span><br><span class="line">            return 0;</span><br><span class="line">        int sum = 0;</span><br><span class="line">        for (int index = 1; index &lt; size; index++)&#123;</span><br><span class="line">            int stackTop = stack.peek();</span><br><span class="line">            if (height[index] &lt; height[stackTop])&#123;</span><br><span class="line">                stack.push(index);    //新</span><br><span class="line">            &#125;else if (height[index] == height[stackTop])&#123;</span><br><span class="line">                stack.pop();</span><br><span class="line">                stack.push(index);      //新 平替</span><br><span class="line">            &#125;else&#123;</span><br><span class="line"></span><br><span class="line">                int heightAtIdx = height[index];</span><br><span class="line"></span><br><span class="line">                while (!stack.isEmpty() &amp;&amp; (heightAtIdx &gt; height[stackTop]))&#123;</span><br><span class="line"></span><br><span class="line">                    int mid = stack.pop();</span><br><span class="line">                    if (!stack.isEmpty())&#123;</span><br><span class="line">                //面积计算</span><br><span class="line">                        int left = stack.peek();</span><br><span class="line">                        int h = Math.min(height[left], height[index]) - height[mid];</span><br><span class="line">                        int w = index - left - 1;</span><br><span class="line">                        int hold = h * w;</span><br><span class="line">                        if (hold &gt; 0) sum += hold;</span><br><span class="line">                        stackTop = stack.peek();</span><br><span class="line"></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                stack.push(index);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
  
-
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2023/03/20/Day7/" class="archive-article-date">
-  <time datetime="2023-03-20T15:58:53.000Z" itemprop="datePublished">03/20</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2023/03/20/Day7/"
-    >代码随想录算法训练营Day7|哈希表 454、383、15、18</a> 
-</h2>
- 
-
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2023/03/20/day6/" class="archive-article-date">
-  <time datetime="2023-03-20T11:16:46.000Z" itemprop="datePublished">03/20</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2023/03/20/day6/"
-    >代码随想录算法训练营Day6|哈希表 242、349、201、1</a> 
-</h2>
- 
-
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2023/03/18/day4/" class="archive-article-date">
-  <time datetime="2023-03-17T16:09:51.000Z" itemprop="datePublished">03/18</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2023/03/18/day4/"
-    >代码随想录算法训练营Day4|继续链表24、19、160、142</a> 
-</h2>
- 
-
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2023/03/17/day3/" class="archive-article-date">
-  <time datetime="2023-03-16T16:18:35.000Z" itemprop="datePublished">03/17</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2023/03/17/day3/"
-    >代码随想录算法训练营Day3|链表p1 203、707、206</a> 
-</h2>
- 
-
-    </header>
-    
-    
-  </div>
-</article>
-      
+      <!-- reward -->
       
     </div>
-  </div>
-  
-  
-
-  
-  <nav class="page-nav">
     
-    <a class="extend prev" rel="prev" href="/archives/2023/page/4/">上一页</a><a class="page-number" href="/archives/2023/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2023/page/3/">3</a><a class="page-number" href="/archives/2023/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/archives/2023/page/6/">6</a><a class="extend next" rel="next" href="/archives/2023/page/6/">下一页</a>
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/05/12/day59/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2023/05/12/day60/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            代码随想录算法训练营Day84|84
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2023/05/12/day58/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">代码随想录算法训练营Day58|单调栈739 496</div>
+      </a>
+    
   </nav>
+
   
+   
+    
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
 </section>
       <footer class="footer">
   <div class="outer">
@@ -431,6 +360,22 @@
 <script src="/js/lazyload.min.js"></script>
 
 <!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
 
 <script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
 <link

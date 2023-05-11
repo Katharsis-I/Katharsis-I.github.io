@@ -152,6 +152,410 @@
     
     
     <article
+  id="post-day60"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/05/12/day60/"
+    >代码随想录算法训练营Day84|84</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/05/12/day60/" class="article-date">
+  <time datetime="2023-05-11T16:02:55.000Z" itemprop="datePublished">2023-05-12</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="84-柱状图中最大的矩形"><a href="#84-柱状图中最大的矩形" class="headerlink" title="84.柱状图中最大的矩形"></a>84.柱状图中最大的矩形</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/largest-rectangle-in-histogram/">力扣题目链接</a></p>
+<p>本来我以为是增 谁知道是减……</p>
+<p>但是这样才能找第一个差，毕竟增会有坑</p>
+<p><del>其实个人觉得底×1挺好</del></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    int largestRectangleArea(int[] heights) &#123;</span><br><span class="line">        Stack&lt;Integer&gt; st = new Stack&lt;Integer&gt;();</span><br><span class="line">                          // 扩元</span><br><span class="line">        int [] newHeights = new int[heights.length + 2];</span><br><span class="line">        newHeights[0] = 0;</span><br><span class="line">        newHeights[newHeights.length - 1] = 0;</span><br><span class="line">        for (int index = 0; index &lt; heights.length; index++)&#123;</span><br><span class="line">            newHeights[index + 1] = heights[index];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        heights = newHeights;</span><br><span class="line">        st.push(0);</span><br><span class="line">        int result = 0;</span><br><span class="line">                            // 1</span><br><span class="line">        for (int i = 1; i &lt; heights.length; i++) &#123;</span><br><span class="line">            //i | st.top()</span><br><span class="line">            if (heights[i] &gt; heights[st.peek()]) &#123;</span><br><span class="line">                st.push(i);</span><br><span class="line">            &#125; else if (heights[i] == heights[st.peek()]) &#123;</span><br><span class="line">                st.pop(); </span><br><span class="line">                st.push(i);</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                while (heights[i] &lt; heights[st.peek()]) &#123; </span><br><span class="line">                    int mid = st.peek();</span><br><span class="line">                    st.pop();</span><br><span class="line">                    int left = st.peek();</span><br><span class="line">                    int right = i;</span><br><span class="line">                    int w = right - left - 1;</span><br><span class="line">                    int h = heights[mid];</span><br><span class="line">                    result = Math.max(result, w * h);</span><br><span class="line">                &#125;</span><br><span class="line">                st.push(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
+  id="post-day59"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/05/12/day59/"
+    >代码随想录算法训练营Day59|503 42</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/05/12/day59/" class="article-date">
+  <time datetime="2023-05-11T16:02:49.000Z" itemprop="datePublished">2023-05-12</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="503-下一个更大元素II"><a href="#503-下一个更大元素II" class="headerlink" title="503 下一个更大元素II"></a>503 下一个更大元素II</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/next-greater-element-ii/">力扣题目链接</a></p>
+<p>可否队列</p>
+<p>拼接两个的确没想到……   当然可以分类模拟专门讨论首尾 但是……容易被绕进去</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int[] nextGreaterElements(int[] nums) &#123;</span><br><span class="line">        if(nums == null || nums.length &lt;= 1) &#123;</span><br><span class="line">            return new int[]&#123;-1&#125;;</span><br><span class="line">        &#125;</span><br><span class="line">        int size = nums.length;</span><br><span class="line">        int[] result = new int[size];</span><br><span class="line">        Arrays.fill(result,-1);/</span><br><span class="line">        Stack&lt;Integer&gt; st= new Stack&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        for(int i = 0; i &lt; 2*size; i++) &#123;</span><br><span class="line">            while(!st.empty() &amp;&amp; nums[i % size] &gt; nums[st.peek()]) &#123;</span><br><span class="line">                result[st.peek()] = nums[i % size];//更新result</span><br><span class="line">                st.pop();</span><br><span class="line">            &#125;</span><br><span class="line">            st.push(i % size);</span><br><span class="line">        &#125;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="42-接雨水"><a href="#42-接雨水" class="headerlink" title="42 接雨水"></a>42 接雨水</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/trapping-rain-water/">力扣题目链接</a></p>
+<p>单调栈就是递增？</p>
+<p>忘了可以用双指针……</p>
+<p> 不过动态规划我绝对想不出来</p>
+<p>等等，虽然是单调栈，坑的地形也是多种多样的，多加代码</p>
+<p>但是请注意双指针面积计算是一块一块算，左高右高差 高度差</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int trap(int[] height)&#123;</span><br><span class="line">        int size = height.length;</span><br><span class="line"></span><br><span class="line">        if (size &lt;= 2)</span><br><span class="line">            return 0;</span><br><span class="line">        int sum = 0;</span><br><span class="line">        for (int index = 1; index &lt; size; index++)&#123;</span><br><span class="line">            int stackTop = stack.peek();</span><br><span class="line">            if (height[index] &lt; height[stackTop])&#123;</span><br><span class="line">                stack.push(index);    //新</span><br><span class="line">            &#125;else if (height[index] == height[stackTop])&#123;</span><br><span class="line">                stack.pop();</span><br><span class="line">                stack.push(index);      //新 平替</span><br><span class="line">            &#125;else&#123;</span><br><span class="line"></span><br><span class="line">                int heightAtIdx = height[index];</span><br><span class="line"></span><br><span class="line">                while (!stack.isEmpty() &amp;&amp; (heightAtIdx &gt; height[stackTop]))&#123;</span><br><span class="line"></span><br><span class="line">                    int mid = stack.pop();</span><br><span class="line">                    if (!stack.isEmpty())&#123;</span><br><span class="line">                //面积计算</span><br><span class="line">                        int left = stack.peek();</span><br><span class="line">                        int h = Math.min(height[left], height[index]) - height[mid];</span><br><span class="line">                        int w = index - left - 1;</span><br><span class="line">                        int hold = h * w;</span><br><span class="line">                        if (hold &gt; 0) sum += hold;</span><br><span class="line">                        stackTop = stack.peek();</span><br><span class="line"></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                stack.push(index);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
+  id="post-day58"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/05/12/day58/"
+    >代码随想录算法训练营Day58|单调栈739 496</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/05/12/day58/" class="article-date">
+  <time datetime="2023-05-11T16:02:42.000Z" itemprop="datePublished">2023-05-12</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="739-每日温度"><a href="#739-每日温度" class="headerlink" title="739. 每日温度"></a>739. 每日温度</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/daily-temperatures/">力扣题目链接</a></p>
+<p>首先明确单调栈 </p>
+<p>一维数组 寻找任一元素的右边或者左边第一个比自己大或小的元素位置</p>
+<p>空间换时间</p>
+<p>用栈记录遍历过的元素</p>
+<p>存元素下标 顺序 头到底   求大 递增 求小 递减</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int[] dailyTemperatures(int[] temperatures) &#123;</span><br><span class="line">        int lens=temperatures.length;</span><br><span class="line">        int []res=new int[lens];</span><br><span class="line">        Deque&lt;Integer&gt; stack=new LinkedList&lt;&gt;();</span><br><span class="line">        stack.push(0);</span><br><span class="line">        for(int i=1;i&lt;lens;i++)&#123;</span><br><span class="line"></span><br><span class="line">            if(temperatures[i]&lt;=temperatures[stack.peek()])&#123;</span><br><span class="line">                stack.push(i);</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                while(!stack.isEmpty()&amp;&amp;temperatures[i]&gt;temperatures[stack.peek()])&#123;</span><br><span class="line">                    res[stack.peek()]=i-stack.peek();</span><br><span class="line">                    stack.pop();</span><br><span class="line">                &#125;</span><br><span class="line">                stack.push(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return  res;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="496-下一个更大元素-I"><a href="#496-下一个更大元素-I" class="headerlink" title="496.下一个更大元素 I"></a>496.下一个更大元素 I</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/next-greater-element-i/">力扣题目链接</a></p>
+<p>终于碰见一个哈希表，但是没想到是哈希表，重复元素理解错了……</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int[] nextGreaterElement(int[] nums1, int[] nums2) &#123;</span><br><span class="line">        Stack&lt;Integer&gt; temp = new Stack&lt;&gt;();</span><br><span class="line">        int[] res = new int[nums1.length];</span><br><span class="line">        Arrays.fill(res,-1);  //-1</span><br><span class="line">        HashMap&lt;Integer, Integer&gt; hashMap = new HashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        for (int i = 0 ; i&lt; nums1.length ; i++)&#123;</span><br><span class="line">            hashMap.put(nums1[i],i);</span><br><span class="line">        &#125;</span><br><span class="line">        temp.add(0);</span><br><span class="line">        for (int i = 1; i &lt; nums2.length; i++) &#123;</span><br><span class="line">            if (nums2[i] &lt;= nums2[temp.peek()]) &#123;</span><br><span class="line">                temp.add(i);</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                while (!temp.isEmpty() &amp;&amp; nums2[temp.peek()] &lt; nums2[i]) &#123;</span><br><span class="line"></span><br><span class="line">                     if (hashMap.containsKey(nums2[temp.peek()]))&#123;     //哈希</span><br><span class="line">                        Integer index = hashMap.get(nums2[temp.peek()]);</span><br><span class="line">                        res[index] = nums2[i];</span><br><span class="line">                    &#125;</span><br><span class="line">                    temp.pop();</span><br><span class="line">                &#125;</span><br><span class="line">                temp.add(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
+  id="post-day57"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/05/09/day57/"
+    >代码随想录算法训练营Day57|647 516</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/05/09/day57/" class="article-date">
+  <time datetime="2023-05-09T13:18:49.000Z" itemprop="datePublished">2023-05-09</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="647-回文子串"><a href="#647-回文子串" class="headerlink" title="647 回文子串"></a>647 回文子串</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/palindromic-substrings/">力扣题目链接</a></p>
+<p>首先想到递归，不过二叉树还是算了吧，但是双指针不太现实，一定麻烦得要死……动规么，中心点怎么办，虽然左右的判断没什么好说的</p>
+<p>well，子串还是都能有的，回文……i j ？拆出来函数？</p>
+<p>失策，双指针法并不算难，而且动规的重点是中点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int countSubstrings(String s) &#123;</span><br><span class="line">        int len, ans = 0;</span><br><span class="line">        if (s == null || (len = s.length()) &lt; 1) return 0;</span><br><span class="line">        for (int i = 0; i &lt; 2 * len - 1; i++) &#123;</span><br><span class="line">            int left = i / 2, right = left + i % 2;</span><br><span class="line">            while (left &gt;= 0 &amp;&amp; right &lt; len &amp;&amp; s.charAt(left) == s.charAt(right)) &#123;</span><br><span class="line">                ans++;</span><br><span class="line">                left--;</span><br><span class="line">                right++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int countSubstrings(String s) &#123;</span><br><span class="line">        int len, ans = 0;</span><br><span class="line">        if (s == null || (len = s.length()) &lt; 1) return 0;</span><br><span class="line">        boolean[][] dp = new boolean[len][len];</span><br><span class="line">        for (int j = 0; j &lt; len; j++) &#123;</span><br><span class="line">            for (int i = 0; i &lt;= j; i++) &#123;</span><br><span class="line">                if (s.charAt(i) == s.charAt(j)) &#123;</span><br><span class="line">                   if (j - i &lt; 3) &#123;</span><br><span class="line">                        dp[i][j] = true;  //两种情况</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        dp[i][j] = dp[i + 1][j - 1];</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    dp[i][j] = false;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        for (int i = 0; i &lt; len; i++) &#123;</span><br><span class="line">            for (int j = 0; j &lt; len; j++) &#123;</span><br><span class="line">                if (dp[i][j]) ans++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="516-最长回文子序列"><a href="#516-最长回文子序列" class="headerlink" title="516 最长回文子序列"></a>516 最长回文子序列</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-palindromic-subsequence/">力扣题目链接</a></p>
+<p>子序列和回文的嵌套  详情看前几天……</p>
+<p>没想过是后序 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    public int longestPalindromeSubseq(String s) &#123;</span><br><span class="line">        int len = s.length();</span><br><span class="line">        int[][] dp = new int[len + 1][len + 1];</span><br><span class="line">        for (int i = len - 1; i &gt;= 0; i--) &#123; </span><br><span class="line">            dp[i][i] = 1;</span><br><span class="line">            for (int j = i + 1; j &lt; len; j++) &#123;</span><br><span class="line">                if (s.charAt(i) == s.charAt(j)) &#123;</span><br><span class="line">                    dp[i][j] = dp[i + 1][j - 1] + 2;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    dp[i][j] = Math.max(dp[i + 1][j], Math.max(dp[i][j], dp[i][j - 1]));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[0][len - 1];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
+  id="post-day56"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/05/09/day56/"
+    >代码随想录算法训练营Day56|583 72</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/05/09/day56/" class="article-date">
+  <time datetime="2023-05-09T13:18:26.000Z" itemprop="datePublished">2023-05-09</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="583-两个字符串的删除操作"><a href="#583-两个字符串的删除操作" class="headerlink" title="583. 两个字符串的删除操作"></a>583. 两个字符串的删除操作</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/delete-operation-for-two-strings/">力扣题目链接</a></p>
+<p>逆转一下，用两个字符串长度减去最长公共子序列，这个思路很巧妙也能书接上文，可惜很难想出来。而正规的动规……  与递归有点相同 ，全部遍历，条件筛取 一点一点堆出来</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int minDistance(String word1, String word2) &#123;</span><br><span class="line">        int[][] dp = new int[word1.length() + 1][word2.length() + 1];</span><br><span class="line">        for (int i = 0; i &lt; word1.length() + 1; i++) dp[i][0] = i;</span><br><span class="line">        for (int j = 0; j &lt; word2.length() + 1; j++) dp[0][j] = j;</span><br><span class="line"></span><br><span class="line">        for (int i = 1; i &lt; word1.length() + 1; i++) &#123;</span><br><span class="line">            for (int j = 1; j &lt; word2.length() + 1; j++) &#123;</span><br><span class="line">                if (word1.charAt(i - 1) == word2.charAt(j - 1)) &#123;</span><br><span class="line">                    dp[i][j] = dp[i - 1][j - 1];</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    dp[i][j] = Math.min(dp[i - 1][j - 1] + 2,</span><br><span class="line">                                        Math.min(dp[i - 1][j] + 1, dp[i][j - 1] + 1));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return dp[word1.length()][word2.length()];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="72-编辑距离"><a href="#72-编辑距离" class="headerlink" title="72 编辑距离"></a>72 编辑距离</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/edit-distance/">力扣题目链接</a></p>
+<p>确实很难，非常难，前面的动规不熟直接导致这一题满头问号……</p>
+<p>精髓是这一句</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[i][j] = Math.min(Math.min(dp[i - 1][j - 1], dp[i][j - 1]), dp[i - 1][j]) + 1;</span><br></pre></td></tr></table></figure>
+
+<p>矩形，if条件筛选？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public int minDistance(String word1, String word2) &#123;</span><br><span class="line">    int m = word1.length();</span><br><span class="line">    int n = word2.length();</span><br><span class="line">    int[][] dp = new int[m + 1][n + 1];</span><br><span class="line">    for (int i = 1; i &lt;= m; i++) &#123;</span><br><span class="line">        dp[i][0] =  i;</span><br><span class="line">    &#125;</span><br><span class="line">    for (int j = 1; j &lt;= n; j++) &#123;</span><br><span class="line">        dp[0][j] = j;</span><br><span class="line">    &#125;</span><br><span class="line">    for (int i = 1; i &lt;= m; i++) &#123;</span><br><span class="line">        for (int j = 1; j &lt;= n; j++) &#123;</span><br><span class="line">            if (word1.charAt(i - 1) == word2.charAt(j - 1)) &#123;</span><br><span class="line">                dp[i][j] = dp[i - 1][j - 1];</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                dp[i][j] = Math.min(Math.min(dp[i - 1][j - 1], dp[i][j - 1]), dp[i - 1][j]) + 1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return dp[m][n];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>确实，前面的题就是为了这道题作铺垫</p>
+<p>不过很明显我现在还不算懂这题</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
+  id="post-day55"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/05/09/day55/"
+    >代码随想录算法训练营Day55|392 115</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/05/09/day55/" class="article-date">
+  <time datetime="2023-05-09T13:17:00.000Z" itemprop="datePublished">2023-05-09</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="392-判断子序列"><a href="#392-判断子序列" class="headerlink" title="392 判断子序列"></a>392 判断子序列</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/is-subsequence/">力扣题目链接</a></p>
+<p>双指针   哈希不行，顺序</p>
+<p>算是之前的加上条件判断</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public boolean isSubsequence(String s, String t) &#123;</span><br><span class="line">        int length1 = s.length(); int length2 = t.length();</span><br><span class="line">        int[][] dp = new int[length1+1][length2+1];</span><br><span class="line"></span><br><span class="line">        for(int i = 1; i &lt;= length1; i++)&#123;</span><br><span class="line">            for(int j = 1; j &lt;= length2; j++)&#123;</span><br><span class="line">                if(s.charAt(i-1) == t.charAt(j-1))&#123;</span><br><span class="line">                    dp[i][j] = dp[i-1][j-1] + 1;</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    dp[i][j] = dp[i][j-1];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if(dp[length1][length2] == length1)&#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="115-不同的子序列"><a href="#115-不同的子序列" class="headerlink" title="115 不同的子序列"></a>115 不同的子序列</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/distinct-subsequences/">力扣题目链接</a></p>
+<p>很难说怎么具体解释……</p>
+<p>与上题比较，为什么开始会有一个for循环，当然递推公式是可以理解的</p>
+<p>如果能看文章看懂，一般我不太会看视频，视频的效率比较低 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int numDistinct(String s, String t) &#123;</span><br><span class="line">        int[][] dp = new int[s.length() + 1][t.length() + 1];</span><br><span class="line">        for (int i = 0; i &lt; s.length() + 1; i++) &#123;</span><br><span class="line">            dp[i][0] = 1;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for (int i = 1; i &lt; s.length() + 1; i++) &#123;</span><br><span class="line">            for (int j = 1; j &lt; t.length() + 1; j++) &#123;</span><br><span class="line">                if (s.charAt(i - 1) == t.charAt(j - 1)) &#123;</span><br><span class="line">                    dp[i][j] = dp[i - 1][j - 1] + dp[i - 1][j];</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    dp[i][j] = dp[i - 1][j];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return dp[s.length()][t.length()];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
+  id="post-day53"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/05/06/day53/"
+    >代码随想录算法训练营Day53|1143 1035 53</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/05/06/day53/" class="article-date">
+  <time datetime="2023-05-05T17:26:17.000Z" itemprop="datePublished">2023-05-06</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="1143-最长公共子序列"><a href="#1143-最长公共子序列" class="headerlink" title="1143 最长公共子序列"></a>1143 最长公共子序列</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-common-subsequence/">力扣题目链接</a></p>
+<p>这次不是连续 </p>
+<p>如何合并两个序列显然是二维数组，但是怎么设计？</p>
+<p>初始化自然为0但是递推的顺序 递推的公式 需要从源头梳理</p>
+<p>这次看代码其实还好理解</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int longestCommonSubsequence(String text1, String text2) &#123;</span><br><span class="line">        int[][] dp = new int[text1.length() + 1][text2.length() + 1]; </span><br><span class="line">        </span><br><span class="line">        for (int i = 1 ; i &lt;= text1.length() ; i++) &#123;</span><br><span class="line">            char char1 = text1.charAt(i - 1);</span><br><span class="line"></span><br><span class="line">            for (int j = 1; j &lt;= text2.length(); j++) &#123;</span><br><span class="line">                char char2 = text2.charAt(j - 1);</span><br><span class="line"></span><br><span class="line">                if (char1 == char2) &#123;</span><br><span class="line">                    dp[i][j] = dp[i - 1][j - 1] + 1;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[text1.length()][text2.length()];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="1035-不相交的线"><a href="#1035-不相交的线" class="headerlink" title="1035 不相交的线"></a>1035 不相交的线</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/uncrossed-lines/">力扣题目链接</a></p>
+<p>……没想到还是最长公共，不过的确</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"> class Solution &#123;</span><br><span class="line">    public int maxUncrossedLines(int[] nums1, int[] nums2) &#123;</span><br><span class="line">        int len1 = nums1.length;</span><br><span class="line">        int len2 = nums2.length;</span><br><span class="line">        int[][] dp = new int[len1 + 1][len2 + 1];</span><br><span class="line"></span><br><span class="line">        for (int i = 1; i &lt;= len1; i++) &#123;</span><br><span class="line">            for (int j = 1; j &lt;= len2; j++) &#123;</span><br><span class="line"> </span><br><span class="line">                if (nums1[i - 1] == nums2[j - 1]) &#123;</span><br><span class="line">                    dp[i][j] = dp[i - 1][j - 1] + 1;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return dp[len1][len2];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="53-最大子序和"><a href="#53-最大子序和" class="headerlink" title="53 最大子序和"></a>53 最大子序和</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-subarray/">力扣题目链接</a></p>
+<p>之前用过贪心</p>
+<p>动态规划这题是比子序列好一点</p>
+<p>但是核心思路还是一样的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public static int maxSubArray(int[] nums) &#123;</span><br><span class="line">       if (nums.length == 0) </span><br><span class="line">           return 0;</span><br><span class="line"></span><br><span class="line">       int res = nums[0];</span><br><span class="line">       int[] dp = new int[nums.length];</span><br><span class="line">       dp[0] = nums[0];</span><br><span class="line"></span><br><span class="line">       for (int i = 1; i &lt; nums.length; i++) &#123;</span><br><span class="line">           dp[i] = Math.max(dp[i - 1] + nums[i], nums[i]);</span><br><span class="line">           res = res &gt; dp[i] ? res : dp[i];   //刷新</span><br><span class="line">       &#125;</span><br><span class="line">       return res;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
   id="post-day52"
   class="article article-type-post"
   itemscope
@@ -164,7 +568,7 @@
        
 <h2 itemprop="name">
   <a class="article-title" href="/2023/05/05/day52/"
-    >day52</a> 
+    >代码随想录算法训练营Day52|300 674 718</a> 
 </h2>
  
 
@@ -179,7 +583,40 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-   
+  <h2 id="300-最长递增子序列"><a href="#300-最长递增子序列" class="headerlink" title="300 最长递增子序列"></a>300 最长递增子序列</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-increasing-subsequence/">力扣题目链接</a></p>
+<p>没料到这会是动规 重点应当是状态转移方程</p>
+<p>判断严格递增 所以有了if语句</p>
+<p>最长是减一位置的最长的序列+1的最大值 </p>
+<p>不过说实话，这个思路我不是很能理解，如果可能的话，我倾向于双指针导出新序列</p>
+<pre><code>class Solution &#123;
+    public int lengthOfLIS(int[] nums) &#123;
+        int[] dp = new int[nums.length];
+        Arrays.fill(dp, 1);
+        for (int i = 0; i &lt; dp.length; i++) &#123;
+            for (int j = 0; j &lt; i; j++) &#123;
+                if (nums[i] &gt; nums[j]) &#123;
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
+                &#125;
+            &#125;
+        &#125;
+        int res = 0;
+        for (int i = 0; i &lt; dp.length; i++) &#123;
+            res = Math.max(res, dp[i]);
+        &#125;
+        return res;
+    &#125;
+&#125;   
+</code></pre>
+<h2 id="674-最长连续递增序列"><a href="#674-最长连续递增序列" class="headerlink" title="674 最长连续递增序列"></a>674 最长连续递增序列</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-continuous-increasing-subsequence/">力扣题目链接</a></p>
+<p>此题为未排序版本且连续，于是突然察觉，上题双指针可能有个问题</p>
+<p>接下来的数无疑是递增的 但是排在后面的次高的数或许会更长 躺</p>
+<p>前面貌似有贪心类似题</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public static int findLengthOfLCIS(int[] nums) &#123;</span><br><span class="line">       int[] dp = new int[nums.length];</span><br><span class="line">       for (int i = 0; i &lt; dp.length; i++) &#123;</span><br><span class="line">           dp[i] = 1;</span><br><span class="line">       &#125;</span><br><span class="line">       int res = 1;</span><br><span class="line">       for (int i = 0; i &lt; nums.length - 1; i++) &#123;</span><br><span class="line">           if (nums[i + 1] &gt; nums[i]) &#123;</span><br><span class="line">               dp[i + 1] = dp[i] + 1;</span><br><span class="line">           &#125;</span><br><span class="line">           res = res &gt; dp[i + 1] ? res : dp[i + 1];</span><br><span class="line">       &#125;</span><br><span class="line">       return res;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="718-最长重复子数组"><a href="#718-最长重复子数组" class="headerlink" title="718 最长重复子数组"></a>718 最长重复子数组</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-length-of-repeated-subarray/">力扣题目链接</a></p>
+<p>不可置否 我只能说动规我恐怕2刷才行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int findLength(int[] nums1, int[] nums2) &#123;</span><br><span class="line">        int result = 0;</span><br><span class="line">        int[][] dp = new int[nums1.length + 1][nums2.length + 1];</span><br><span class="line"></span><br><span class="line">        for (int i = 1; i &lt; nums1.length + 1; i++) &#123;</span><br><span class="line">            for (int j = 1; j &lt; nums2.length + 1; j++) &#123;</span><br><span class="line">                if (nums1[i - 1] == nums2[j - 1]) &#123;</span><br><span class="line">                    dp[i][j] = dp[i - 1][j - 1] + 1;</span><br><span class="line">                    result = Math.max(result, dp[i][j]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ 
       <!-- reward -->
       
     </div>
@@ -311,425 +748,13 @@
 </article>
 
     
-    <article
-  id="post-day49"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/05/02/day49/"
-    >代码随想录算法训练营Day49|121 122</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/05/02/day49/" class="article-date">
-  <time datetime="2023-05-01T21:00:10.000Z" itemprop="datePublished">2023-05-02</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="121-买卖股票的最佳时机"><a href="#121-买卖股票的最佳时机" class="headerlink" title="121 买卖股票的最佳时机"></a>121 买卖股票的最佳时机</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/">力扣题目链接</a></p>
-<p>贪心（    不过和之前的还是有区别的，毕竟这题是只有一次 这题的话就是找最大最小直接粗暴相减</p>
-<p>动规……跪了  也是数组为2 持有与不持有</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int maxProfit(int[] prices) &#123;</span><br><span class="line">        if (prices == null || prices.length == 0) </span><br><span class="line">            return 0;</span><br><span class="line">        int length = prices.length;</span><br><span class="line">        int[][] dp = new int[length][2];</span><br><span class="line">        int result = 0;</span><br><span class="line">        dp[0][0] = -prices[0];</span><br><span class="line">        dp[0][1] = 0;</span><br><span class="line"></span><br><span class="line">        for (int i = 1; i &lt; length; i++) &#123;</span><br><span class="line">            dp[i][0] = Math.max(dp[i - 1][0], -prices[i]);</span><br><span class="line">            dp[i][1] = Math.max(dp[i - 1][0] + prices[i], dp[i - 1][1]);</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[length - 1][1];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="122-买卖股票的最佳时机II"><a href="#122-买卖股票的最佳时机II" class="headerlink" title="122 买卖股票的最佳时机II"></a>122 买卖股票的最佳时机II</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-ii/">力扣题目链接</a></p>
-<p>舒适的配方（ 之前的贪心</p>
-<p>动规的话，思路延续上题</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Solution </span><br><span class="line">    public int maxProfit(int[] prices) &#123;</span><br><span class="line">        int n = prices.length;</span><br><span class="line">        int[][] dp = new int[n][2];    </span><br><span class="line">        dp[0][0] = 0;                  </span><br><span class="line">        dp[0][1] = -prices[0];</span><br><span class="line">        for (int i = 1; i &lt; n; ++i) &#123;</span><br><span class="line">            dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i]);    // 第 i 天，没有股票</span><br><span class="line">            dp[i][1] = Math.max(dp[i - 1][1], dp[i - 1][0] - prices[i]);    // 第 i 天，持有股票</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[n - 1][0];   </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-day48"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/05/02/day48/"
-    >代码随想录算法训练营Day48|198 213 337</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/05/02/day48/" class="article-date">
-  <time datetime="2023-05-01T21:00:01.000Z" itemprop="datePublished">2023-05-02</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="198-打家劫舍"><a href="#198-打家劫舍" class="headerlink" title="198 打家劫舍"></a>198 打家劫舍</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/house-robber/">力扣题目链接</a></p>
-<p>还是动规……不过如何确定 很难说</p>
-<p>双层？ 然而不是</p>
-<p>dp[i] = max(dp[i - 2] + nums[i], dp[i - 1])</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int rob(int[] nums) &#123;</span><br><span class="line">        if (nums == null || nums.length == 0) </span><br><span class="line">            return 0;</span><br><span class="line">        if (nums.length == 1) </span><br><span class="line">            return nums[0];</span><br><span class="line"></span><br><span class="line">        int[] dp = new int[nums.length];</span><br><span class="line">        dp[0] = nums[0];</span><br><span class="line">        dp[1] = Math.max(dp[0], nums[1]);</span><br><span class="line"></span><br><span class="line">        for (int i = 2; i &lt; nums.length; i++) &#123;</span><br><span class="line">            dp[i] = Math.max(dp[i - 1], dp[i - 2] + nums[i]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return dp[nums.length - 1];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="213-打家劫舍II"><a href="#213-打家劫舍II" class="headerlink" title="213 打家劫舍II"></a>213 打家劫舍II</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/house-robber-ii/">力扣题目链接</a></p>
-<p>环状……分情况，也只能分情况  首与尾的分类讨论 </p>
-<p>虽然之前是有过环型的，但是动态规划是整体的息息相关 拆成线性 不会</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int rob(int[] nums) &#123;</span><br><span class="line">        if (nums == null || nums.length == 0)</span><br><span class="line">            return 0;</span><br><span class="line">        int len = nums.length;</span><br><span class="line">        if (len == 1)</span><br><span class="line">            return nums[0];</span><br><span class="line">        return Math.max(robAction(nums, 0, len - 1), robAction(nums, 1, len));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    int robAction(int[] nums, int start, int end) &#123;</span><br><span class="line">        int x = 0, y = 0, z = 0;</span><br><span class="line">        for (int i = start; i &lt; end; i++) &#123;</span><br><span class="line">            y = z;</span><br><span class="line">            z = Math.max(y, x + nums[i]);</span><br><span class="line">            x = y;</span><br><span class="line">        &#125;</span><br><span class="line">        return z;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="337-打家劫舍III"><a href="#337-打家劫舍III" class="headerlink" title="337 打家劫舍III"></a>337 打家劫舍III</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/house-robber-iii/">力扣题目链接</a></p>
-<p>二叉树？</p>
-<p>我只能想到遍历回溯 n-2</p>
-<p>一定后序</p>
-<p>树形动规……  dp数组长度为2 标记偷与不偷可得金钱</p>
-<p>之后树方面的话是递归 以及偷与地形的结合</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int rob3(TreeNode root) &#123;</span><br><span class="line">        int[] res = robAction1(root);</span><br><span class="line">        return Math.max(res[0], res[1]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    int[] robAction1(TreeNode root) &#123;</span><br><span class="line">        int res[] = new int[2];</span><br><span class="line">        if (root == null)</span><br><span class="line">            return res;</span><br><span class="line"></span><br><span class="line">        int[] left = robAction1(root.left);</span><br><span class="line">        int[] right = robAction1(root.right);</span><br><span class="line"></span><br><span class="line">        res[0] = Math.max(left[0], left[1]) + Math.max(right[0], right[1]);</span><br><span class="line">        res[1] = root.val + left[0] + right[0];</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-day46"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/04/29/day46/"
-    >代码随想录算法训练营Day46|139 多重背包</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/04/29/day46/" class="article-date">
-  <time datetime="2023-04-29T15:41:20.000Z" itemprop="datePublished">2023-04-29</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="139-单词拆分"><a href="#139-单词拆分" class="headerlink" title="139 单词拆分"></a>139 单词拆分</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/word-break/">力扣题目链接</a></p>
-<p>联 回溯分割回文串</p>
-<p>单词嘛 排列 固定序列 不过不会写啊 break？</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public boolean wordBreak(String s, List&lt;String&gt; wordDict) &#123;</span><br><span class="line">        boolean[] dp = new boolean[s.length() + 1];</span><br><span class="line">        dp[0] = true;</span><br><span class="line"></span><br><span class="line">        for (int i = 1; i &lt;= s.length(); i++) &#123;</span><br><span class="line">            for (String word : wordDict) &#123;</span><br><span class="line">                int len = word.length();</span><br><span class="line">                if (i &gt;= len &amp;&amp; dp[i - len] &amp;&amp; word.equals(s.substring(i - len, i))) &#123;</span><br><span class="line">                    dp[i] = true;</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return dp[s.length()];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="多重背包"><a href="#多重背包" class="headerlink" title="多重背包"></a>多重背包</h2><p>有N种物品和一个容量为V 的背包。第i种物品最多有Mi件可用，每件耗费的空间是Ci ，价值是Wi 。求解将哪些物品装入背包可使这些物品的耗费的空间 总和不超过背包容量，且价值总和最大。</p>
-<p>本质01背包</p>
-<p>背包问题，怎么说呢，逻辑转开其实还好，某些时候单看代码分析是看不出什么的，大道至简的代码    总结直接看网站（</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-day45"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/04/28/day45/"
-    >代码随想录算法训练营Day45|70 322 279</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/04/28/day45/" class="article-date">
-  <time datetime="2023-04-27T21:24:00.000Z" itemprop="datePublished">2023-04-28</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="70-爬楼梯"><a href="#70-爬楼梯" class="headerlink" title="70 爬楼梯"></a>70 爬楼梯</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/climbing-stairs/">力扣题目链接</a></p>
-<p>一步一个台阶，两个台阶，三个台阶，…….，直到 m个台阶，有多少种不同的方法可以爬到楼顶</p>
-<p>确实是完全背包</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int climbStairs(int n) &#123;</span><br><span class="line">        int[] dp = new int[n + 1];</span><br><span class="line">        int[] weight = &#123;1,2&#125;;</span><br><span class="line">        dp[0] = 1;</span><br><span class="line"></span><br><span class="line">        for (int i = 0; i &lt;= n; i++) &#123;</span><br><span class="line">            for (int j = 0; j &lt; weight.length; j++) &#123;</span><br><span class="line">                if (i &gt;= weight[j]) dp[i] += dp[i - weight[j]];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return dp[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="322-零钱兑换"><a href="#322-零钱兑换" class="headerlink" title="322 零钱兑换"></a>322 零钱兑换</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/coin-change/">力扣题目链接</a></p>
-<p>…… 并没有什么衍生的奇怪思路 <del>抛去题目不谈 1块5毛好搞多了，除了12便士</del></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int coinChange(int[] coins, int amount) &#123;</span><br><span class="line">        int max = Integer.MAX_VALUE;</span><br><span class="line">        int[] dp = new int[amount + 1];</span><br><span class="line">        //初始化dp数组为最大值</span><br><span class="line">        for (int j = 0; j &lt; dp.length; j++) &#123;</span><br><span class="line">            dp[j] = max;</span><br><span class="line">        &#125;</span><br><span class="line">        dp[0] = 0;</span><br><span class="line">        for (int i = 0; i &lt; coins.length; i++) &#123;</span><br><span class="line">            //正序遍历：完全背包每个硬币可以选择多次</span><br><span class="line">            for (int j = coins[i]; j &lt;= amount; j++) &#123;</span><br><span class="line">                if (dp[j - coins[i]] != max) &#123;</span><br><span class="line">                    dp[j] = Math.min(dp[j], dp[j - coins[i]] + 1);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[amount] == max ? -1 : dp[amount];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="279-完全平方数"><a href="#279-完全平方数" class="headerlink" title="279 完全平方数"></a>279 完全平方数</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/perfect-squares/">力扣题目链接</a></p>
-<p>单纯加了完全平方数的转换？</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int numSquares(int n) &#123;</span><br><span class="line">        int max = Integer.MAX_VALUE;</span><br><span class="line">        int[] dp = new int[n + 1];</span><br><span class="line">        for (int j = 0; j &lt;= n; j++) &#123;</span><br><span class="line">            dp[j] = max;</span><br><span class="line">        &#125;</span><br><span class="line">        dp[0] = 0;</span><br><span class="line"></span><br><span class="line">        for (int j = 1; j &lt;= n; j++) &#123;</span><br><span class="line">            for (int i = 1; i * i &lt;= j; i++) &#123;</span><br><span class="line">                dp[j] = Math.min(dp[j], dp[j - i * i] + 1);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-day44"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/04/27/day44/"
-    >代码随想录算法训练营Day44|完全背包 518 377</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/04/27/day44/" class="article-date">
-  <time datetime="2023-04-26T20:28:18.000Z" itemprop="datePublished">2023-04-27</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="完全背包理论基础"><a href="#完全背包理论基础" class="headerlink" title="完全背包理论基础"></a>完全背包理论基础</h2><p>有N件物品和一个最多能背重量为W的背包。第i件物品的重量是weight[i]，得到的价值是value[i] 。每件物品都有无限个（也就是可以放入背包多次），求解将哪些物品装入背包里物品价值总和最大。   </p>
-<p>遍历顺序反而不重要    但是我坦白 我不会    一开始我以为可能与性价比有关，不过显然那不太行</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">private static void testCompletePack()&#123;</span><br><span class="line">    int[] weight = &#123;1, 3, 4&#125;;</span><br><span class="line">    int[] value = &#123;15, 20, 30&#125;;</span><br><span class="line">    int bagWeight = 4;</span><br><span class="line">    int[] dp = new int[bagWeight + 1];</span><br><span class="line">    for (int i = 0; i &lt; weight.length; i++)&#123;    // 物品</span><br><span class="line">        for (int j = weight[i]; j &lt;= bagWeight; j++)&#123; // 容量</span><br><span class="line">            dp[j] = Math.max(dp[j], dp[j - weight[i]] + value[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    for (int maxValue : dp)&#123;</span><br><span class="line">        System.out.println(maxValue + &quot;   &quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private static void testCompletePackAnotherWay()&#123;</span><br><span class="line">    int[] weight = &#123;1, 3, 4&#125;;</span><br><span class="line">    int[] value = &#123;15, 20, 30&#125;;</span><br><span class="line">    int bagWeight = 4;</span><br><span class="line">    int[] dp = new int[bagWeight + 1];</span><br><span class="line">    for (int i = 1; i &lt;= bagWeight; i++)&#123; // 容量</span><br><span class="line">        for (int j = 0; j &lt; weight.length; j++)&#123; // 物品</span><br><span class="line">            if (i - weight[j] &gt;= 0)&#123;</span><br><span class="line">                dp[i] = Math.max(dp[i], dp[i - weight[j]] + value[j]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    for (int maxValue : dp)&#123;</span><br><span class="line">        System.out.println(maxValue + &quot;   &quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="518-零钱兑换II"><a href="#518-零钱兑换II" class="headerlink" title="518 零钱兑换II"></a>518 零钱兑换II</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/coin-change-ii/">力扣题目链接</a></p>
-<p>显然如上题完全背包</p>
-<p>与前几天的换零钱略有关？不过不适用于这种要求普适性的就是了  那是贪心</p>
-<p>外层遍历物品，内层遍历背包</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int change(int amount, int[] coins) &#123;</span><br><span class="line">        int[] dp = new int[amount + 1];</span><br><span class="line">        dp[0] = 1;</span><br><span class="line">        for (int i = 0; i &lt; coins.length; i++) &#123;</span><br><span class="line">            for (int j = coins[i]; j &lt;= amount; j++) &#123;</span><br><span class="line">                dp[j] += dp[j - coins[i]];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[amount];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="377-组合总和IV"><a href="#377-组合总和IV" class="headerlink" title="377 组合总和IV"></a>377 组合总和IV</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/combination-sum-iv/">力扣题目链接</a></p>
-<p><del>二叉树遍历 四数之和</del></p>
-<p>完全背包进一步的变种</p>
-<p>外层背包，内层物品</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int combinationSum4(vector&lt;int&gt;&amp; nums, int target) &#123;</span><br><span class="line">        vector&lt;int&gt; dp(target + 1, 0);</span><br><span class="line">        dp[0] = 1;</span><br><span class="line">        for (int i = 0; i &lt;= target; i++) &#123; </span><br><span class="line">            for (int j = 0; j &lt; nums.size(); j++) &#123; </span><br><span class="line">                if (i - nums[j] &gt;= 0 &amp;&amp; dp[i] &lt; INT_MAX - dp[i - nums[j]]) &#123;</span><br><span class="line">                    dp[i] += dp[i - nums[j]];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[target];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-day43"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/04/27/day43/"
-    >代码随想录算法训练营Day43|1049 494 474</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/04/27/day43/" class="article-date">
-  <time datetime="2023-04-26T20:28:10.000Z" itemprop="datePublished">2023-04-27</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h3 id="1049-最后一块石头的重量II"><a href="#1049-最后一块石头的重量II" class="headerlink" title="1049 最后一块石头的重量II"></a>1049 最后一块石头的重量II</h3><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/last-stone-weight-ii/">力扣题目链接</a></p>
-<p>想了半天 怎么两两相消，忘了天平直接看相差  熬夜熬得……</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int lastStoneWeightII(int[] stones) &#123;</span><br><span class="line">        int sum = 0;</span><br><span class="line">        for (int s : stones) &#123;</span><br><span class="line">            sum += s;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        int target = sum / 2;</span><br><span class="line">        int[][] dp = new int[stones.length][target + 1];</span><br><span class="line">        for (int j = stones[0]; j &lt;= target; j++) &#123;</span><br><span class="line">            dp[0][j] = stones[0];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for (int i = 1; i &lt; stones.length; i++) &#123;</span><br><span class="line">            for (int j = 1; j &lt;= target; j++) &#123;</span><br><span class="line">                if (j &gt;= stones[i]) &#123;</span><br><span class="line">                    dp[i][j] = Math.max(dp[i - 1][j], dp[i - 1][j - stones[i]] + stones[i]);</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    dp[i][j] = dp[i - 1][j];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(dp[stones.length - 1][target]);</span><br><span class="line">        return (sum - dp[stones.length - 1][target]) - dp[stones.length - 1][target];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="494-目标和"><a href="#494-目标和" class="headerlink" title="494 目标和"></a>494 目标和</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/target-sum/">力扣题目链接</a></p>
-<p>一开始想到的是24点，但是那比这复杂多了 怎么办呢，遍历回溯属于是……过于那什么的解法 复杂度……</p>
-<p>没想到还是两队     <del>果然还是原道</del></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int findTargetSumWays(int[] nums, int target) &#123;</span><br><span class="line">        int sum = 0;</span><br><span class="line">        for (int i = 0; i &lt; nums.length; i++) &#123;</span><br><span class="line">             sum += nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">        if ( target &lt; 0 &amp;&amp; sum &lt; -target) </span><br><span class="line">             return 0;</span><br><span class="line">        if ((target + sum) % 2 != 0)</span><br><span class="line">              return 0;</span><br><span class="line">        int size = (target + sum) / 2;</span><br><span class="line">        if(size &lt; 0) //没想到</span><br><span class="line">              size = -size;</span><br><span class="line">        int[] dp = new int[size + 1];</span><br><span class="line">        dp[0] = 1;</span><br><span class="line">        for (int i = 0; i &lt; nums.length; i++) &#123;</span><br><span class="line">            for (int j = size; j &gt;= nums[i]; j--) &#123;</span><br><span class="line">                dp[j] += dp[j - nums[i]];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[size];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="474-一和零"><a href="#474-一和零" class="headerlink" title="474 一和零"></a>474 一和零</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/ones-and-zeroes/">力扣题目链接</a></p>
-<p>一开始我以为是贪心不错，从左边遇见的第一个1计数，直到n个，驱逐最大，但是重复进入很难办    排序？ 但是不能兼顾两个指标排序  所以 动态规划也是两个维度 啊哈哈哈</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int findMaxForm(String[] strs, int m, int n) &#123;</span><br><span class="line">        int[][] dp = new int[m + 1][n + 1];</span><br><span class="line">        int oneNum, zeroNum;</span><br><span class="line">        for (String str : strs) &#123;</span><br><span class="line">            oneNum = 0;</span><br><span class="line">            zeroNum = 0;</span><br><span class="line">            for (char ch : str.toCharArray()) &#123;</span><br><span class="line">                if (ch == &#x27;0&#x27;) &#123;</span><br><span class="line">                    zeroNum++;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    oneNum++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            for (int i = m; i &gt;= zeroNum; i--) &#123;</span><br><span class="line">                for (int j = n; j &gt;= oneNum; j--) &#123;</span><br><span class="line"></span><br><span class="line">                    dp[i][j] = Math.max(dp[i][j], dp[i - zeroNum][j - oneNum] + 1);</span><br><span class="line">      </span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[m][n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-day42"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/04/24/day42/"
-    >代码随想录算法训练营Day42|背包问题01 416</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/04/24/day42/" class="article-date">
-  <time datetime="2023-04-23T21:26:33.000Z" itemprop="datePublished">2023-04-24</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>中途没保存结果从头开始（惨叫    我直接简化了</p>
-<h2 id="背包问题01"><a href="#背包问题01" class="headerlink" title="背包问题01"></a>背包问题01</h2><p>有n件物品和一个最多能背重量为w 的背包。第i件物品的重量是weight[i]，得到的价值是value[i] 。<strong>每件物品只能用一次</strong>，求解将哪些物品装入背包里物品价值总和最大。</p>
-<p>dp[i][j] = max(dp[i - 1][j], dp[i - 1][j - weight[i]] + value[i]);</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">public class BagProblem &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        int[] weight = &#123;1,3,4&#125;;</span><br><span class="line">        int[] value = &#123;15,20,30&#125;;</span><br><span class="line">        int bagSize = 4;</span><br><span class="line">        testWeightBagProblem(weight,value,bagSize);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">        int goods = weight.length; </span><br><span class="line">        int[][] dp = new int[goods][bagSize + 1];</span><br><span class="line"></span><br><span class="line">        for (int j = weight[0]; j &lt;= bagSize; j++) &#123;</span><br><span class="line">            dp[0][j] = value[0];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        for (int i = 1; i &lt; weight.length; i++) &#123;</span><br><span class="line">            for (int j = 1; j &lt;= bagSize; j++) &#123;</span><br><span class="line">                if (j &lt; weight[i]) &#123;</span><br><span class="line"></span><br><span class="line">                    dp[i][j] = dp[i-1][j];</span><br><span class="line">                &#125; else &#123;</span><br><span class="line"></span><br><span class="line">                    dp[i][j] = Math.max(dp[i-1][j] , dp[i-1][j-weight[i]] + value[i]);</span><br><span class="line"></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for (int i = 0; i &lt; goods; i++) &#123;</span><br><span class="line">            for (int j = 0; j &lt;= bagSize; j++) &#123;</span><br><span class="line">                System.out.print(dp[i][j] + &quot;\t&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(&quot;\n&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>而一维</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[j] = max(dp[j], dp[j - weight[i]] + value[i]);</span><br></pre></td></tr></table></figure>
-
-<p>倒序遍历   先物品，再背包</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">       int[] weight = &#123;1, 3, 4&#125;;</span><br><span class="line">       int[] value = &#123;15, 20, 30&#125;;</span><br><span class="line">       int bagWight = 4;</span><br><span class="line">       testWeightBagProblem(weight, value, bagWight);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   public static void testWeightBagProblem(int[] weight, int[] value, int bagWeight)&#123;</span><br><span class="line">       int wLen = weight.length;</span><br><span class="line">       int[] dp = new int[bagWeight + 1];</span><br><span class="line">       for (int i = 0; i &lt; wLen; i++)&#123;</span><br><span class="line">           for (int j = bagWeight; j &gt;= weight[i]; j--)&#123;</span><br><span class="line">               dp[j] = Math.max(dp[j], dp[j - weight[i]] + value[i]);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       for (int j = 0; j &lt;= bagWeight; j++)&#123;</span><br><span class="line">           System.out.print(dp[j] + &quot; &quot;);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="416-分割等和子集"><a href="#416-分割等和子集" class="headerlink" title="416 分割等和子集"></a>416 分割等和子集</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/partition-equal-subset-sum/">力扣题目链接</a></p>
-<p>只要sum/2</p>
-<p>有一种给数组求满足指定值的感觉 不过一般都是map？集合？双指针？反正不是动态规划</p>
-<p>但是需要等于，而不是在容量内</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public boolean canPartition(int[] nums) &#123;</span><br><span class="line">        if(nums == null || nums.length == 0)</span><br><span class="line">            return false;</span><br><span class="line">        int n = nums.length;</span><br><span class="line">        int sum = 0;</span><br><span class="line">        for(int num : nums) &#123;</span><br><span class="line">            sum += num;</span><br><span class="line">        &#125;</span><br><span class="line">        if(sum % 2 != 0) </span><br><span class="line">            return false;</span><br><span class="line">        int target = sum / 2;</span><br><span class="line">        int[] dp = new int[target + 1];</span><br><span class="line">        for(int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">            for(int j = target; j &gt;= nums[i]; j--) &#123;</span><br><span class="line">                dp[j] = Math.max(dp[j], dp[j-nums[i]] + nums[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[target] == target;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
   </article>
   
 
   
   <nav class="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
   </nav>
   
 </section>
