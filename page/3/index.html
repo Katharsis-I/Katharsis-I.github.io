@@ -152,6 +152,83 @@
     
     
     <article
+  id="post-day38"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/04/21/day38/"
+    >代码随想录算法训练营Day38|动态规划 509 70 746</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/04/21/day38/" class="article-date">
+  <time datetime="2023-04-21T08:04:24.000Z" itemprop="datePublished">2023-04-21</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="动态规划简要介绍"><a href="#动态规划简要介绍" class="headerlink" title="动态规划简要介绍"></a>动态规划简要介绍</h2><p>简称DP 和上一个状态有关</p>
+<p>确定dp数组 下标  递推公式  初始化 遍历顺序</p>
+<h2 id="509-斐波那契数"><a href="#509-斐波那契数" class="headerlink" title="509  斐波那契数"></a>509  斐波那契数</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/fibonacci-number/">力扣题目链接</a></p>
+<pre><code>class Solution &#123;
+    public int fib(int n) &#123;
+        if (n &lt; 2) return n;             
+        int[] dp = new int[n + 1];
+        dp[0] = 0;
+        dp[1] = 1;
+        for (int index = 2; index &lt;= n; index++)&#123;
+            dp[index] = dp[index - 1] + dp[index - 2];
+        &#125;
+        return dp[n];
+    &#125;
+&#125;     
+</code></pre>
+<h2 id="70-爬楼梯"><a href="#70-爬楼梯" class="headerlink" title="70 爬楼梯"></a>70 爬楼梯</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/climbing-stairs/">力扣题目链接</a></p>
+<p>递归？直接看有哪些可到n 不过不是动态规划</p>
+<pre><code>public int climbStairs(int n) &#123;
+    int[] dp = new int[n + 1];
+    dp[0] = 1;
+    dp[1] = 1;
+    for (int i = 2; i &lt;= n; i++) &#123;
+        dp[i] = dp[i - 1] + dp[i - 2];
+    &#125;
+    return dp[n];
+&#125;
+</code></pre>
+<h2 id="746-使用最小花费爬楼梯"><a href="#746-使用最小花费爬楼梯" class="headerlink" title="746 使用最小花费爬楼梯"></a>746 使用最小花费爬楼梯</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/min-cost-climbing-stairs/">力扣题目链接</a></p>
+<p>本来以为需要贪心，毕竟每一步是有花费的，不过……为什么不直接了当最后统计最小呢 是我想太多了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int minCostClimbingStairs(int[] cost) &#123;</span><br><span class="line">        int len = cost.length;</span><br><span class="line">        int[] dp = new int[len + 1];</span><br><span class="line">        dp[0] = 0;</span><br><span class="line">        dp[1] = 0;</span><br><span class="line">        for (int i = 2; i &lt;= len; i++) &#123;</span><br><span class="line">            dp[i] = Math.min(dp[i - 1] + cost[i - 1],</span><br><span class="line">                             dp[i - 2] + cost[i - 2]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return dp[len];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
   id="post-day37"
   class="article article-type-post"
   itemscope
@@ -1157,77 +1234,6 @@ public:
 &#125;  
 </code></pre>
 <p>回溯的知识轮廓是有了，但是我的实操……最近事太多了</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-day27"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/04/10/day27/"
-    >代码随想录算法训练营Day27|39、40、131</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/04/10/day27/" class="article-date">
-  <time datetime="2023-04-09T16:18:39.000Z" itemprop="datePublished">2023-04-10</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="39-组合总和"><a href="#39-组合总和" class="headerlink" title="39 组合总和"></a>39 组合总和</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/combination-sum/">力扣题目链接</a></p>
-<p>无数量要求，只有目标要求，well</p>
-<p>while？ 不，是break</p>
-<p>while的判断句信息量太少了</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public List&lt;List&lt;Integer&gt;&gt; combinationSum(int[] candidates, int target) &#123;</span><br><span class="line">        List&lt;List&lt;Integer&gt;&gt; res = new ArrayList&lt;&gt;();</span><br><span class="line">        Arrays.sort(candidates); </span><br><span class="line">        backtracking(res, new ArrayList&lt;&gt;(), candidates, target, 0, 0);</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void backtracking(List&lt;List&lt;Integer&gt;&gt; res, List&lt;Integer&gt; path, int[] candidates, int target, int sum, int idx) &#123;</span><br><span class="line">        if (sum == target) &#123;           //end</span><br><span class="line">            res.add(new ArrayList&lt;&gt;(path));</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for (int i = idx; i &lt; candidates.length; i++) &#123;</span><br><span class="line">            if (sum + candidates[i] &gt; target)</span><br><span class="line">               break;</span><br><span class="line">            path.add(candidates[i]);</span><br><span class="line"></span><br><span class="line">            backtracking(res, path, candidates, target, sum + candidates[i], i);</span><br><span class="line"></span><br><span class="line">            path.remove(path.size() - 1);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>需要捋清函数的参数，个数，为什么需要这些，定义不同亦有不同。</p>
-<h2 id="40-组合总和II"><a href="#40-组合总和II" class="headerlink" title="40 组合总和II"></a>40 组合总和II</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/combination-sum-ii/">力扣题目链接</a></p>
-<p>数字只能出现一次，怎么去重？</p>
-<p>有重复元素，不能有重复的组合……well</p>
-<p>讲解是层不同，枝可同(不过组合不是集合？不包含相同元素？有序？)</p>
-<p>好的，没有提供有序就要自己排序</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">  LinkedList&lt;Integer&gt; path = new LinkedList&lt;&gt;();</span><br><span class="line">  List&lt;List&lt;Integer&gt;&gt; ans = new ArrayList&lt;&gt;();</span><br><span class="line">  boolean[] used;   //bool   </span><br><span class="line">  int sum = 0;</span><br><span class="line"></span><br><span class="line">  public List&lt;List&lt;Integer&gt;&gt; combinationSum2(int[] candidates, int target) &#123;</span><br><span class="line">    used = new boolean[candidates.length];</span><br><span class="line">   </span><br><span class="line">    Arrays.fill(used, false);   // fill</span><br><span class="line">    Arrays.sort(candidates);</span><br><span class="line"></span><br><span class="line">    backTracking(candidates, target, 0);</span><br><span class="line">    return ans;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  private void backTracking(int[] candidates, int target, int startIndex) &#123;</span><br><span class="line">    if (sum == target) &#123;</span><br><span class="line">      ans.add(new ArrayList(path));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    for (int i = startIndex; i &lt; candidates.length; i++) &#123;</span><br><span class="line">      if (sum + candidates[i] &gt; target) </span><br><span class="line">          break;</span><br><span class="line">      </span><br><span class="line">      if (i &gt; 0 &amp;&amp; candidates[i] == candidates[i - 1] &amp;&amp; !used[i - 1]) &#123;</span><br><span class="line">        continue;                              //确认遍历过，中间的第二个判断式注意，是回溯后的检查吗</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      used[i] = true;</span><br><span class="line">      sum += candidates[i];</span><br><span class="line">      path.add(candidates[i]);</span><br><span class="line"> </span><br><span class="line">      backTracking(candidates, target, i + 1);</span><br><span class="line">      used[i] = false;</span><br><span class="line">      sum -= candidates[i];</span><br><span class="line">      path.removeLast();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="131-分割回文串"><a href="#131-分割回文串" class="headerlink" title="131 分割回文串"></a>131 分割回文串</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/palindrome-partitioning/">力扣题目链接</a></p>
-<p>真·没有头绪</p>
-<p>怎么知道哪里回文，分割后判断回文？，你怎么知道回文……</p>
-<p>分割本身并不是关键，关键是在哪里分割是回文，还是说发现回文于是分割（还有大回文套小回文那种） 很混乱</p>
-<p>回溯过程剪枝？</p>
-<p>投降</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    List&lt;List&lt;String&gt;&gt; lists = new ArrayList&lt;&gt;();</span><br><span class="line">    Deque&lt;String&gt; deque = new LinkedList&lt;&gt;();</span><br><span class="line">    public List&lt;List&lt;String&gt;&gt; partition(String s) &#123;</span><br><span class="line">        backTracking(s, 0);</span><br><span class="line">        return lists;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void backTracking(String s, int startIndex) &#123;</span><br><span class="line"></span><br><span class="line">        if (startIndex &gt;= s.length()) &#123;</span><br><span class="line">            lists.add(new ArrayList(deque));</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for (int i = startIndex; i &lt; s.length(); i++) &#123;</span><br><span class="line"> </span><br><span class="line">            if (isPalindrome(s, startIndex, i)) &#123;</span><br><span class="line">                String str = s.substring(startIndex, i + 1);</span><br><span class="line">                deque.addLast(str);</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            backTracking(s, i + 1);</span><br><span class="line"></span><br><span class="line">            deque.removeLast();</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private boolean isPalindrome(String s, int startIndex, int end) &#123;</span><br><span class="line">        for (int i = startIndex, j = end; i &lt; j; i++, j--) &#123;</span><br><span class="line">            if (s.charAt(i) != s.charAt(j)) &#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>遍历中筛取</p>
  
       <!-- reward -->
       

@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>代码随想录算法训练营总结篇</title>
+    <url>/2023/05/17/sum/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>从3月中旬到5月中旬，虽然小可说2个月，但大可说60天，发生了很多事，让我认识到自己在知识上有很多欠缺，还有很多很多东西没有学过，真的会吗，会融会贯通吗，能自己搭建一点什么吗。很遗憾，虽然网上教程繁多，傻瓜式、进阶式、展示类，但是不可能满足实际情况，俗称纸上谈兵，这也是我在刷代码随想录时的情况。</p>
+<p>纸上得来终觉浅，绝知此事要躬行。说来更加惭愧，因为毕设，因为毕业季总是各种事情，导致并没开营前那种理想畅想。可以说是跌跌撞撞滑轨地趟过来，开始还是都理解的，但到后来因为没接触过直接接近快开摆的地步，倒不是说思路搞不懂，但是不会实现。只能祈祷自己之后有空，重新审视自己的记录，重刷一遍乃至两遍三遍。不会就是不会，这点还是不能含糊的。</p>
+<p>数组一直到栈与队列基本还是可以的，不过也是上段说的，我发现有些必要的真不会……，例如某些类/库，虽然问题不大，但是……  这些算是基本中的基本</p>
+<p>二叉树算是很大的一类了，利用二叉树可以做的东西，很多，幸好没有红黑树。从这里开始有些思路就跳出我的思维了，更不用说后面的回溯 贪心 动规……</p>
+<p>回溯基于二叉树，而‘贪心 动规也可以说不少方法基于回溯，就是在树上挑挑拣拣，加点代码当做剪刀罢了</p>
+<p>贪心，脑筋急转弯？不见得，但是很要求灵活性</p>
+<p>动规就不说了……吃的最大的亏就是动规，以及背包，5步法，有时候想不到初始，有时候想不到dp公式，等二刷</p>
+<p>单调栈可以说是栈的高阶用法？在经历过动规后都不算什么了……</p>
+<p>我想我才刚刚揭开了代码的一点点面纱，哦，各位，看看gpt看看ai绘画<del>看看在ns上竟然能跑的王国之泪</del>，真是不可思议，我这个门外汉真是五体投地，看看嵌入式、分布式什么的，方向众多，我也将找到自己的方向，不过在此之前，我可能，还是要看很多东西吧</p>
+]]></content>
+  </entry>
+  <entry>
     <title>代码随想录算法训练营Day60|84</title>
     <url>/2023/05/12/day60/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="84-柱状图中最大的矩形"><a href="#84-柱状图中最大的矩形" class="headerlink" title="84.柱状图中最大的矩形"></a>84.柱状图中最大的矩形</h2><p><a href="https://leetcode.cn/problems/largest-rectangle-in-histogram/">力扣题目链接</a></p>

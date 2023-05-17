@@ -152,6 +152,61 @@
     
     
     <article
+  id="post-sum"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/05/17/sum/"
+    >代码随想录算法训练营总结篇</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/05/17/sum/" class="article-date">
+  <time datetime="2023-05-17T13:09:19.000Z" itemprop="datePublished">2023-05-17</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>从3月中旬到5月中旬，虽然小可说2个月，但大可说60天，发生了很多事，让我认识到自己在知识上有很多欠缺，还有很多很多东西没有学过，真的会吗，会融会贯通吗，能自己搭建一点什么吗。很遗憾，虽然网上教程繁多，傻瓜式、进阶式、展示类，但是不可能满足实际情况，俗称纸上谈兵，这也是我在刷代码随想录时的情况。</p>
+<p>纸上得来终觉浅，绝知此事要躬行。说来更加惭愧，因为毕设，因为毕业季总是各种事情，导致并没开营前那种理想畅想。可以说是跌跌撞撞滑轨地趟过来，开始还是都理解的，但到后来因为没接触过直接接近快开摆的地步，倒不是说思路搞不懂，但是不会实现。只能祈祷自己之后有空，重新审视自己的记录，重刷一遍乃至两遍三遍。不会就是不会，这点还是不能含糊的。</p>
+<p>数组一直到栈与队列基本还是可以的，不过也是上段说的，我发现有些必要的真不会……，例如某些类/库，虽然问题不大，但是……  这些算是基本中的基本</p>
+<p>二叉树算是很大的一类了，利用二叉树可以做的东西，很多，幸好没有红黑树。从这里开始有些思路就跳出我的思维了，更不用说后面的回溯 贪心 动规……</p>
+<p>回溯基于二叉树，而‘贪心 动规也可以说不少方法基于回溯，就是在树上挑挑拣拣，加点代码当做剪刀罢了</p>
+<p>贪心，脑筋急转弯？不见得，但是很要求灵活性</p>
+<p>动规就不说了……吃的最大的亏就是动规，以及背包，5步法，有时候想不到初始，有时候想不到dp公式，等二刷</p>
+<p>单调栈可以说是栈的高阶用法？在经历过动规后都不算什么了……</p>
+<p>我想我才刚刚揭开了代码的一点点面纱，哦，各位，看看gpt看看ai绘画<del>看看在ns上竟然能跑的王国之泪</del>，真是不可思议，我这个门外汉真是五体投地，看看嵌入式、分布式什么的，方向众多，我也将找到自己的方向，不过在此之前，我可能，还是要看很多东西吧</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
   id="post-day60"
   class="article article-type-post"
   itemscope
@@ -675,61 +730,6 @@
 <h2 id="714-买卖股票的最佳时机含手续费"><a href="#714-买卖股票的最佳时机含手续费" class="headerlink" title="714 买卖股票的最佳时机含手续费"></a>714 买卖股票的最佳时机含手续费</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/">力扣题目链接</a></p>
 <p>只是需要多一个减去手续费的操作 但是对我来说还是很复杂的程度</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public int maxProfit(int[] prices, int fee) &#123;</span><br><span class="line">    int len = prices.length;</span><br><span class="line">    int[][] dp = new int[len][2];</span><br><span class="line">    dp[0][0] = -prices[0];</span><br><span class="line">    for (int i = 1; i &lt; len; i++) &#123;</span><br><span class="line">        dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] - prices[i]);</span><br><span class="line">        dp[i][1] = Math.max(dp[i - 1][0] + prices[i] - fee, dp[i - 1][1]);</span><br><span class="line">    &#125;</span><br><span class="line">    return Math.max(dp[len - 1][0], dp[len - 1][1]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public int maxProfit(int[] prices, int fee) &#123;</span><br><span class="line">    int len = prices.length;</span><br><span class="line">    int[][] dp = new int[len][2];</span><br><span class="line">    dp[0][0] = -prices[0] - fee;</span><br><span class="line">    for (int i = 1; i &lt; len; i++) &#123;</span><br><span class="line">        dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] - prices[i] - fee);</span><br><span class="line">        dp[i][1] = Math.max(dp[i - 1][0] + prices[i], dp[i - 1][1]);</span><br><span class="line">    &#125;</span><br><span class="line">    return Math.max(dp[len - 1][0], dp[len - 1][1]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-day50"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/05/05/day50/"
-    >代码随想录算法训练营Day50|123 188</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/05/05/day50/" class="article-date">
-  <time datetime="2023-05-04T17:14:49.000Z" itemprop="datePublished">2023-05-05</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="123-买卖股票的最佳时机III"><a href="#123-买卖股票的最佳时机III" class="headerlink" title="123 买卖股票的最佳时机III"></a>123 买卖股票的最佳时机III</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iii/">力扣题目链接</a></p>
-<p>最多完成两次交易…… 能直接算只买卖一次 两次 甚至不卖吗……</p>
-<p>虽然能大致猜到与数组有关，但是，扩了0~4……</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int maxProfit(int[] prices) &#123;</span><br><span class="line">        int[] dp = new int[4]; </span><br><span class="line">        dp[0] = -prices[0];</span><br><span class="line">        dp[1] = 0;</span><br><span class="line">        dp[2] = -prices[0];  </span><br><span class="line">        dp[3] = 0;</span><br><span class="line">        for(int i = 1; i &lt;= prices.length; i++)&#123;</span><br><span class="line">            dp[0] = Math.max(dp[0], -prices[i-1]);</span><br><span class="line">            dp[1] = Math.max(dp[1], dp[0]+prices[i-1]);</span><br><span class="line">            dp[2] = Math.max(dp[2], dp[1]-prices[i-1]);</span><br><span class="line">            dp[3] = Math.max(dp[3], dp[2]+ prices[i-1]);</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[3];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="188-买卖股票的最佳时机IV"><a href="#188-买卖股票的最佳时机IV" class="headerlink" title="188 买卖股票的最佳时机IV"></a>188 买卖股票的最佳时机IV</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iv/">力扣题目链接</a></p>
-<p>又是上一题的普通版本</p>
-<p>如果还延续思路的话 代数</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int maxProfit(int k, int[] prices) &#123;</span><br><span class="line">        if (prices.length == 0) return 0;</span><br><span class="line">        int len = prices.length;</span><br><span class="line">        int[][] dp = new int[len][k*2 + 1];</span><br><span class="line">        for (int i = 1; i &lt; k*2; i += 2) &#123;</span><br><span class="line">            dp[0][i] = -prices[0];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for (int i = 1; i &lt; len; i++) &#123;</span><br><span class="line">            for (int j = 0; j &lt; k*2 - 1; j += 2) &#123;</span><br><span class="line">                dp[i][j + 1] = Math.max(dp[i - 1][j + 1], dp[i - 1][j] - prices[i]);</span><br><span class="line">                dp[i][j + 2] = Math.max(dp[i - 1][j + 2], dp[i - 1][j + 1] + prices[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[len - 1][k*2];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
  
       <!-- reward -->
       

@@ -152,6 +152,61 @@
     
     
     <article
+  id="post-day50"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/05/05/day50/"
+    >代码随想录算法训练营Day50|123 188</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/05/05/day50/" class="article-date">
+  <time datetime="2023-05-04T17:14:49.000Z" itemprop="datePublished">2023-05-05</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="123-买卖股票的最佳时机III"><a href="#123-买卖股票的最佳时机III" class="headerlink" title="123 买卖股票的最佳时机III"></a>123 买卖股票的最佳时机III</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iii/">力扣题目链接</a></p>
+<p>最多完成两次交易…… 能直接算只买卖一次 两次 甚至不卖吗……</p>
+<p>虽然能大致猜到与数组有关，但是，扩了0~4……</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int maxProfit(int[] prices) &#123;</span><br><span class="line">        int[] dp = new int[4]; </span><br><span class="line">        dp[0] = -prices[0];</span><br><span class="line">        dp[1] = 0;</span><br><span class="line">        dp[2] = -prices[0];  </span><br><span class="line">        dp[3] = 0;</span><br><span class="line">        for(int i = 1; i &lt;= prices.length; i++)&#123;</span><br><span class="line">            dp[0] = Math.max(dp[0], -prices[i-1]);</span><br><span class="line">            dp[1] = Math.max(dp[1], dp[0]+prices[i-1]);</span><br><span class="line">            dp[2] = Math.max(dp[2], dp[1]-prices[i-1]);</span><br><span class="line">            dp[3] = Math.max(dp[3], dp[2]+ prices[i-1]);</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[3];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="188-买卖股票的最佳时机IV"><a href="#188-买卖股票的最佳时机IV" class="headerlink" title="188 买卖股票的最佳时机IV"></a>188 买卖股票的最佳时机IV</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iv/">力扣题目链接</a></p>
+<p>又是上一题的普通版本</p>
+<p>如果还延续思路的话 代数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int maxProfit(int k, int[] prices) &#123;</span><br><span class="line">        if (prices.length == 0) return 0;</span><br><span class="line">        int len = prices.length;</span><br><span class="line">        int[][] dp = new int[len][k*2 + 1];</span><br><span class="line">        for (int i = 1; i &lt; k*2; i += 2) &#123;</span><br><span class="line">            dp[0][i] = -prices[0];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for (int i = 1; i &lt; len; i++) &#123;</span><br><span class="line">            for (int j = 0; j &lt; k*2 - 1; j += 2) &#123;</span><br><span class="line">                dp[i][j + 1] = Math.max(dp[i - 1][j + 1], dp[i - 1][j] - prices[i]);</span><br><span class="line">                dp[i][j + 2] = Math.max(dp[i - 1][j + 2], dp[i - 1][j + 1] + prices[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[len - 1][k*2];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
   id="post-day49"
   class="article article-type-post"
   itemscope
@@ -661,83 +716,6 @@
 <h2 id="63-不同路径"><a href="#63-不同路径" class="headerlink" title="63 不同路径"></a>63 不同路径</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/unique-paths-ii/">力扣题目链接</a></p>
 <p>障碍的判定 break不行，按照上题的逻辑需要立刻置0</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int uniquePathsWithObstacles(int[][] obstacleGrid) &#123;</span><br><span class="line">        int m = obstacleGrid.length;</span><br><span class="line">        int n = obstacleGrid[0].length;</span><br><span class="line">        int[][] dp = new int[m][n];</span><br><span class="line"></span><br><span class="line">        if (obstacleGrid[m - 1][n - 1] == 1 || obstacleGrid[0][0] == 1) &#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for (int i = 0; i &lt; m &amp;&amp; obstacleGrid[i][0] == 0; i++) &#123;</span><br><span class="line">            dp[i][0] = 1;</span><br><span class="line">        &#125;</span><br><span class="line">        for (int j = 0; j &lt; n &amp;&amp; obstacleGrid[0][j] == 0; j++) &#123;</span><br><span class="line">            dp[0][j] = 1;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for (int i = 1; i &lt; m; i++) &#123;</span><br><span class="line">            for (int j = 1; j &lt; n; j++) &#123;</span><br><span class="line">                dp[i][j] = (obstacleGrid[i][j] == 0) ? dp[i - 1][j] + dp[i][j - 1] : 0;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return dp[m - 1][n - 1];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-day38"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/04/21/day38/"
-    >代码随想录算法训练营Day38|动态规划 509 70 746</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/04/21/day38/" class="article-date">
-  <time datetime="2023-04-21T08:04:24.000Z" itemprop="datePublished">2023-04-21</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="动态规划简要介绍"><a href="#动态规划简要介绍" class="headerlink" title="动态规划简要介绍"></a>动态规划简要介绍</h2><p>简称DP 和上一个状态有关</p>
-<p>确定dp数组 下标  递推公式  初始化 遍历顺序</p>
-<h2 id="509-斐波那契数"><a href="#509-斐波那契数" class="headerlink" title="509  斐波那契数"></a>509  斐波那契数</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/fibonacci-number/">力扣题目链接</a></p>
-<pre><code>class Solution &#123;
-    public int fib(int n) &#123;
-        if (n &lt; 2) return n;             
-        int[] dp = new int[n + 1];
-        dp[0] = 0;
-        dp[1] = 1;
-        for (int index = 2; index &lt;= n; index++)&#123;
-            dp[index] = dp[index - 1] + dp[index - 2];
-        &#125;
-        return dp[n];
-    &#125;
-&#125;     
-</code></pre>
-<h2 id="70-爬楼梯"><a href="#70-爬楼梯" class="headerlink" title="70 爬楼梯"></a>70 爬楼梯</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/climbing-stairs/">力扣题目链接</a></p>
-<p>递归？直接看有哪些可到n 不过不是动态规划</p>
-<pre><code>public int climbStairs(int n) &#123;
-    int[] dp = new int[n + 1];
-    dp[0] = 1;
-    dp[1] = 1;
-    for (int i = 2; i &lt;= n; i++) &#123;
-        dp[i] = dp[i - 1] + dp[i - 2];
-    &#125;
-    return dp[n];
-&#125;
-</code></pre>
-<h2 id="746-使用最小花费爬楼梯"><a href="#746-使用最小花费爬楼梯" class="headerlink" title="746 使用最小花费爬楼梯"></a>746 使用最小花费爬楼梯</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/min-cost-climbing-stairs/">力扣题目链接</a></p>
-<p>本来以为需要贪心，毕竟每一步是有花费的，不过……为什么不直接了当最后统计最小呢 是我想太多了</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int minCostClimbingStairs(int[] cost) &#123;</span><br><span class="line">        int len = cost.length;</span><br><span class="line">        int[] dp = new int[len + 1];</span><br><span class="line">        dp[0] = 0;</span><br><span class="line">        dp[1] = 0;</span><br><span class="line">        for (int i = 2; i &lt;= len; i++) &#123;</span><br><span class="line">            dp[i] = Math.min(dp[i - 1] + cost[i - 1],</span><br><span class="line">                             dp[i - 2] + cost[i - 2]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return dp[len];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
  
       <!-- reward -->
       
