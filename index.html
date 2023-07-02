@@ -152,6 +152,54 @@
     
     
     <article
+  id="post-exam"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/07/02/exam/"
+    >exam</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/07/02/exam/" class="article-date">
+  <time datetime="2023-07-02T14:51:13.000Z" itemprop="datePublished">2023-07-02</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>测试，卸建模软件注册表删多了 直接重装系统 </p>
+<p>git什么的都要重调</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
   id="post-sum"
   class="article article-type-post"
   itemscope
@@ -671,65 +719,6 @@
 <h2 id="718-最长重复子数组"><a href="#718-最长重复子数组" class="headerlink" title="718 最长重复子数组"></a>718 最长重复子数组</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-length-of-repeated-subarray/">力扣题目链接</a></p>
 <p>不可置否 我只能说动规我恐怕2刷才行</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int findLength(int[] nums1, int[] nums2) &#123;</span><br><span class="line">        int result = 0;</span><br><span class="line">        int[][] dp = new int[nums1.length + 1][nums2.length + 1];</span><br><span class="line"></span><br><span class="line">        for (int i = 1; i &lt; nums1.length + 1; i++) &#123;</span><br><span class="line">            for (int j = 1; j &lt; nums2.length + 1; j++) &#123;</span><br><span class="line">                if (nums1[i - 1] == nums2[j - 1]) &#123;</span><br><span class="line">                    dp[i][j] = dp[i - 1][j - 1] + 1;</span><br><span class="line">                    result = Math.max(result, dp[i][j]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-day51"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/05/05/day51/"
-    >代码随想录算法训练营Day51|309 714</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/05/05/day51/" class="article-date">
-  <time datetime="2023-05-04T17:15:01.000Z" itemprop="datePublished">2023-05-05</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="309-最佳买卖股票时机含冷冻期"><a href="#309-最佳买卖股票时机含冷冻期" class="headerlink" title="309 最佳买卖股票时机含冷冻期"></a>309 最佳买卖股票时机含冷冻期</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-cooldown/">力扣题目链接</a></p>
-<p>冷冻期使划分更多了</p>
-<p>而且这几题的初始化更为复杂 与递推公式有很大关系</p>
-<p><del>分类讨论</del></p>
-<p>有 今天买 之前买</p>
-<p>卖出 之前卖了 有冷冻没冷冻都买了 </p>
-<p>今天卖</p>
-<p>冷冻期</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int maxProfit(int[] prices) &#123;</span><br><span class="line">        if (prices == null || prices.length &lt; 2) &#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        int[][] dp = new int[prices.length][2];</span><br><span class="line"></span><br><span class="line">        dp[0][0] = 0;</span><br><span class="line">        dp[0][1] = -prices[0];</span><br><span class="line">        dp[1][0] = Math.max(dp[0][0], dp[0][1] + prices[1]);</span><br><span class="line">        dp[1][1] = Math.max(dp[0][1], -prices[1]);</span><br><span class="line"></span><br><span class="line">        for (int i = 2; i &lt; prices.length; i++) &#123;</span><br><span class="line">            dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i]);</span><br><span class="line">            dp[i][1] = Math.max(dp[i - 1][1], dp[i - 2][0] - prices[i]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return dp[prices.length - 1][0];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="714-买卖股票的最佳时机含手续费"><a href="#714-买卖股票的最佳时机含手续费" class="headerlink" title="714 买卖股票的最佳时机含手续费"></a>714 买卖股票的最佳时机含手续费</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/">力扣题目链接</a></p>
-<p>只是需要多一个减去手续费的操作 但是对我来说还是很复杂的程度</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public int maxProfit(int[] prices, int fee) &#123;</span><br><span class="line">    int len = prices.length;</span><br><span class="line">    int[][] dp = new int[len][2];</span><br><span class="line">    dp[0][0] = -prices[0];</span><br><span class="line">    for (int i = 1; i &lt; len; i++) &#123;</span><br><span class="line">        dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] - prices[i]);</span><br><span class="line">        dp[i][1] = Math.max(dp[i - 1][0] + prices[i] - fee, dp[i - 1][1]);</span><br><span class="line">    &#125;</span><br><span class="line">    return Math.max(dp[len - 1][0], dp[len - 1][1]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public int maxProfit(int[] prices, int fee) &#123;</span><br><span class="line">    int len = prices.length;</span><br><span class="line">    int[][] dp = new int[len][2];</span><br><span class="line">    dp[0][0] = -prices[0] - fee;</span><br><span class="line">    for (int i = 1; i &lt; len; i++) &#123;</span><br><span class="line">        dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] - prices[i] - fee);</span><br><span class="line">        dp[i][1] = Math.max(dp[i - 1][0] + prices[i], dp[i - 1][1]);</span><br><span class="line">    &#125;</span><br><span class="line">    return Math.max(dp[len - 1][0], dp[len - 1][1]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
  
       <!-- reward -->
       

@@ -152,6 +152,148 @@
     
     
     <article
+  id="post-day28"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/04/11/day28/"
+    >代码随想录算法训练营Day28|93 78 90</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/04/11/day28/" class="article-date">
+  <time datetime="2023-04-11T08:56:44.000Z" itemprop="datePublished">2023-04-11</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="93-复原IP地址"><a href="#93-复原IP地址" class="headerlink" title="93 复原IP地址"></a>93 复原IP地址</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/restore-ip-addresses/">力扣题目链接</a></p>
+<p>和上一题一样，不过检测回文变成了ip判断</p>
+<pre><code>class Solution &#123;
+    List&lt;String&gt; result = new ArrayList&lt;String&gt;();
+    StringBuilder stringBuilder = new StringBuilder();
+
+    public List&lt;String&gt; restoreIpAddresses(String s) &#123;
+        restoreIpAddressesHandler(s, 0, 0);
+        return result;
+    &#125;
+
+
+    public void restoreIpAddressesHandler(String s, int start, int number) &#123;
+
+        if (start == s.length() &amp;&amp; number == 4) &#123;
+            result.add(stringBuilder.toString());
+            return;
+        &#125;
+        if (start == s.length() || number == 4) &#123;
+            return;
+        &#125;
+                    //这一段的范围……
+        for (int i = start; i &lt; s.length() &amp;&amp; i - start &lt; 3 &amp;&amp; Integer.parseInt(s.substring(start, i + 1)) &gt;= 0
+                &amp;&amp; Integer.parseInt(s.substring(start, i + 1)) &lt;= 255; i++) &#123;
+
+            if (i + 1 - start &gt; 1 &amp;&amp; s.charAt(start) - &#39;0&#39; == 0) &#123;
+                continue;
+            &#125;
+            stringBuilder.append(s.substring(start, i + 1));
+
+            if (number &lt; 3) &#123;
+                stringBuilder.append(&quot;.&quot;);
+            &#125;
+            number++;
+
+            restoreIpAddressesHandler(s, i + 1, number);
+            number--;
+            stringBuilder.delete(start + number, i + number + 2);
+        &#125;
+    &#125; 
+</code></pre>
+<h2 id="78-子集"><a href="#78-子集" class="headerlink" title="78 子集"></a>78 子集</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/subsets/">力扣题目链接</a></p>
+<p>收集树形结构中树的所有节点，说明白不就好了</p>
+<pre><code>class Solution &#123;
+    List&lt;List&lt;Integer&gt;&gt; result = new ArrayList&lt;&gt;();
+    LinkedList&lt;Integer&gt; path = new LinkedList&lt;&gt;();
+    public List&lt;List&lt;Integer&gt;&gt; subsets(int[] nums) &#123;
+        subsetsHelper(nums, 0);
+        return result;
+    &#125;
+
+    private void subsetsHelper(int[] nums, int startIndex)&#123;
+        result.add(new ArrayList&lt;&gt;(path));
+        if (startIndex &gt;= nums.length)&#123;    // ?
+            return;
+        &#125;
+        for (int i = startIndex; i &lt; nums.length; i++)&#123;
+            path.add(nums[i]);
+            subsetsHelper(nums, i + 1);
+            path.removeLast();
+        &#125;
+    &#125;
+&#125; 
+</code></pre>
+<h2 id="90-子集"><a href="#90-子集" class="headerlink" title="90 子集"></a>90 子集</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/subsets-ii/">力扣题目链接</a></p>
+<p>树层还是树枝？</p>
+<pre><code>lass Solution &#123;
+
+  List&lt;List&lt;Integer&gt;&gt; res = new ArrayList&lt;&gt;();
+  LinkedList&lt;Integer&gt; path = new LinkedList&lt;&gt;();
+
+  public List&lt;List&lt;Integer&gt;&gt; subsetsWithDup( int[] nums ) &#123;
+    Arrays.sort( nums );
+    subsetsWithDupHelper( nums, 0 );
+    return res;
+  &#125;
+
+
+  private void subsetsWithDupHelper( int[] nums, int start ) &#123;
+    res.add( new ArrayList&lt;&gt;( path ) );
+
+    for ( int i = start; i &lt; nums.length; i++ ) &#123;
+
+      if ( i &gt; start &amp;&amp; nums[i - 1] == nums[i] ) 
+        continue;
+
+
+      path.add( nums[i] );
+      subsetsWithDupHelper( nums, i + 1 );
+      path.removeLast();
+    &#125;
+  &#125;
+
+&#125;  
+</code></pre>
+<p>回溯的知识轮廓是有了，但是我的实操……最近事太多了</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
   id="post-day27"
   class="article article-type-post"
   itemscope
@@ -1195,143 +1337,6 @@ class Solution &#123;
 <p>递归说简单但是逻辑是必须要捋顺的</p>
 <p>层序迭代，比较直观</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int sumOfLeftLeaves(TreeNode root) &#123;</span><br><span class="line">        int sum = 0;</span><br><span class="line">        if (root == null) </span><br><span class="line">            return 0;</span><br><span class="line">        Queue&lt;TreeNode&gt; queue = new LinkedList&lt;&gt;();</span><br><span class="line">        queue.offer(root);</span><br><span class="line">        while (!queue.isEmpty()) &#123;</span><br><span class="line">            int size = queue.size();</span><br><span class="line">            while (size &gt; 0) &#123;</span><br><span class="line">                size--;</span><br><span class="line">                TreeNode node = queue.poll();</span><br><span class="line">                if (node.left != null) &#123; </span><br><span class="line">                    queue.offer(node.left);    //</span><br><span class="line">                    if (node.left.left == null &amp;&amp; node.left.right == null)&#123; // 左叶子节点</span><br><span class="line">                        sum += node.left.val;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                if (node.right != null) </span><br><span class="line">                    queue.offer(node.right);  //这两句就是一层层下推</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-day15"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/03/30/day15/"
-    >代码随想录算法训练营Day15|层序 226 101</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/03/30/day15/" class="article-date">
-  <time datetime="2023-03-30T14:53:55.000Z" itemprop="datePublished">2023-03-30</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="层序遍历"><a href="#层序遍历" class="headerlink" title="层序遍历"></a>层序遍历</h2><h3 id="102-二叉树的层序遍历"><a href="#102-二叉树的层序遍历" class="headerlink" title="102.二叉树的层序遍历"></a>102.二叉树的层序遍历</h3><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-level-order-traversal/">力扣题目链接</a></p>
-<p>没什么好说的，就是模板</p>
-<pre><code>class Solution &#123;
-    public List&lt;List&lt;Integer&gt;&gt; resList = new ArrayList&lt;List&lt;Integer&gt;&gt;();
-    public List&lt;List&lt;Integer&gt;&gt; levelOrder(TreeNode root) &#123;
-        //checkFun01(root,0); ？
-        checkFun02(root);    
-
-        return resList;
-    &#125;
-
-
-    public void checkFun01(TreeNode node, Integer deep) &#123;
-        if (node == null) return;
-        deep++;
-
-        if (resList.size() &lt; deep) &#123;
-            List&lt;Integer&gt; item = new ArrayList&lt;Integer&gt;();
-            resList.add(item);
-        &#125;
-        resList.get(deep - 1).add(node.val);   //?
-
-        checkFun01(node.left, deep);
-        checkFun01(node.right, deep);
-    &#125;
-</code></pre>
-<p> 107.二叉树的层次遍历 II   数组反转</p>
-<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-level-order-traversal-ii/">力扣题目链接</a></p>
-<p>199.二叉树的右视图   最右侧</p>
-<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-right-side-view/">力扣题目链接</a></p>
-<p>637.二叉树的层平均值  double</p>
-<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/average-of-levels-in-binary-tree/">力扣题目链接</a></p>
-<p>429.N叉树的层序遍历  children</p>
-<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/n-ary-tree-level-order-traversal/">力扣题目链接</a></p>
-<p>515.在每个树行中找最大值   for?if?    二元</p>
-<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-largest-value-in-each-tree-row/">力扣题目链接</a></p>
-<p>116.填充每个节点的下一个右侧节点指针  # 117.填充每个节点的下一个右侧节点指针II  b树？不过的确不知道怎么设    <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/populating-next-right-pointers-in-each-node/">力扣题目链接</a>  <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/populating-next-right-pointers-in-each-node-ii/">力扣题目链接</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public Node connect(Node root) &#123;</span><br><span class="line">	Queue&lt;Node&gt; tmpQueue = new LinkedList&lt;Node&gt;();</span><br><span class="line">	if (root != null) tmpQueue.add(root);</span><br><span class="line"></span><br><span class="line">	while (tmpQueue.size() != 0)&#123;</span><br><span class="line">	    int size = tmpQueue.size();</span><br><span class="line"></span><br><span class="line">            Node cur = tmpQueue.poll();</span><br><span class="line">            if (cur.left != null) tmpQueue.add(cur.left);</span><br><span class="line">            if (cur.right != null) tmpQueue.add(cur.right);</span><br><span class="line"></span><br><span class="line">	    for (int index = 1; index &lt; size; index++)&#123;</span><br><span class="line">		Node next = tmpQueue.poll();</span><br><span class="line">		if (next.left != null) tmpQueue.add(next.left);</span><br><span class="line">		if (next.right != null) tmpQueue.add(next.right);</span><br><span class="line"></span><br><span class="line">                cur.next = next;</span><br><span class="line">                cur = next;</span><br><span class="line">	    &#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">        return root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public Node connect(Node root) &#123;</span><br><span class="line">        Queue&lt;Node&gt; queue = new LinkedList&lt;&gt;();</span><br><span class="line">        if (root != null) &#123;</span><br><span class="line">            queue.add(root);</span><br><span class="line">        &#125;</span><br><span class="line">        while (!queue.isEmpty()) &#123;</span><br><span class="line">            int size = queue.size();</span><br><span class="line">            Node node = null;</span><br><span class="line">            Node nodePre = null;</span><br><span class="line"></span><br><span class="line">            for (int i = 0; i &lt; size; i++) &#123;</span><br><span class="line">                if (i == 0) &#123;</span><br><span class="line">                    nodePre = queue.poll(); // 取出</span><br><span class="line">                    node = nodePre;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    node = queue.poll();</span><br><span class="line">                    nodePre.next = node; // 链接</span><br><span class="line">                    nodePre = nodePre.next;</span><br><span class="line">                &#125;</span><br><span class="line">                if (node.left != null) &#123;</span><br><span class="line">                    queue.add(node.left);</span><br><span class="line">                &#125;</span><br><span class="line">                if (node.right != null) &#123;</span><br><span class="line">                    queue.add(node.right);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            nodePre.next = null; </span><br><span class="line">        &#125;</span><br><span class="line">        return root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="104-二叉树的最大深度"><a href="#104-二叉树的最大深度" class="headerlink" title="104.二叉树的最大深度"></a>104.二叉树的最大深度</h3><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-depth-of-binary-tree/">力扣题目链接</a></p>
-<p>层序 模板</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int maxDepth(TreeNode root) &#123;</span><br><span class="line">        if (root == null)   return 0;</span><br><span class="line">        Queue&lt;TreeNode&gt; que = new LinkedList&lt;&gt;();</span><br><span class="line">        que.offer(root);</span><br><span class="line">        int depth = 0;</span><br><span class="line">        while (!que.isEmpty())</span><br><span class="line">        &#123;</span><br><span class="line">            int len = que.size();</span><br><span class="line">            while (len &gt; 0)</span><br><span class="line">            &#123;</span><br><span class="line">                TreeNode node = que.poll();</span><br><span class="line">                if (node.left != null)  que.offer(node.left);</span><br><span class="line">                if (node.right != null) que.offer(node.right);</span><br><span class="line">                len--;</span><br><span class="line">            &#125;</span><br><span class="line">            depth++;</span><br><span class="line">        &#125;</span><br><span class="line">        return depth;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="111-二叉树的最小深度"><a href="#111-二叉树的最小深度" class="headerlink" title="111.二叉树的最小深度"></a>111.二叉树的最小深度</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-depth-of-binary-tree/">力扣题目链接</a></p>
-<p>层次  比较</p>
-<pre><code>class Solution &#123;
-    public int minDepth(TreeNode root)&#123;
-        if (root == null) &#123;
-            return 0;
-        &#125;
-        Queue&lt;TreeNode&gt; queue = new LinkedList&lt;&gt;();
-        queue.offer(root);
-        int depth = 0;
-        while (!queue.isEmpty())&#123;
-            int size = queue.size();
-            depth++;
-            TreeNode cur = null;
-            for (int i = 0; i &lt; size; i++) &#123;
-                cur = queue.poll();
-                if (cur.left == null &amp;&amp; cur.right == null)&#123;
-                    return depth;
-                &#125;
-                if (cur.left != null) queue.offer(cur.left);
-                if (cur.right != null) queue.offer(cur.right);
-            &#125;
-        &#125;
-        return depth;
-    &#125;
-&#125; 
-</code></pre>
-<h2 id="226-翻转二叉树"><a href="#226-翻转二叉树" class="headerlink" title="226 翻转二叉树"></a>226 翻转二叉树</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/invert-binary-tree/">力扣题目链接</a> </p>
-<p>首先，链表 但不是链表     temp？过于……</p>
-<p>更加倾向于层次，层次更加符合对称那种感觉</p>
-<p>……swap下意识跳了</p>
-<p>办法竟然这么多 递归 迭代 深度 层次</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public TreeNode invertTree(TreeNode root) &#123;</span><br><span class="line">        if (root == null) &#123;</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">        invertTree(root.left);</span><br><span class="line">        invertTree(root.right);</span><br><span class="line">        swapChildren(root);</span><br><span class="line">        return root;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void swapChildren(TreeNode root) &#123;</span><br><span class="line">        TreeNode tmp = root.left;</span><br><span class="line">        root.left = root.right;</span><br><span class="line">        root.right = tmp;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public TreeNode invertTree(TreeNode root) &#123;</span><br><span class="line">        if (root == null) &#123;return null;&#125;</span><br><span class="line">        ArrayDeque&lt;TreeNode&gt; deque = new ArrayDeque&lt;&gt;();</span><br><span class="line">        deque.offer(root);</span><br><span class="line">        while (!deque.isEmpty()) &#123;</span><br><span class="line">            int size = deque.size();</span><br><span class="line">            while (size-- &gt; 0) &#123;</span><br><span class="line">                TreeNode node = deque.poll();</span><br><span class="line">                swap(node);</span><br><span class="line">                if (node.left != null) deque.offer(node.left);</span><br><span class="line">                if (node.right != null) deque.offer(node.right);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return root;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void swap(TreeNode root) &#123;</span><br><span class="line">        TreeNode temp = root.left;</span><br><span class="line">        root.left = root.right;</span><br><span class="line">        root.right = temp;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="101-对称二叉树"><a href="#101-对称二叉树" class="headerlink" title="101 对称二叉树"></a>101 对称二叉树</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/symmetric-tree/">力扣题目链接</a></p>
-<p>前后序啊，，同时进行中序遍历是不现实的，所指对象一直在变动，你该如何对left right做出指控？</p>
-<p>栈和队列的邪教 受教了</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public boolean isSymmetric3(TreeNode root) &#123;</span><br><span class="line">        Queue&lt;TreeNode&gt; deque = new LinkedList&lt;&gt;();</span><br><span class="line">        deque.offer(root.left);</span><br><span class="line">        deque.offer(root.right);</span><br><span class="line">        while (!deque.isEmpty()) &#123;</span><br><span class="line">            TreeNode leftNode = deque.poll();</span><br><span class="line">            TreeNode rightNode = deque.poll();</span><br><span class="line">            if (leftNode == null &amp;&amp; rightNode == null) &#123;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            if (leftNode == null || rightNode == null || leftNode.val != rightNode.val) &#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">            deque.offer(leftNode.left);</span><br><span class="line">            deque.offer(rightNode.right);</span><br><span class="line">            deque.offer(leftNode.right);</span><br><span class="line">            deque.offer(rightNode.left);</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>今天的理解两极分化，要好好看视频。</p>
  
       <!-- reward -->
       
